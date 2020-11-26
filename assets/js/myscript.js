@@ -1,3 +1,9 @@
+$(function () {
+
+
+
+});
+
 const flashData = $(`.flash-data`).data(`flashdata`);
 
 if (flashData) {

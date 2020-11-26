@@ -16,7 +16,7 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="" class="btn btn-info btn-sm float-right bg-gradient-info" data-toggle="modal" data-target="#newRoleModal">Add New Role</a>
+                    <a href="" class="btn btn-info btn-sm float-right bg-gradient-info tombolTambahData" data-toggle="modal" data-target="#newRoleModal">Add New Role</a>
                     <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
                 </div>
                 <div class="card-body">
@@ -37,7 +37,7 @@
                                         <td><?= $r['role']; ?></td>
                                         <td>
                                             <a href="<?= base_url('admin/roleAccess/' . $r['id']); ?>" class="btn btn-success btn-circle btn-sm bg-gradient-success"><i class="fas fa-check"></i></a>
-                                            <a href="#" class="btn btn-warning btn-circle btn-sm bg-gradient-warning"><i class="fas fa-edit"></i></a>
+                                            <a href=" " class="btn btn-warning btn-circle btn-sm bg-gradient-warning tampilModalUbah" data-toggle="modal" data-target="#newRoleModal" data-id="<?= $r['id']; ?>"><i class="fas fa-edit"></i></a>
                                             <a href="<?= base_url(); ?>admin/deleterole/<?= $r['id']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>

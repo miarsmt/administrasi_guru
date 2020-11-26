@@ -107,26 +107,26 @@ class Auth extends CI_Controller
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
-                'is_active' => 0,
+                'is_active' => 1,
                 'date_created' => time()
 
             ];
 
             //siapkan token
-            $token = base64_encode(random_bytes(32));
-            $user_token = [
-                'email' => $this->input->post('email', true),
-                'token' => $token,
-                'date_created' => time()
-            ];
+            // $token = base64_encode(random_bytes(32));
+            // $user_token = [
+            //     'email' => $this->input->post('email', true),
+            //     'token' => $token,
+            //     'date_created' => time()
+            // ];
 
 
             $this->user->save($data);
-            $this->user->saveToken($user_token);
+            // $this->user->saveToken($user_token);
 
-            $this->_sendEmail($token, 'verify');
+            // $this->_sendEmail($token, 'verify');
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! your account has been created. Please activate your account</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! your account has been created. Please Login</div>');
             redirect('auth');
         }
     }
