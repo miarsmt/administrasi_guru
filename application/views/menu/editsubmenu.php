@@ -52,6 +52,7 @@
                                 </label>
                             </div>
                         </div>
+                        <a href="<?= base_url('menu/submenu'); ?>" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn btn-info float-right bg-gradient-info">Ubah Data</button>
                     </form>
                 </div>
