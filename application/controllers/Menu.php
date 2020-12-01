@@ -17,7 +17,9 @@ class Menu extends CI_Controller
             'menu'  => $this->menu->getAllMenu()
         ];
 
-        $this->form_validation->set_rules('menu', 'Menu', 'required|trim');
+        $this->form_validation->set_rules('menu', 'Menu', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -33,6 +35,38 @@ class Menu extends CI_Controller
 
             $this->menu->saveMenu($data);
             $this->session->set_flashdata('message', 'Menu baru berhasil di-tambahkan!');
+            redirect('menu');
+        }
+    }
+
+    public function editmenu()
+    {
+        $data = [
+            'title' => 'Menu Management',
+            'user'  => $this->admin->sesi(),
+            'menu'  => $this->menu->getAllMenu()
+        ];
+
+        $this->form_validation->set_rules('menu', 'Menu', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'menu' => $this->input->post('menu', true)
+            ];
+            $where = [
+                'id' => $this->input->post('id')
+            ];
+
+            $this->menu->editMenu($where, $data);
+            $this->session->set_flashdata('message', 'Menu berhasil di-rubah!');
             redirect('menu');
         }
     }
@@ -65,23 +99,31 @@ class Menu extends CI_Controller
 
             // tambah data baru sub menu
             $this->menu->save_sub($data);
-            $this->session->set_flashdata('message', 'New submenu added!');
+            $this->session->set_flashdata('message', 'Submenu baru berhasil ditambah-kan!');
             redirect('menu/submenu');
         }
     }
 
     private function _rulesSubmenu()
     {
-        $this->form_validation->set_rules('title', 'Title', 'required|trim');
-        $this->form_validation->set_rules('menu_id', 'Menu', 'required');
-        $this->form_validation->set_rules('url', 'URL', 'required');
-        $this->form_validation->set_rules('icon', 'Icon', 'required|trim');
+        $this->form_validation->set_rules('title', 'Title', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('menu_id', 'Menu', 'required', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('url', 'URL', 'required', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('icon', 'Icon', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
     }
 
     public function deletemenu($id)
     {
         $this->menu->deleteMenu($id);
-        $this->session->set_flashdata('message', 'Menu has been deleted!');
+        $this->session->set_flashdata('message', 'Menu berhasil ter-hapus!');
         redirect('menu');
     }
 
@@ -104,7 +146,7 @@ class Menu extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->menu->editDataSubmenu();
-            $this->session->set_flashdata('message', 'Submenu has been updated!');
+            $this->session->set_flashdata('message', 'Submenu telah berhasil di-rubah!');
             redirect('menu/submenu');
         }
     }
@@ -112,7 +154,7 @@ class Menu extends CI_Controller
     public function deletesubmenu($id)
     {
         $this->menu->deleteSubmenu($id);
-        $this->session->set_flashdata('message', 'Submenu has been deleted!');
+        $this->session->set_flashdata('message', 'Submenu berhasil ter-hapus!');
         redirect('menu/submenu');
     }
 }

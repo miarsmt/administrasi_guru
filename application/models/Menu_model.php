@@ -13,6 +13,13 @@ class Menu_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
+    public function editMenu($where, $data)
+    {
+        $this->db->where($where);
+        $this->db->update('user_menu', $data);
+        return true;
+    }
+
     public function deleteMenu($id)
     {
         $this->db->delete('user_menu', ['id' => $id]);
