@@ -17,8 +17,13 @@ class Auth extends CI_Controller
 
         $data['title'] = 'Login Page';
 
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', [
+            'required' => '%s tidak boleh kosong',
+            'valid_email' => '%s belum terdaftar'
+        ]);
+        $this->form_validation->set_rules('password', 'Password', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
 
 
         if ($this->form_validation->run() == false) {
@@ -87,14 +92,20 @@ class Auth extends CI_Controller
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
-            'is_unique' => 'Email ini telah berhasil di-daftar kan!'
+            'is_unique' => '%s telah terdaftar sebelum-nya',
+            'required' => '%s tidak boleh kosong'
         ]);
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
-            'matches' => 'Password tidak sama!',
-            'min_length' => 'Password terlalu pendek!'
+            'required' => '%s tidak boleh kosong',
+            'matches' => '%s harus sama',
+            'min_length' => '%s terlalu pendek'
         ]);
 
-        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
+        $this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|matches[password1]', [
+            'required' => '%s tidak boleh kosong',
+            'matches' => '%s harus sama',
+            'min_length' => '%s terlalu pendek'
+        ]);
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/auth_header', $data);
@@ -225,7 +236,10 @@ class Auth extends CI_Controller
     {
         $data['title'] = 'Forgot Password';
 
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', [
+            'required' => '%s tidak boleh kosong',
+            'valid_email' => '%s tidak sesuai'
+        ]);
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/forgot_password');
@@ -286,8 +300,16 @@ class Auth extends CI_Controller
 
         $data['title'] = 'Change Password';
 
-        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]');
-        $this->form_validation->set_rules('password2', 'Password', 'required|trim|min_length[3]|matches[password1]');
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+            'required' => '%s tidak boleh sama',
+            'min_length' => '%s minimal 3 karakter',
+            'matches' => '%s harus sama'
+        ]);
+        $this->form_validation->set_rules('password2', 'Retype Password', 'required|trim|min_length[3]|matches[password1]', [
+            'required' => '%s tidak boleh sama',
+            'min_length' => '%s minimal 3 karakter',
+            'matches' => '%s harus sama'
+        ]);
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/change_password');
