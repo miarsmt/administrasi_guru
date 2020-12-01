@@ -15,7 +15,7 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="" class="btn btn-info btn-sm float-right bg-gradient-info" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
+                    <a href="" class="btn btn-info btn-sm float-right bg-gradient-info" data-toggle="modal" data-target="#newMenuModal"><i class="fas fa-plus-circle"></i> Add New Menu</a>
                     <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
                 </div>
                 <div class="card-body">
