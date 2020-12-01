@@ -19,7 +19,7 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="" class="btn btn-info btn-sm float-right bg-gradient-info" data-toggle="modal" data-target="#newSubMenuModal">Add New Submenu</a>
+                    <a href="" class="btn btn-info btn-sm float-right bg-gradient-info" data-toggle="modal" data-target="#newSubMenuModal"><i class="fas fa-plus-circle"></i> Add New Submenu</a>
                     <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
                 </div>
                 <div class="card-body">
@@ -52,7 +52,7 @@
                                         <td><?= $sm['icon']; ?></td>
                                         <td><?= $active ?></td>
                                         <td>
-                                            <a href="<?= base_url(); ?>menu/editsubmenu/<?= $sm['id']; ?>" class="btn btn-warning btn circle btn-sm bg-gradient-warning"><i class="fas fa-edit"></i></a>
+                                            <a href="<?= base_url(); ?>menu/editsubmenu/<?= $sm['id']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning"><i class="fas fa-edit"></i></a>
                                             <a href="<?= base_url(); ?>menu/deletesubmenu/<?= $sm['id']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
