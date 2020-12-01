@@ -13,7 +13,7 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900">Change your password for</h1>
+                                    <h1 class="h4 text-gray-900">Ubah password anda untuk</h1>
                                     <h5 class="mb-4"><?= $this->session->userdata('reset_email'); ?></h5>
                                     <?= $this->session->flashdata('message'); ?>
                                 </div>
@@ -27,7 +27,7 @@
                                         <?= form_error('password2', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block bg-gradient-primary">
-                                        Change Password
+                                        Rubah Password
                                     </button>
                                 </form>
                             </div>
