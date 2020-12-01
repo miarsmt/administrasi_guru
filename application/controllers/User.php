@@ -39,7 +39,7 @@ class User extends CI_Controller
             $this->load->view('user/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $name = htmlspecialchars($this->input->post('name', true));
+            $name = $this->input->post('name', true);
             $email = $this->input->post('email');
 
             //cek jika ada upload gambar
@@ -68,7 +68,7 @@ class User extends CI_Controller
             $this->db->set('name', $name);
             $this->db->where('email', $email);
             $this->db->update('user');
-            $this->session->set_flashdata('message', 'Your profile has been updated!');
+            $this->session->set_flashdata('message', 'Profile anda telah berhasil di-ubah!');
             redirect('user');
         }
     }
@@ -91,15 +91,15 @@ class User extends CI_Controller
             $this->load->view('user/change_password', $data);
             $this->load->view('templates/footer');
         } else {
-            $current_password = htmlspecialchars($this->input->post('current_password', true));
-            $new_password = htmlspecialchars($this->input->post('new_password1', true));
+            $current_password = $this->input->post('current_password', true);
+            $new_password = $this->input->post('new_password1', true);
 
             if (!password_verify($current_password, $data['user']['password'])) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Passwrod lama salah!</div>');
                 redirect('user/changepassword');
             } else {
                 if ($current_password == $new_password) {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password cannot be the same as current password!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password baru tidak boleh sama dengan password lama!</div>');
                     redirect('user/changepassword');
                 } else {
                     // password ok
@@ -107,7 +107,7 @@ class User extends CI_Controller
 
                     $this->user->changePass($password_hash);
 
-                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password telah berhasil di-ubah!</div>');
                     redirect('user/changepassword');
                 }
             }
