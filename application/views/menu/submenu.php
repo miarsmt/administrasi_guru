@@ -9,7 +9,8 @@
 
             <!-- kalau error -->
             <?php if (validation_errors()) : ?>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                     <?= validation_errors(); ?>
                 </div>
             <?php endif; ?>
