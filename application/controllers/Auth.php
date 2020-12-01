@@ -63,15 +63,15 @@ class Auth extends CI_Controller
                         redirect('user');
                     }
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password yang anda masukkan salah!</div>');
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This email has not been activated!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email ini belum di-aktif kan!</div>');
                 redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not registered!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email belum terdaftar!</div>');
             redirect('auth');
         }
     }
@@ -87,11 +87,11 @@ class Auth extends CI_Controller
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
-            'is_unique' => 'This email has already registered!'
+            'is_unique' => 'Email ini telah berhasil di-daftar kan!'
         ]);
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
-            'matches' => 'Password dont match!',
-            'min_length' => 'Password too short!'
+            'matches' => 'Password tidak sama!',
+            'min_length' => 'Password terlalu pendek!'
         ]);
 
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
@@ -126,7 +126,7 @@ class Auth extends CI_Controller
 
             // $this->_sendEmail($token, 'verify');
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! your account has been created. Please Login</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat! akun anda telah berhasil dibuat. Silahkan Login</div>');
             redirect('auth');
         }
     }
@@ -212,7 +212,7 @@ class Auth extends CI_Controller
     {
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('role_id');
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out!</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil logout!</div>');
         redirect('auth');
     }
 
