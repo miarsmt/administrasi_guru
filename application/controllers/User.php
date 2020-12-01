@@ -30,7 +30,9 @@ class User extends CI_Controller
             'user'  => $this->admin->sesi()
         ];
 
-        $this->form_validation->set_rules('name', 'Name', 'required|trim');
+        $this->form_validation->set_rules('name', 'Name', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -80,9 +82,19 @@ class User extends CI_Controller
             'user'  => $this->admin->sesi()
         ];
 
-        $this->form_validation->set_rules('current_password', 'Current Password', 'required|trim');
-        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[3]|matches[new_password2]');
-        $this->form_validation->set_rules('new_password2', 'Retype Password', 'required|trim|min_length[3]|matches[new_password1]');
+        $this->form_validation->set_rules('current_password', 'Current Password', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[3]|matches[new_password2]', [
+            'required' => '%s tidak boleh kosong',
+            'min_length' => '%s minimal 3 karakter',
+            'matches' => '%s harus sama'
+        ]);
+        $this->form_validation->set_rules('new_password2', 'Retype Password', 'required|trim|min_length[3]|matches[new_password1]', [
+            'required' => '%s tidak boleh kosong',
+            'min_length' => '%s minimal 3 karakter',
+            'matches' => '%s harus sama'
+        ]);
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
