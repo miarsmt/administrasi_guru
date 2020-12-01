@@ -26,13 +26,13 @@ class Menu extends CI_Controller
             $this->load->view('menu/index', $data);
             $this->load->view('templates/footer');
         } else {
-            $menu = htmlspecialchars($this->input->post('menu', true));
+            $menu = $this->input->post('menu', true);
             $data = [
                 'menu' => $menu
             ];
 
             $this->menu->saveMenu($data);
-            $this->session->set_flashdata('message', 'New menu added!');
+            $this->session->set_flashdata('message', 'Menu baru berhasil di-tambahkan!');
             redirect('menu');
         }
     }
@@ -56,11 +56,11 @@ class Menu extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $data = [
-                'title' => htmlspecialchars($this->input->post('title', true)),
-                'menu_id' => htmlspecialchars($this->input->post('menu_id', true)),
-                'url' => htmlspecialchars($this->input->post('url', true)),
-                'icon' => htmlspecialchars($this->input->post('icon', true)),
-                'is_active' => htmlspecialchars($this->input->post('is_active', true))
+                'title' => $this->input->post('title', true),
+                'menu_id' => $this->input->post('menu_id', true),
+                'url' => $this->input->post('url', true),
+                'icon' => $this->input->post('icon', true),
+                'is_active' => $this->input->post('is_active', true)
             ];
 
             // tambah data baru sub menu
