@@ -13,7 +13,7 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Forgot your password ?</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Lupa password anda ?</h1>
                                     <?= $this->session->flashdata('message'); ?>
                                 </div>
                                 <form class="user" method="POST" action="<?= base_url('auth/forgotPassword'); ?>">
