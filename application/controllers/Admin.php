@@ -40,13 +40,13 @@ class Admin extends CI_Controller
             $this->load->view('admin/role', $data);
             $this->load->view('templates/footer');
         } else {
-            $role = htmlspecialchars($this->input->post('role', true));
+            $role = $this->input->post('role', true);
             $data = [
                 'role' => $role
             ];
 
             $this->role->save($data);
-            $this->session->set_flashdata('message', 'New role added!');
+            $this->session->set_flashdata('message', 'Role baru berhasil ditambahkan!');
             redirect('admin/role');
         }
     }
@@ -55,7 +55,7 @@ class Admin extends CI_Controller
     {
 
         $this->role->delete($id);
-        $this->session->set_flashdata('message', 'Role has been deleted!');
+        $this->session->set_flashdata('message', 'Role telah berhasil di hapus!');
         redirect('admin/role');
     }
 
@@ -77,8 +77,8 @@ class Admin extends CI_Controller
 
     public function changeAccess()
     {
-        $menu_id = $this->input->post('menuId');
-        $role_id = $this->input->post('roleId');
+        $menu_id = $this->input->post('menuId', true);
+        $role_id = $this->input->post('roleId', true);
 
         $data = [
             'role_id' => $role_id,
@@ -93,6 +93,6 @@ class Admin extends CI_Controller
             $this->menu->deleteAccess($data);
         }
 
-        $this->session->set_flashdata('message', 'Access changed!');
+        $this->session->set_flashdata('message', 'Akses telah berhasil di ubah!');
     }
 }
