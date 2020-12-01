@@ -13,6 +13,13 @@ class Role_model extends CI_Model
         $this->db->insert('user_role', $data);
     }
 
+    public function editRole($where, $data)
+    {
+        $this->db->where($where);
+        $this->db->update('user_role', $data);
+        return true;
+    }
+
     public function delete($id)
     {
         $this->db->delete('user_role', ['id' => $id]);

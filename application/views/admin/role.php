@@ -8,7 +8,7 @@
         <div class="col-lg-6">
 
             <!-- kalau error -->
-            <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>') ?>
+            <?= form_error('role', '<div class="alert alert-danger" role="alert">', '</div>') ?>
 
             <!-- kalau lolos -->
             <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
@@ -36,9 +36,9 @@
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $r['role']; ?></td>
                                         <td>
-                                            <a href="<?= base_url('admin/roleAccess/' . $r['id']); ?>" class="btn btn-success btn-circle btn-sm bg-gradient-success"><i class="fas fa-check"></i></a>
-                                            <a href="#" class="btn btn-warning btn-circle btn-sm bg-gradient-warning"><i class="fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>admin/deleterole/<?= $r['id']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus"><i class="fas fa-trash"></i></a>
+                                            <a href="<?= base_url('admin/roleAccess/' . $r['id']); ?>" class="btn btn-success btn-circle btn-sm bg-gradient-success" title="Role Access"><i class="fas fa-check"></i></a>
+                                            <a href="" data-toggle="modal" data-target="#editRoleModal<?= $r['id']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="<?= base_url(); ?>admin/deleterole/<?= $r['id']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
@@ -83,3 +83,32 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Update -->
+
+<?php foreach ($role as $row) : ?>
+    <div class="modal fade" id="editRoleModal<?= $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editRoleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editRoleModalLabel">Edit Role</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('admin/editrole'); ?>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" name="id" id="id" value="<?= $row['id']; ?>">
+                            <input type="text" class="form-control" name="role" id="role" value="<?= $row['role']; ?>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
