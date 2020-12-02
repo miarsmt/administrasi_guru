@@ -21,7 +21,6 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <a href="" class="btn btn-info btn-sm float-right bg-gradient-info" data-toggle="modal" data-target="#newSubMenuModal"><i class="fas fa-plus-circle"></i> Add New Submenu</a>
-                    <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -33,7 +32,7 @@
                                     <th scope="col">Menu</th>
                                     <th scope="col">Url</th>
                                     <th scope="col">Icon</th>
-                                    <th scope="col">Active</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -41,9 +40,9 @@
                                 <?php $i = 1; ?>
                                 <?php foreach ($submenu as $sm) : ?>
                                     <?php if ($sm['is_active'] == 1) {
-                                        $active = 'Active';
+                                        $active = 'Aktif';
                                     } else {
-                                        $active = 'Not Active';
+                                        $active = 'Tidak Aktif';
                                     } ?>
                                     <tr>
                                         <th scope="row"><?= $i; ?></th>
