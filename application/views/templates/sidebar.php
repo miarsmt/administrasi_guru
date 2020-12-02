@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-code"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">CI Admin </div>
+        <div class="sidebar-brand-text mx-3">SIMAG </div>
     </a>
 
     <!-- Divider -->
