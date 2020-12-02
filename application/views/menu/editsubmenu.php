@@ -21,11 +21,7 @@
                             <label for="menu_id">Menu</label>
                             <select name="menu_id" id="menu_id" class="form-control">
                                 <?php foreach ($menu as $m) : ?>
-                                    <?php if ($m['id'] == $submenu['menu_id']) : ?>
-                                        <option value="<?= $m['id']; ?>" selected><?= $m['menu']; ?></option>
-                                    <?php else : ?>
-                                        <option value="<?= $m['id']; ?>"><?= $m['menu']; ?></option>
-                                    <?php endif; ?>
+                                    <option value="<?= $m['id']; ?>" <?= ($m['id'] == $submenu['menu_id']) ? 'selected' : ''; ?>><?= $m['menu']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -41,12 +37,7 @@
                         </div>
                         <div class="form-group">
                             <div class="form-check">
-                                <?php if ($submenu['is_active'] == 1) {
-                                    $val = 1;
-                                } else {
-                                    $val = 0;
-                                } ?>
-                                <input type="checkbox" class="form-check-input" value="<?= $val; ?>" name="is_active" id="is_active" checked>
+                                <input type="checkbox" class="form-check-input" value="<?= $submenu['is_active']; ?>" name="is_active" id="is_active" <?= ($submenu['is_active'] == '1') ? 'checked' : ''; ?>>
                                 <label for="is_active" class="form-check-label">
                                     Active?
                                 </label>
