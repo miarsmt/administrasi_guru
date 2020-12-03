@@ -8,6 +8,15 @@ class Master_model extends CI_Model
         return $this->db->get('tb_guru')->result_array();
     }
 
+    public function getGuru()
+    {
+        $this->db->select('tb_guru.*, tb_jurusan.namajurusan');
+        $this->db->from('tb_guru');
+        $this->db->join('tb_jurusan', 'tb_guru.kodejurusan = tb_jurusan.kodejurusan', 'left');
+        $result = $this->db->get();
+        return $result->result_array();
+    }
+
     public function save_guru($data)
     {
         $this->db->insert('tb_guru', $data);
@@ -22,7 +31,7 @@ class Master_model extends CI_Model
     public function editDataGuru()
     {
         $data = [
-            'namaguru'     => $this->input->post('namaguru' . true),
+            'namaguru'     => $this->input->post('namaguru', true),
             'jeniskelamin'  => $this->input->post('jenkel', true),
             'tempatlahir'   => $this->input->post('tempat', true),
             'tgllahir'      => $this->input->post('tgl', true),

@@ -15,7 +15,7 @@ class Master extends CI_Controller
         $data = [
             'title' => 'Modul Guru',
             'user' => $this->admin->sesi(),
-            'guru' => $this->master->getAllGuru()
+            'guru' => $this->master->getGuru()
         ];
 
         $this->load->view('templates/header', $data);
@@ -29,7 +29,8 @@ class Master extends CI_Controller
     {
         $data = [
             'title' => 'Tambah Data Guru',
-            'user'  => $this->admin->sesi()
+            'user'  => $this->admin->sesi(),
+            'jurusan' => $this->master->getAllJurusan()
         ];
 
         $this->_rulesGuru();
@@ -94,7 +95,8 @@ class Master extends CI_Controller
         $data = [
             'title' => 'Edit Data Guru',
             'user'  => $this->admin->sesi(),
-            'dtguru' => $this->master->getGuruById($nip)
+            'dtguru' => $this->master->getGuruById($nip),
+            'jurusan' => $this->master->getAllJurusan()
         ];
 
         $this->_rulesEditGuru();

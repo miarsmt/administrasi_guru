@@ -41,7 +41,7 @@
                                         <td><?= $gr['nip']; ?></td>
                                         <td><?= $gr['namaguru']; ?></td>
                                         <td><?= $gr['tempatlahir']; ?>, <br><?= format_indo($gr['tgllahir']); ?></td>
-                                        <td><?= $gr['kodejurusan']; ?></td>
+                                        <td><?= $gr['namajurusan']; ?></td>
                                         <td><?= $active ?></td>
                                         <td>
                                             <a href="<?= base_url(); ?>master/editguru/<?= $gr['nip']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning" title="Edit Data"><i class="fas fa-edit"></i></a>

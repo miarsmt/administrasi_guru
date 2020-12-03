@@ -78,7 +78,12 @@
                             <div class="form-group row">
                                 <label for="kodejurusan" class="col-sm-2 col-form-label">Jurusan</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="kodejurusan" id="kodejurusan" value="<?= set_value('kodejurusan'); ?>">
+                                    <select name="kodejurusan" id="kodejurusan" class="form-control">
+                                        <option value="">-Jurusan-</option>
+                                        <?php foreach ($jurusan as $j) : ?>
+                                            <option value="<?= $j['kodejurusan']; ?>"><?= $j['namajurusan']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
