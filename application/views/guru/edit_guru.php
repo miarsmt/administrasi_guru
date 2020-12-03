@@ -17,7 +17,7 @@
                             <div class="form-group row">
                                 <label for="nip" class="col-sm-2 col-form-label">NIP</label>
                                 <div class="col-sm-10">
-                                    <input type="hidden" name="id" id="id" value="<?= $dtguru['id']; ?>">
+                                    <input type="hidden" name="idnip" id="idnip" value="<?= $dtguru['nip']; ?>">
                                     <input type="text" class="form-control" name="nip" id="nip" value="<?= $dtguru['nip']; ?>" readonly>
                                     <?= form_error('nip', '<small class="text-danger">', '</small>'); ?>
                                 </div>
