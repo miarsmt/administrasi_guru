@@ -45,12 +45,17 @@ class Master_model extends CI_Model
         return true;
     }
 
+    public function getAllJurusan()
+    {
+        return $this->db->get('tb_jurusan')->result_array();
+    }
+
     public function getJurusan()
     {
         $this->db->select('tb_jurusan.*, tb_guru.namaguru');
         $this->db->from('tb_jurusan');
         $this->db->join('tb_guru', 'tb_jurusan.nip = tb_guru.nip', 'left');
-        $result = $this->db->get('');
+        $result = $this->db->get();
         return $result->result_array();
     }
 
@@ -81,6 +86,48 @@ class Master_model extends CI_Model
     public function deljurusan($id)
     {
         $this->db->delete('tb_jurusan', ['kodejurusan' => $id]);
+        return true;
+    }
+
+    public function getKelas()
+    {
+        $this->db->select('tb_kelas.*, tb_jurusan.namajurusan');
+        $this->db->from('tb_kelas');
+        $this->db->join('tb_jurusan', 'tb_kelas.kodejurusan = tb_jurusan.kodejurusan', 'left');
+        $result = $this->db->get();
+        return $result->result_array();
+    }
+
+    public function save_kelas($data)
+    {
+        $this->db->insert('tb_kelas', $data);
+        return true;
+    }
+
+    public function getKelasById($id)
+    {
+        return $this->db->get_where('tb_kelas', ['kodekelas' => $id])->row_array();
+    }
+
+    public function update_kelas()
+    {
+        $data = [
+            'kodejurusan' => $this->input->post('kodejur', true),
+            'namakelas'   => $this->input->post('namakls', true),
+            'kelas'       => $this->input->post('kls', true),
+            'angkatankelas' => $this->input->post('angkatan', true),
+            'is_active'   => $this->input->post('is_active', true),
+            'iduser'      => $this->session->userdata('role_id')
+        ];
+
+        $this->db->where('kodekelas', $this->input->post('kode'));
+        $this->db->update('tb_kelas', $data);
+        return true;
+    }
+
+    public function delkelas($id)
+    {
+        $this->db->delete('tb_kelas', ['kodekelas' => $id]);
         return true;
     }
 }

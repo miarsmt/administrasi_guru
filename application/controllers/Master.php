@@ -215,4 +215,89 @@ class Master extends CI_Controller
         $this->session->set_flashdata('message', 'data jurusan berhasil di-hapus');
         redirect('master/jurusan');
     }
+
+    public function kelas()
+    {
+        $data = [
+            'title'     => 'Modul Kelas',
+            'user'      => $this->admin->sesi(),
+            'kelas'     => $this->master->getKelas(),
+            'jurusan'   => $this->master->getAllJurusan()
+        ];
+
+        $this->form_validation->set_rules('kodekls', 'Kode kelas', 'required|trim|is_unique[tb_kelas.kodekelas]', [
+            'required' => '%s tidak boleh kosong',
+            'is_unique' => '%s sudah ada dalam database'
+        ]);
+        $this->form_validation->set_rules('kodejur', 'Kode jurusan', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('namakls', 'Nama kelas', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('kls', 'Kelas', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('angkatan', 'Angkatan', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('kelas/index', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'kodekelas' => $this->input->post('kodekls', true),
+                'kodejurusan' => $this->input->post('kodejur', true),
+                'namakelas' => $this->input->post('namakls', true),
+                'kelas'     => $this->input->post('kls', true),
+                'angkatankelas' => $this->input->post('angkatan', true),
+                'is_active' => $this->input->post('is_active', true),
+                'iduser'    => $this->session->userdata('role_id')
+            ];
+
+            $this->master->save_kelas($data);
+            $this->session->set_flashdata('message', 'data kelas berhasil ditambah-kan');
+            redirect('master/kelas');
+        }
+    }
+
+    public function editkelas($id)
+    {
+        $data = [
+            'title'     => 'Edit Data Kelas',
+            'user'      => $this->admin->sesi(),
+            'dtkelas'   => $this->master->getKelasById($id),
+            'jurusan'   => $this->master->getAllJurusan()
+        ];
+
+        $this->form_validation->set_rules('namakls', 'Nama kelas', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('angkatan', 'Angkatan', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('kelas/edit_kelas', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->master->update_kelas();
+            $this->session->set_flashdata('message', 'data kelas berhasil di-rubah');
+            redirect('master/kelas');
+        }
+    }
+
+    public function deletekelas($id)
+    {
+        $this->master->delkelas($id);
+        $this->session->set_flashdata('message', 'data kelas berhasil di-hapus');
+        redirect('master/kelas');
+    }
 }
