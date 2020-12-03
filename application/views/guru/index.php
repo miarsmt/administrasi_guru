@@ -44,8 +44,8 @@
                                         <td><?= $gr['kodejurusan']; ?></td>
                                         <td><?= $active ?></td>
                                         <td>
-                                            <a href="<?= base_url(); ?>master/editguru/<?= $gr['id']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>master/deleteguru/<?= $gr['id']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
+                                            <a href="<?= base_url(); ?>master/editguru/<?= $gr['nip']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="<?= base_url(); ?>master/deleteguru/<?= $gr['nip']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
