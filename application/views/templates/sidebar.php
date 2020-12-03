@@ -50,38 +50,34 @@
 
         <!-- LOOPING SUB MENU -->
         <?php foreach ($subMenu as $sm) : ?>
-            <?php if ($title == $sm['title']) : ?>
-                <li class="nav-item active">
-                <?php else : ?>
-                <li class="nav-item">
-                <?php endif; ?>
+            <li class="nav-item <?= ($title == $sm['title']) ? 'active' : ''; ?>">
                 <!-- Nav Item - Dashboard -->
                 <a class="nav-link pb-0" href="<?= base_url($sm['url']); ?>">
                     <i class="<?= $sm['icon']; ?>"></i>
                     <span><?= $sm['title']; ?></span></a>
-                </li>
-            <?php endforeach; ?>
-            <!-- END OF LOOPING SUB MENU -->
-
-            <!-- Divider -->
-            <hr class="sidebar-divider mt-3">
-
+            </li>
         <?php endforeach; ?>
-        <!-- END OF LOOPING MENU -->
-
-        <li class="nav-item">
-            <a class="nav-link pb-0" href="<?= base_url('auth/logout'); ?>">
-                <i class="fas fa-fw fa-sign-out-alt"></i>
-                <span>Logout</span></a>
-        </li>
+        <!-- END OF LOOPING SUB MENU -->
 
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block mt-3">
+        <hr class="sidebar-divider mt-3">
 
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+    <?php endforeach; ?>
+    <!-- END OF LOOPING MENU -->
+
+    <li class="nav-item">
+        <a class="nav-link pb-0" href="<?= base_url('auth/logout'); ?>">
+            <i class="fas fa-fw fa-sign-out-alt"></i>
+            <span>Logout</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block mt-3">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 
 </ul>
 <!-- End of Sidebar -->
