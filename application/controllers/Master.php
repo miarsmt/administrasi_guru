@@ -21,7 +21,7 @@ class Master extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('guru/index', $data);
+        $this->load->view('master/guru/index', $data);
         $this->load->view('templates/footer');
     }
 
@@ -39,7 +39,7 @@ class Master extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('guru/add_guru', $data);
+            $this->load->view('master/guru/add_guru', $data);
             $this->load->view('templates/footer');
         } else {
             $data = [
@@ -105,7 +105,7 @@ class Master extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('guru/edit_guru', $data);
+            $this->load->view('master/guru/edit_guru', $data);
             $this->load->view('templates/footer');
         } else {
             $this->master->editDataGuru();
@@ -169,7 +169,7 @@ class Master extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('jurusan/index', $data);
+            $this->load->view('master/jurusan/index', $data);
             $this->load->view('templates/footer');
         } else {
             $data = [
@@ -202,7 +202,7 @@ class Master extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('jurusan/edit_jurusan', $data);
+            $this->load->view('master/jurusan/edit_jurusan', $data);
             $this->load->view('templates/footer');
         } else {
             $this->master->update_jurusan();
@@ -248,7 +248,7 @@ class Master extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('kelas/index', $data);
+            $this->load->view('master/kelas/index', $data);
             $this->load->view('templates/footer');
         } else {
             $data = [
@@ -287,7 +287,7 @@ class Master extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('kelas/edit_kelas', $data);
+            $this->load->view('master/kelas/edit_kelas', $data);
             $this->load->view('templates/footer');
         } else {
             $this->master->update_kelas();
