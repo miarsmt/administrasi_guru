@@ -42,17 +42,17 @@ class Master extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $data = [
-                'nip'           => $this->input->post('nip'),
-                'namaguru'     => $this->input->post('namaguru'),
-                'jeniskelamin'  => $this->input->post('jenkel'),
-                'tempatlahir'   => $this->input->post('tempat'),
-                'tgllahir'      => $this->input->post('tgl'),
-                'alamatguru'   => $this->input->post('alamatguru'),
-                'notelpseluler' => $this->input->post('notelp'),
-                'emailguru'    => $this->input->post('emailguru'),
-                'kodejurusan'   => $this->input->post('kodejurusan'),
+                'nip'           => $this->input->post('nip', true),
+                'namaguru'     => $this->input->post('namaguru', true),
+                'jeniskelamin'  => $this->input->post('jenkel', true),
+                'tempatlahir'   => $this->input->post('tempat', true),
+                'tgllahir'      => $this->input->post('tgl', true),
+                'alamatguru'   => $this->input->post('alamatguru', true),
+                'notelpseluler' => $this->input->post('notelp', true),
+                'emailguru'    => $this->input->post('emailguru', true),
+                'kodejurusan'   => $this->input->post('kodejurusan', true),
                 'iduser'        => $this->session->userdata('role_id'),
-                'is_active'     => $this->input->post('is_active')
+                'is_active'     => $this->input->post('is_active', true)
             ];
 
             $this->master->save_guru($data);
@@ -65,7 +65,7 @@ class Master extends CI_Controller
     {
         $this->form_validation->set_rules('nip', 'NIP', 'required|trim|is_unique[tb_guru.nip]', [
             'required' => '%s tidak boleh kosong',
-            'is_unique' => '%s sudah terdaftar sebelum-nya'
+            'is_unique' => '%s sudah terdaftar'
         ]);
         $this->form_validation->set_rules('namaguru', 'Nama guru', 'required|trim', [
             'required' => '%s tidak boleh kosong',
@@ -89,12 +89,12 @@ class Master extends CI_Controller
         ]);
     }
 
-    public function editguru($id)
+    public function editguru($nip)
     {
         $data = [
             'title' => 'Edit Data Guru',
             'user'  => $this->admin->sesi(),
-            'dtguru' => $this->master->getGuruById($id)
+            'dtguru' => $this->master->getGuruById($nip)
         ];
 
         $this->_rulesEditGuru();
@@ -136,10 +136,83 @@ class Master extends CI_Controller
         ]);
     }
 
-    public function deleteguru($id)
+    public function deleteguru($nip)
     {
-        $this->master->delguru($id);
+        $this->master->delguru($nip);
         $this->session->set_flashdata('message', 'data guru berhasil di-hapus!');
         redirect('master/guru');
+    }
+
+    public function jurusan()
+    {
+        $data = [
+            'title'     => 'Modul Jurusan',
+            'user'      => $this->admin->sesi(),
+            'jurusan'   => $this->master->getJurusan(),
+            'guru'      => $this->master->getAllGuru()
+        ];
+
+        $this->form_validation->set_rules('kodejur', 'Kode jurusan', 'required|trim|is_unique[tb_jurusan.kodejurusan]', [
+            'required' => '%s tidak boleh kosong',
+            'is_unique' => '%s sudah ada dalam database'
+        ]);
+        $this->form_validation->set_rules('namajur', 'Nama jurusan', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('nip', 'Ketua jurusan', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('jurusan/index', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'kodejurusan' => $this->input->post('kodejur', true),
+                'namajurusan' => $this->input->post('namajur', true),
+                'nip'         => $this->input->post('nip', true),
+                'iduser'      => $this->session->userdata('role_id')
+            ];
+
+            $this->master->save_jurusan($data);
+            $this->session->set_flashdata('message', 'data jurusan berhasil ditambah-kan');
+            redirect('master/jurusan');
+        }
+    }
+
+    public function editjurusan($id)
+    {
+        $data = [
+            'title'     => 'Edit Jurusan',
+            'user'      => $this->admin->sesi(),
+            'dtjurusan' => $this->master->getJurusanById($id),
+            'guru'      => $this->master->getAllGuru()
+        ];
+
+        $this->form_validation->set_rules('namajur', 'Nama jurusan', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('jurusan/edit_jurusan', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->master->update_jurusan();
+            $this->session->set_flashdata('message', 'data jurusan berhasil di-rubah');
+            redirect('master/jurusan');
+        }
+    }
+
+    public function deletejurusan($id)
+    {
+        $this->master->deljurusan($id);
+        $this->session->set_flashdata('message', 'data jurusan berhasil di-hapus');
+        redirect('master/jurusan');
     }
 }
