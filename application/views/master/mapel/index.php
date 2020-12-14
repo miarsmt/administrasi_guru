@@ -52,9 +52,9 @@
                                         <td><?= $mp['kelompok']; ?></td>
                                         <td><?= $jurusan; ?></td>
                                         <td>
-                                            <a href="<?= base_url(); ?>guru/addkomp/<?= $mp['kodemapel']; ?>" class="btn btn-success btn-circle btn-sm bg-gradient-success" title="Tambah Komp Dasar"><i class="fas fa-tasks"></i></a>
-                                            <a href="<?= base_url(); ?>guru/editmapel/<?= $mp['kodemapel']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>guru/deletemapel/<?= $mp['kodemapel']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
+                                            <a href="<?= base_url(); ?>master/addkomp/<?= $mp['kodemapel']; ?>" class="btn btn-success btn-circle btn-sm bg-gradient-success" title="Tambah Komp Dasar"><i class="fas fa-tasks"></i></a>
+                                            <a href="<?= base_url(); ?>master/editmapel/<?= $mp['kodemapel']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="<?= base_url(); ?>master/deletemapel/<?= $mp['kodemapel']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
@@ -85,7 +85,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('guru/mapel'); ?>" method="post">
+            <form action="<?= base_url('master/mapel'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" class="form-control" name="kodemp" id="kodemp" value="<?= $kodemp; ?>">

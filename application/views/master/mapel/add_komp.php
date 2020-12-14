@@ -35,7 +35,7 @@
                             <?= form_error('kkm', '<small class="text-danger">', '</small>'); ?>
                         </div>
                         <div class="form-group">
-                            <a href="<?= base_url('guru/mapel'); ?>" class="btn btn-secondary">Batal</a>
+                            <a href="<?= base_url('master/mapel'); ?>" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-info bg-gradient-info float-right">Tambah</button>
                         </div>
                     </form>
