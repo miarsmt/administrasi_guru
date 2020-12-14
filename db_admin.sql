@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2020 at 03:31 PM
+-- Generation Time: Dec 14, 2020 at 04:04 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -97,6 +97,83 @@ INSERT INTO `tb_kelas` (`kodekelas`, `kodejurusan`, `namakelas`, `kelas`, `angka
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_kompdasar`
+--
+
+CREATE TABLE `tb_kompdasar` (
+  `kodekd` varchar(15) NOT NULL,
+  `namakd` varchar(30) NOT NULL,
+  `keterangankd` text NOT NULL,
+  `semester` varchar(7) NOT NULL,
+  `kkm` double NOT NULL,
+  `kodemapel` varchar(20) NOT NULL,
+  `iduser` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_mapel`
+--
+
+CREATE TABLE `tb_mapel` (
+  `kodemapel` varchar(20) NOT NULL,
+  `namamapel` varchar(256) NOT NULL,
+  `tingkatan` varchar(10) NOT NULL,
+  `kelompok` varchar(70) NOT NULL,
+  `kodejurusan` varchar(30) NOT NULL,
+  `kkm` double NOT NULL,
+  `iduser` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_mapel`
+--
+
+INSERT INTO `tb_mapel` (`kodemapel`, `namamapel`, `tingkatan`, `kelompok`, `kodejurusan`, `kkm`, `iduser`) VALUES
+('MP001', 'Pendidikan Agama dan Budi Pekerti', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1'),
+('MP002', 'Bahasa Indonesia', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1'),
+('MP003', 'Matematika', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1'),
+('MP004', 'Sejarah Indonesia', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_siswa`
+--
+
+CREATE TABLE `tb_siswa` (
+  `nis` varchar(15) NOT NULL,
+  `namasiswa` varchar(70) NOT NULL,
+  `nisn` varchar(30) DEFAULT NULL,
+  `jeniskelamin` char(15) NOT NULL,
+  `tempatlahir` varchar(30) NOT NULL,
+  `tgllahir` date NOT NULL,
+  `alamatsiswa` varchar(70) NOT NULL,
+  `notelpseluler` varchar(15) DEFAULT NULL,
+  `emailsiswa` varchar(50) DEFAULT NULL,
+  `asalsekolah` varchar(50) DEFAULT NULL,
+  `tglmasuk` date NOT NULL,
+  `nama_ayah` varchar(50) NOT NULL,
+  `nama_ibu` varchar(50) NOT NULL,
+  `kodekelas` char(10) NOT NULL,
+  `kodejurusan` char(10) NOT NULL,
+  `semester_aktif` int(2) NOT NULL,
+  `is_active` int(11) NOT NULL,
+  `iduser` varchar(20) NOT NULL,
+  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_siswa`
+--
+
+INSERT INTO `tb_siswa` (`nis`, `namasiswa`, `nisn`, `jeniskelamin`, `tempatlahir`, `tgllahir`, `alamatsiswa`, `notelpseluler`, `emailsiswa`, `asalsekolah`, `tglmasuk`, `nama_ayah`, `nama_ibu`, `kodekelas`, `kodejurusan`, `semester_aktif`, `is_active`, `iduser`, `tglperbaharui`) VALUES
+('171800001', 'Putri Anne Saloka', '0206774005', 'Perempuan', 'Padang', '2000-11-09', 'Padang Pariaman', '09876654321', 'putrianne@gmail.com', 'SMPN 113 Jakarta Selatan', '2020-07-13', 'Hermawan Adi', 'Endang Dwi Nurhasanah', 'XIAKL', 'AKL', 4, 1, '1', '2020-12-04 05:23:58');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -150,18 +227,19 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 
 CREATE TABLE `user_menu` (
   `id` int(11) NOT NULL,
-  `menu` varchar(128) NOT NULL
+  `menu` varchar(128) NOT NULL,
+  `urutan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_menu`
 --
 
-INSERT INTO `user_menu` (`id`, `menu`) VALUES
-(1, 'Admin'),
-(2, 'User'),
-(3, 'Menu'),
-(4, 'Master');
+INSERT INTO `user_menu` (`id`, `menu`, `urutan`) VALUES
+(1, 'Admin', 1),
+(2, 'User', 4),
+(3, 'Menu', 3),
+(4, 'Master', 2);
 
 -- --------------------------------------------------------
 
@@ -211,7 +289,9 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (7, 2, 'Change Password', 'user/changepassword', 'fas fa-fw fa-key', 1),
 (8, 4, 'Modul Guru', 'master/guru', 'fas fa-fw fa-user-graduate', 1),
 (9, 4, 'Modul Jurusan', 'master/jurusan', 'fas fa-fw fa-tags', 1),
-(10, 4, 'Modul Kelas', 'master/kelas', 'fas fa-fw fa-chalkboard', 1);
+(10, 4, 'Modul Kelas', 'master/kelas', 'fas fa-fw fa-chalkboard', 1),
+(11, 4, 'Modul Siswa', 'master/siswa', 'fas fa-fw fa-users', 1),
+(12, 4, 'Modul Mata Pelajaran', 'master/mapel', 'fas fa-fw fa-book', 1);
 
 --
 -- Indexes for dumped tables
@@ -234,6 +314,12 @@ ALTER TABLE `tb_jurusan`
 --
 ALTER TABLE `tb_kelas`
   ADD PRIMARY KEY (`kodekelas`);
+
+--
+-- Indexes for table `tb_mapel`
+--
+ALTER TABLE `tb_mapel`
+  ADD PRIMARY KEY (`kodemapel`);
 
 --
 -- Indexes for table `user`
@@ -297,7 +383,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
