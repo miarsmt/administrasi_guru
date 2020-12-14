@@ -139,4 +139,58 @@ class Master_model extends CI_Model
         $this->db->delete('tb_kelas', ['kodekelas' => $id]);
         return true;
     }
+
+    public function getSiswa()
+    {
+        $this->db->select('tb_siswa.*, tb_jurusan.namajurusan, tb_kelas.namakelas, tb_kelas.kelas');
+        $this->db->from('tb_siswa');
+        $this->db->join('tb_jurusan', 'tb_siswa.kodejurusan = tb_jurusan.kodejurusan', 'left');
+        $this->db->join('tb_kelas', 'tb_siswa.kodekelas = tb_kelas.kodekelas', 'left');
+        $result = $this->db->get();
+        return $result->result_array();
+    }
+
+    public function save_siswa($data)
+    {
+        $this->db->insert('tb_siswa', $data);
+        return true;
+    }
+
+    public function getSiswaById($id)
+    {
+        return $this->db->get_where('tb_siswa', ['nis' => $id])->row_array();
+    }
+
+    public function update_siswa()
+    {
+        $data = [
+            'namasiswa' => $this->input->post('namasiswa', true),
+            'nisn'      => $this->input->post('nisn', true),
+            'jeniskelamin' => $this->input->post('jenkel', true),
+            'tempatlahir'  => $this->input->post('tempat', true),
+            'tgllahir'     => $this->input->post('tgl', true),
+            'alamatsiswa'  => $this->input->post('alamat', true),
+            'notelpseluler' => $this->input->post('notelp', true),
+            'emailsiswa'   => $this->input->post('email', true),
+            'asalsekolah'  => $this->input->post('asal', true),
+            'tglmasuk'     => $this->input->post('tgmasuk', true),
+            'nama_ayah'    => $this->input->post('ayah', true),
+            'nama_ibu'     => $this->input->post('ibu', true),
+            'kodekelas'    => $this->input->post('kodekls', true),
+            'kodejurusan'  => $this->input->post('kodejur', true),
+            'semester_aktif' => $this->input->post('semester', true),
+            'is_active'    => 1,
+            'iduser'       => $this->session->userdata('role_id')
+        ];
+
+        $this->db->where('nis', $this->input->post('dnis'));
+        $this->db->update('tb_siswa', $data);
+        return true;
+    }
+
+    public function delsiswa($id)
+    {
+        $this->db->delete('tb_siswa', ['nis' => $id]);
+        return true;
+    }
 }

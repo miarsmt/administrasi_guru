@@ -302,4 +302,194 @@ class Master extends CI_Controller
         $this->session->set_flashdata('message', 'data kelas berhasil di-hapus');
         redirect('master/kelas');
     }
+
+    public function siswa()
+    {
+        $data = [
+            'title' => 'Modul Siswa',
+            'user' => $this->admin->sesi(),
+            'siswa' => $this->master->getSiswa()
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('master/siswa/index', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function addsiswa()
+    {
+        $data = [
+            'title' => 'Tambah Data Siswa',
+            'user' => $this->admin->sesi(),
+            'jurusan' => $this->master->getAllJurusan(),
+            'kelas' => $this->master->getKelas()
+        ];
+
+        $this->_rulesSiswa();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('master/siswa/add_siswa', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'nis'       => $this->input->post('nis', true),
+                'namasiswa' => $this->input->post('namasiswa', true),
+                'nisn'      => $this->input->post('nisn', true),
+                'jeniskelamin' => $this->input->post('jenkel', true),
+                'tempatlahir'  => $this->input->post('tempat', true),
+                'tgllahir'     => $this->input->post('tgl', true),
+                'alamatsiswa'  => $this->input->post('alamat', true),
+                'notelpseluler' => $this->input->post('notelp', true),
+                'emailsiswa'   => $this->input->post('email', true),
+                'asalsekolah'  => $this->input->post('asal', true),
+                'tglmasuk'     => $this->input->post('tgmasuk', true),
+                'nama_ayah'    => $this->input->post('ayah', true),
+                'nama_ibu'     => $this->input->post('ibu', true),
+                'kodekelas'    => $this->input->post('kodekls', true),
+                'kodejurusan'  => $this->input->post('kodejur', true),
+                'semester_aktif' => $this->input->post('semester', true),
+                'is_active'    => 1,
+                'iduser'       => $this->session->userdata('role_id')
+            ];
+
+            $this->master->save_siswa($data);
+            $this->session->set_flashdata('message', 'data siswa berhasil ditambah-kan');
+            redirect('master/siswa');
+        }
+    }
+
+    private function _rulesSiswa()
+    {
+        $this->form_validation->set_rules('nis', 'Nomor induk siswa', 'required|trim|is_unique[tb_siswa.nis]|min_length[6]', [
+            'required' => '%s tidak boleh kosong',
+            'is_unique' => '%s sudah ada dalam database',
+            'min_length' => '$s minimal 6 karakter'
+        ]);
+        $this->form_validation->set_rules('namasiswa', 'Nama siswa', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('nisn', 'NISN', 'required|trim|min_length[7]', [
+            'required' => '%s tidak boleh kosong',
+            'min_length' => '$s minimal 7 karakter'
+        ]);
+        $this->form_validation->set_rules('jenkel', 'Jenis kelamin', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('tempat', 'Tempat lahir', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('tgl', 'Tanggal lahir', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('notelp', 'No telp seluler', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('email', 'Email siswa', 'required|trim|valid_email', [
+            'required' => '%s tidak boleh kosong',
+            'valid_email' => '%s harus valid'
+        ]);
+        $this->form_validation->set_rules('asal', 'Asal sekolah', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('tgmasuk', 'Tanggal masuk', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('ayah', 'Nama ayah', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('ibu', 'Nama ibu', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('kodekls', 'Kode kelas', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('kodejur', 'Kode jurusan', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('semester', 'Semester', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+    }
+
+    public function editsiswa($id)
+    {
+        $data = [
+            'title' => 'Edit Data Siswa',
+            'user' => $this->admin->sesi(),
+            'dtsiswa' => $this->master->getSiswaById($id),
+            'jurusan' => $this->master->getAllJurusan(),
+            'kelas' => $this->master->getKelas()
+        ];
+
+        $this->_rulesEditSiswa();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('master/siswa/edit_siswa', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->master->update_siswa();
+            $this->session->set_flashdata('message', 'data siswa berhasil di-rubah');
+            redirect('master/siswa');
+        }
+    }
+
+    public function _rulesEditSiswa()
+    {
+        $this->form_validation->set_rules('namasiswa', 'Nama siswa', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('nisn', 'NISN', 'required|trim|min_length[7]', [
+            'required' => '%s tidak boleh kosong',
+            'min_length' => '$s minimal 7 karakter'
+        ]);
+        $this->form_validation->set_rules('tempat', 'Tempat lahir', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('tgl', 'Tanggal lahir', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('notelp', 'No telp seluler', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('email', 'Email siswa', 'required|trim|valid_email', [
+            'required' => '%s tidak boleh kosong',
+            'valid_email' => '%s harus valid'
+        ]);
+        $this->form_validation->set_rules('asal', 'Asal sekolah', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('tgmasuk', 'Tanggal masuk', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('ayah', 'Nama ayah', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('ibu', 'Nama ibu', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('semester', 'Semester', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+    }
+
+    public function deletesiswa($id)
+    {
+        $this->master->delsiswa($id);
+        $this->session->set_flashdata('message', 'data siswa berhasil di-hapus');
+        redirect('master/siswa');
+    }
 }
