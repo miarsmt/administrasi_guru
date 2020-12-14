@@ -51,8 +51,8 @@
                     <dl class="row">
                         <?php if ($kompdasar) { ?>
                             <?php foreach ($kompdasar as $kd) : ?>
-                                <dt class="col-sm-4"><?= $kd['kodekd']; ?></dt>
-                                <dd class="col-sm-8"><?= $kd['namakd']; ?></dd>
+                                <dt class="col-sm-3"><?= $kd['kodekd']; ?></dt>
+                                <dd class="col-sm-9"><?= $kd['namakd']; ?></dd>
                             <?php endforeach; ?>
                         <?php } else { ?>
                             <dd class="col-md-9 offset-3">Belum ada kompetensi dasar</dd>
