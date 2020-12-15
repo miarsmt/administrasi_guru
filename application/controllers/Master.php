@@ -628,4 +628,81 @@ class Master extends CI_Controller
             redirect('master/mapel');
         }
     }
+
+    public function mengajar()
+    {
+        $data = [
+            'title'     => 'Modul Mengajar',
+            'user'      => $this->admin->sesi(),
+            'ajar'      => $this->master->getAjar(),
+            'mapel'     => $this->master->getMapel(),
+            'guru'      => $this->master->getAllGuru(),
+            'kelas'     => $this->master->getKelas()
+        ];
+
+        $this->form_validation->set_rules('smstr', 'Semester', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('periode', 'Periode mengajar', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('master/mengajar/index', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'kodemapel' => $this->input->post('kodemapel', true),
+                'nip'       => $this->input->post('nip', true),
+                'semester'  => $this->input->post('smstr', true),
+                'kodekelas' => $this->input->post('kodekls', true),
+                'periode_mengajar' => $this->input->post('periode', true)
+            ];
+
+            $this->master->save_mengajar($data);
+            $this->session->set_flashdata('message', 'data mengajar berhasil ditambah-kan');
+            redirect('master/mengajar');
+        }
+    }
+
+    public function editajar($id)
+    {
+        $data = [
+            'title'     => 'Edit Data Mengajar',
+            'user'      => $this->admin->sesi(),
+            'dtajar'    => $this->master->getAjarById($id),
+            'mapel'     => $this->master->getMapel(),
+            'guru'      => $this->master->getAllGuru(),
+            'kelas'     => $this->master->getKelas()
+        ];
+
+        $this->form_validation->set_rules('smstr', 'Semester', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('periode', 'Periode mengajar', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('master/mengajar/edit_mengajar', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->master->update_ajar();
+            $this->session->set_flashdata('message', 'data mengajar berhasil di-rubah');
+            redirect('master/mengajar');
+        }
+    }
+
+    public function deleteajar($id)
+    {
+        $this->master->delajar($id);
+        $this->session->set_flashdata('message', 'data mengajar berhasil di-hapus');
+        redirect('master/mengajar');
+    }
 }

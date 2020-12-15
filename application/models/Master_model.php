@@ -270,4 +270,47 @@ class Master_model extends CI_Model
         $result = $this->db->get();
         return $result->result_array();
     }
+
+    public function getAjar()
+    {
+        $this->db->select('tb_mengajar.*, tb_mapel.namamapel, tb_guru.namaguru, tb_kelas.namakelas, tb_kelas.kelas');
+        $this->db->from('tb_mengajar');
+        $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_mengajar.kodemapel', 'left');
+        $this->db->join('tb_guru', 'tb_guru.nip = tb_mengajar.nip', 'left');
+        $this->db->join('tb_kelas', 'tb_kelas.kodekelas = tb_mengajar.kodekelas', 'left');
+        $result = $this->db->get();
+        return $result->result_array();
+    }
+
+    public function save_mengajar($data)
+    {
+        $this->db->insert('tb_mengajar', $data);
+        return true;
+    }
+
+    public function getAjarById($id)
+    {
+        return $this->db->get_where('tb_mengajar', ['idmengajar' => $id])->row_array();
+    }
+
+    public function update_ajar()
+    {
+        $data = [
+            'kodemapel' => $this->input->post('kodemapel', true),
+            'nip'       => $this->input->post('nip', true),
+            'semester'  => $this->input->post('smstr', true),
+            'kodekelas' => $this->input->post('kodekls', true),
+            'periode_mengajar' => $this->input->post('periode', true)
+        ];
+
+        $this->db->where('idmengajar', $this->input->post('kode'));
+        $this->db->update('tb_mengajar', $data);
+        return true;
+    }
+
+    public function delajar($id)
+    {
+        $this->db->delete('tb_mengajar', ['idmengajar' => $id]);
+        return true;
+    }
 }
