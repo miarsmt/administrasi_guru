@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2020 at 04:04 AM
+-- Generation Time: Dec 15, 2020 at 10:07 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -24,22 +24,52 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_absensi`
+--
+
+CREATE TABLE `tb_absensi` (
+  `kodeabsen` varchar(20) NOT NULL,
+  `tglabsen` date NOT NULL,
+  `nis` int(11) NOT NULL,
+  `keterangan` varchar(10) NOT NULL,
+  `idagenda` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_agenda`
+--
+
+CREATE TABLE `tb_agenda` (
+  `idagenda` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam_ke` int(2) NOT NULL,
+  `kodekelas` varchar(15) NOT NULL,
+  `idkd` int(11) NOT NULL,
+  `keterangan` varchar(30) NOT NULL,
+  `nip` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_guru`
 --
 
 CREATE TABLE `tb_guru` (
   `nip` varchar(30) NOT NULL,
   `namaguru` varchar(50) NOT NULL,
-  `jeniskelamin` varchar(15) NOT NULL,
-  `tempatlahir` varchar(25) NOT NULL,
-  `tgllahir` date NOT NULL,
-  `alamatguru` varchar(80) NOT NULL,
-  `notelpseluler` char(15) NOT NULL,
-  `emailguru` varchar(30) NOT NULL,
-  `kodejurusan` char(10) NOT NULL,
-  `iduser` int(11) NOT NULL,
+  `jeniskelamin` varchar(15) DEFAULT NULL,
+  `tempatlahir` varchar(25) DEFAULT NULL,
+  `tgllahir` date DEFAULT NULL,
+  `alamatguru` varchar(80) DEFAULT NULL,
+  `notelpseluler` char(15) DEFAULT NULL,
+  `emailguru` varchar(30) DEFAULT NULL,
+  `kodejurusan` char(10) DEFAULT NULL,
+  `iduser` int(11) DEFAULT NULL,
   `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `is_active` int(1) NOT NULL
+  `is_active` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -78,12 +108,12 @@ INSERT INTO `tb_jurusan` (`kodejurusan`, `namajurusan`, `nip`, `iduser`, `tglper
 
 CREATE TABLE `tb_kelas` (
   `kodekelas` char(10) NOT NULL,
-  `kodejurusan` char(10) NOT NULL,
-  `namakelas` varchar(30) NOT NULL,
-  `kelas` char(3) NOT NULL,
+  `kodejurusan` char(10) DEFAULT NULL,
+  `namakelas` varchar(30) DEFAULT NULL,
+  `kelas` char(3) DEFAULT NULL,
   `angkatankelas` int(11) NOT NULL,
-  `is_active` int(1) NOT NULL,
-  `iduser` int(11) NOT NULL,
+  `is_active` int(1) DEFAULT NULL,
+  `iduser` int(11) DEFAULT NULL,
   `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -97,18 +127,42 @@ INSERT INTO `tb_kelas` (`kodekelas`, `kodejurusan`, `namakelas`, `kelas`, `angka
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_kelas_history`
+--
+
+CREATE TABLE `tb_kelas_history` (
+  `idhistory` int(11) NOT NULL,
+  `kodekelas` varchar(15) NOT NULL,
+  `tahunajar` int(11) DEFAULT NULL,
+  `semesteraktif` int(11) DEFAULT 1,
+  `nip` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_kompdasar`
 --
 
 CREATE TABLE `tb_kompdasar` (
+  `idkd` int(11) NOT NULL,
   `kodekd` varchar(15) NOT NULL,
-  `namakd` varchar(30) NOT NULL,
-  `keterangankd` text NOT NULL,
-  `semester` varchar(7) NOT NULL,
-  `kkm` double NOT NULL,
+  `namakd` varchar(256) NOT NULL,
+  `keterangankd` text DEFAULT NULL,
+  `semester` varchar(50) DEFAULT NULL,
+  `kkm` double DEFAULT NULL,
   `kodemapel` varchar(20) NOT NULL,
-  `iduser` varchar(15) NOT NULL
+  `iduser` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_kompdasar`
+--
+
+INSERT INTO `tb_kompdasar` (`idkd`, `kodekd`, `namakd`, `keterangankd`, `semester`, `kkm`, `kodemapel`, `iduser`) VALUES
+(1, 'KD 1.1', 'Larangan pergaulan bebas dan perbuatan zina', NULL, '1 (Satu)', 70, 'MP001', '1'),
+(2, 'KD 1.2', 'Makna beriman kepada malaikat - malaikat Allah SWT', NULL, '1 (Satu)', 70, 'MP001', '1'),
+(3, 'KD 1.3', 'Semangat menuntut ilmu dan menyampaikannya kepada sesama', NULL, '1 (Satu)', 70, 'MP001', '1');
 
 -- --------------------------------------------------------
 
@@ -118,12 +172,12 @@ CREATE TABLE `tb_kompdasar` (
 
 CREATE TABLE `tb_mapel` (
   `kodemapel` varchar(20) NOT NULL,
-  `namamapel` varchar(256) NOT NULL,
+  `namamapel` varchar(256) DEFAULT NULL,
   `tingkatan` varchar(10) NOT NULL,
-  `kelompok` varchar(70) NOT NULL,
+  `kelompok` varchar(70) DEFAULT NULL,
   `kodejurusan` varchar(30) NOT NULL,
-  `kkm` double NOT NULL,
-  `iduser` varchar(15) NOT NULL
+  `kkm` double DEFAULT NULL,
+  `iduser` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -139,6 +193,119 @@ INSERT INTO `tb_mapel` (`kodemapel`, `namamapel`, `tingkatan`, `kelompok`, `kode
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_mengajar`
+--
+
+CREATE TABLE `tb_mengajar` (
+  `idmengajar` int(11) NOT NULL,
+  `kodemapel` varchar(15) NOT NULL,
+  `nip` varchar(30) NOT NULL,
+  `semester` int(3) NOT NULL,
+  `kodekelas` varchar(15) NOT NULL,
+  `periode_mengajar` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_mengajar`
+--
+
+INSERT INTO `tb_mengajar` (`idmengajar`, `kodemapel`, `nip`, `semester`, `kodekelas`, `periode_mengajar`) VALUES
+(1, 'MP001', '19801203202105001', 1, 'XIAKL', '2018 / 2019'),
+(2, 'MP002', '19801203202105001', 1, 'XIAKL', '2018 / 2019'),
+(3, 'MP003', '19801203202105001', 1, 'XIAKL', '2018 / 2019'),
+(4, 'MP004', '19801203202105001', 1, 'XIAKL', '2018 / 2019');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_nilai`
+--
+
+CREATE TABLE `tb_nilai` (
+  `idnilai` int(11) NOT NULL,
+  `pts` double NOT NULL,
+  `pat` double NOT NULL,
+  `id_agenda` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_nilai_penugasan`
+--
+
+CREATE TABLE `tb_nilai_penugasan` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(15) NOT NULL,
+  `idkd` int(11) NOT NULL,
+  `nilai` double NOT NULL,
+  `ket` varchar(15) NOT NULL,
+  `idnilai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_nilai_portofolio`
+--
+
+CREATE TABLE `tb_nilai_portofolio` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(15) NOT NULL,
+  `idkd` int(11) NOT NULL,
+  `nilai` double NOT NULL,
+  `ket` varchar(15) NOT NULL,
+  `idnilai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_nilai_produk`
+--
+
+CREATE TABLE `tb_nilai_produk` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(15) NOT NULL,
+  `idkd` int(11) NOT NULL,
+  `nilai` double NOT NULL,
+  `ket` varchar(15) NOT NULL,
+  `idnilai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_nilai_proses`
+--
+
+CREATE TABLE `tb_nilai_proses` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(10) NOT NULL,
+  `idkd` int(11) NOT NULL,
+  `nilai` double NOT NULL,
+  `ket` varchar(15) NOT NULL,
+  `idnilai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_nilai_proyek`
+--
+
+CREATE TABLE `tb_nilai_proyek` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(15) NOT NULL,
+  `idkd` int(11) NOT NULL,
+  `nilai` double NOT NULL,
+  `ket` varchar(15) NOT NULL,
+  `idnilai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_siswa`
 --
 
@@ -146,21 +313,21 @@ CREATE TABLE `tb_siswa` (
   `nis` varchar(15) NOT NULL,
   `namasiswa` varchar(70) NOT NULL,
   `nisn` varchar(30) DEFAULT NULL,
-  `jeniskelamin` char(15) NOT NULL,
-  `tempatlahir` varchar(30) NOT NULL,
-  `tgllahir` date NOT NULL,
-  `alamatsiswa` varchar(70) NOT NULL,
+  `jeniskelamin` char(15) DEFAULT NULL,
+  `tempatlahir` varchar(30) DEFAULT NULL,
+  `tgllahir` date DEFAULT NULL,
+  `alamatsiswa` varchar(70) DEFAULT NULL,
   `notelpseluler` varchar(15) DEFAULT NULL,
   `emailsiswa` varchar(50) DEFAULT NULL,
   `asalsekolah` varchar(50) DEFAULT NULL,
-  `tglmasuk` date NOT NULL,
-  `nama_ayah` varchar(50) NOT NULL,
-  `nama_ibu` varchar(50) NOT NULL,
-  `kodekelas` char(10) NOT NULL,
-  `kodejurusan` char(10) NOT NULL,
+  `tglmasuk` date DEFAULT NULL,
+  `nama_ayah` varchar(50) DEFAULT NULL,
+  `nama_ibu` varchar(50) DEFAULT NULL,
+  `kodekelas` char(10) DEFAULT NULL,
+  `kodejurusan` char(10) DEFAULT NULL,
   `semester_aktif` int(2) NOT NULL,
-  `is_active` int(11) NOT NULL,
-  `iduser` varchar(20) NOT NULL,
+  `is_active` int(11) DEFAULT NULL,
+  `iduser` varchar(20) DEFAULT NULL,
   `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -237,9 +404,10 @@ CREATE TABLE `user_menu` (
 
 INSERT INTO `user_menu` (`id`, `menu`, `urutan`) VALUES
 (1, 'Admin', 1),
-(2, 'User', 4),
-(3, 'Menu', 3),
-(4, 'Master', 2);
+(2, 'User', 5),
+(3, 'Menu', 4),
+(4, 'Master', 2),
+(5, 'Guru', 3);
 
 -- --------------------------------------------------------
 
@@ -291,11 +459,24 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (9, 4, 'Modul Jurusan', 'master/jurusan', 'fas fa-fw fa-tags', 1),
 (10, 4, 'Modul Kelas', 'master/kelas', 'fas fa-fw fa-chalkboard', 1),
 (11, 4, 'Modul Siswa', 'master/siswa', 'fas fa-fw fa-users', 1),
-(12, 4, 'Modul Mata Pelajaran', 'master/mapel', 'fas fa-fw fa-book', 1);
+(12, 4, 'Modul Mata Pelajaran', 'master/mapel', 'fas fa-fw fa-book', 1),
+(13, 4, 'Modul Mengajar', 'master/mengajar', 'fas fa-fw fa-university', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tb_absensi`
+--
+ALTER TABLE `tb_absensi`
+  ADD PRIMARY KEY (`kodeabsen`);
+
+--
+-- Indexes for table `tb_agenda`
+--
+ALTER TABLE `tb_agenda`
+  ADD PRIMARY KEY (`idagenda`);
 
 --
 -- Indexes for table `tb_guru`
@@ -316,10 +497,64 @@ ALTER TABLE `tb_kelas`
   ADD PRIMARY KEY (`kodekelas`);
 
 --
+-- Indexes for table `tb_kelas_history`
+--
+ALTER TABLE `tb_kelas_history`
+  ADD PRIMARY KEY (`idhistory`);
+
+--
+-- Indexes for table `tb_kompdasar`
+--
+ALTER TABLE `tb_kompdasar`
+  ADD PRIMARY KEY (`idkd`);
+
+--
 -- Indexes for table `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
   ADD PRIMARY KEY (`kodemapel`);
+
+--
+-- Indexes for table `tb_mengajar`
+--
+ALTER TABLE `tb_mengajar`
+  ADD PRIMARY KEY (`idmengajar`);
+
+--
+-- Indexes for table `tb_nilai`
+--
+ALTER TABLE `tb_nilai`
+  ADD PRIMARY KEY (`idnilai`);
+
+--
+-- Indexes for table `tb_nilai_penugasan`
+--
+ALTER TABLE `tb_nilai_penugasan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_nilai_portofolio`
+--
+ALTER TABLE `tb_nilai_portofolio`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_nilai_proses`
+--
+ALTER TABLE `tb_nilai_proses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_nilai_proyek`
+--
+ALTER TABLE `tb_nilai_proyek`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_siswa`
+--
+ALTER TABLE `tb_siswa`
+  ADD PRIMARY KEY (`nis`);
 
 --
 -- Indexes for table `user`
@@ -356,6 +591,60 @@ ALTER TABLE `user_sub_menu`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_agenda`
+--
+ALTER TABLE `tb_agenda`
+  MODIFY `idagenda` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_kelas_history`
+--
+ALTER TABLE `tb_kelas_history`
+  MODIFY `idhistory` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_kompdasar`
+--
+ALTER TABLE `tb_kompdasar`
+  MODIFY `idkd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_mengajar`
+--
+ALTER TABLE `tb_mengajar`
+  MODIFY `idmengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_nilai`
+--
+ALTER TABLE `tb_nilai`
+  MODIFY `idnilai` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_nilai_penugasan`
+--
+ALTER TABLE `tb_nilai_penugasan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_nilai_portofolio`
+--
+ALTER TABLE `tb_nilai_portofolio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_nilai_proses`
+--
+ALTER TABLE `tb_nilai_proses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_nilai_proyek`
+--
+ALTER TABLE `tb_nilai_proyek`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -365,13 +654,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -383,7 +672,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
