@@ -36,7 +36,7 @@
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $sw['nis']; ?></td>
                                         <td><?= $sw['namasiswa']; ?></td>
-                                        <td><?= $sw['tempatlahir']; ?>, <br><?= format_indo($sw['tgllahir']); ?></td>
+                                        <td><?= $sw['tempatlahir']; ?>, <br><?= $sw['tgllahir']; ?></td>
                                         <td><?= $sw['namajurusan']; ?></td>
                                         <td><?= $sw['kelas']; ?> <?= $sw['namakelas']; ?></td>
                                         <td><?= $sw['semester_aktif'] ?></td>
@@ -49,6 +49,7 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <a href="" data-toggle="modal" data-target="#importSiswa" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Siswa</a>
                     </div>
                 </div>
             </div>
@@ -61,3 +62,33 @@
 
 </div>
 <!-- End of Main Content -->
+
+<!-- Modal Import -->
+
+<div class="modal fade" id="importSiswa" tabindex="-1" aria-labelledby="importSiswaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importSiswaLabel">Import Data Siswa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('import/uploadsiswa'); ?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="file">Unggah File Excel</label>
+                        <div class="custom-file">
+                            <input type="file" name="berkas_excel" id="berkas" class="custom-file-input" accept=".xlsx, .xls">
+                            <label for="berkas" class="custom-file-label">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
