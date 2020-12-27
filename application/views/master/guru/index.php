@@ -40,7 +40,7 @@
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $gr['nip']; ?></td>
                                         <td><?= $gr['namaguru']; ?></td>
-                                        <td><?= $gr['tempatlahir']; ?>, <br><?= format_indo($gr['tgllahir']); ?></td>
+                                        <td><?= $gr['tempatlahir']; ?>, <br><?= $gr['tgllahir']; ?></td>
                                         <td><?= $gr['namajurusan']; ?></td>
                                         <td><?= $active ?></td>
                                         <td>
@@ -52,6 +52,7 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <a href="" data-toggle="modal" data-target="#importGuru" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Guru</a>
                     </div>
                 </div>
             </div>
@@ -64,3 +65,33 @@
 
 </div>
 <!-- End of Main Content -->
+
+<!-- Modal -->
+
+<div class="modal fade" id="importGuru" tabindex="-1" aria-labelledby="importGuruLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importGuruLabel">Import Data Guru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('import/uploadguru'); ?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="file">Unggah File Excel</label>
+                        <div class="custom-file">
+                            <input type="file" name="berkas_excel" id="berkas" class="custom-file-input" accept=".xlsx, .xls">
+                            <label for="berkas" class="custom-file-label">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
