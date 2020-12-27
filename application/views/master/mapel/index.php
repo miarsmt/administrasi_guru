@@ -61,6 +61,7 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <a href="" data-toggle="modal" data-target="#importMapel" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Mapel</a>
                     </div>
                 </div>
             </div>
@@ -115,6 +116,36 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Import -->
+
+<div class="modal fade" id="importMapel" tabindex="-1" aria-labelledby="importMapelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importMapelLabel">Import Data Mapel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('import/uploadmapel'); ?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="file">Unggah File Excel</label>
+                        <div class="custom-file">
+                            <input type="file" name="berkas_excel" id="berkas" class="custom-file-input" accept=".xlsx, .xls">
+                            <label for="berkas" class="custom-file-label">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </div>
             </form>
         </div>
