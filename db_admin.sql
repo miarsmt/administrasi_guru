@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2020 at 05:23 PM
+-- Generation Time: Dec 28, 2020 at 02:33 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -59,14 +59,15 @@ CREATE TABLE `tb_agenda` (
 
 CREATE TABLE `tb_guru` (
   `nip` varchar(30) NOT NULL,
+  `kodeguru` varchar(10) DEFAULT NULL,
   `namaguru` varchar(50) NOT NULL,
-  `jeniskelamin` varchar(15) DEFAULT NULL,
+  `jeniskelamin` varchar(15) NOT NULL,
   `tempatlahir` varchar(25) DEFAULT NULL,
   `tgllahir` date DEFAULT NULL,
   `alamatguru` varchar(80) DEFAULT NULL,
   `notelpseluler` char(15) DEFAULT NULL,
   `emailguru` varchar(30) DEFAULT NULL,
-  `kodejurusan` char(10) DEFAULT NULL,
+  `kodejurusan` char(10) NOT NULL,
   `iduser` int(11) DEFAULT NULL,
   `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `is_active` int(1) DEFAULT 1
@@ -76,13 +77,59 @@ CREATE TABLE `tb_guru` (
 -- Dumping data for table `tb_guru`
 --
 
-INSERT INTO `tb_guru` (`nip`, `namaguru`, `jeniskelamin`, `tempatlahir`, `tgllahir`, `alamatguru`, `notelpseluler`, `emailguru`, `kodejurusan`, `iduser`, `tglperbaharui`, `is_active`) VALUES
-('19801203202105001', 'Najwa Shihab', 'Perempuan', 'Jakarta', '1980-12-03', 'Jl. Kenari No.103 Kaswari', '085896600511', 'mbanana@gmail.com', 'AKL', 1, '2020-12-03 14:27:08', 1),
-('19801203202105002', 'Maudy Ayunda', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-27 09:14:29', 1),
-('19801203202105003', 'Sandiaga Uno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-27 09:14:29', 1),
-('19801203202105004', 'Cinta Laura', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-27 09:14:29', 1),
-('19801203202105005', 'Tasya Kamila', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-27 09:14:29', 1),
-('19801203202105006', 'Gita Savitri', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-27 09:14:29', 1);
+INSERT INTO `tb_guru` (`nip`, `kodeguru`, `namaguru`, `jeniskelamin`, `tempatlahir`, `tgllahir`, `alamatguru`, `notelpseluler`, `emailguru`, `kodejurusan`, `iduser`, `tglperbaharui`, `is_active`) VALUES
+('11111', 'ARF', 'Ust. Arifin, S.Pd.I', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11112', 'EVI', 'Evi Apriyanti, S.Pd.I', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11113', 'MD', 'Merda Budi H, S.IP., M.M.', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11114', 'YU', 'Yuyun Yuniasih, S.Pd. MM.', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11115', 'ZF', 'Zafar Sidik, S.Pd., S.IP., M.M', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11116', 'NI', 'Novi Indriyani, S.Pd', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11117', 'PY', 'Panji Yusuf, SS.', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11118', 'ARYO', 'Moch. Aryo, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11119', 'DP', 'Deri Prayoga, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11120', 'DS', 'Dedi Sopyandi, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11121', 'IRF', 'Irfan Abdurrahman, M.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11122', 'WIN', 'Winekas, S.Pd', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11123', 'GAL', 'Galih Nidiasari', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11124', 'RAT', 'Ratna Siti Nurhayati, S.Pd', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11125', 'ANN', 'Anna Rachmawati, S.Pd', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11126', 'AS', 'Ahmad Sandi, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11127', 'RIS', 'Rismat Maulana, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11128', 'EJ', 'Neneng Jajah, S.Pd', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11129', 'AGS', 'Agustina C Juwita, M.Pd', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11130', 'SRI', 'Sri Nuraeni, S.Pd', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11131', 'JB', ' Juli Budi Satya, S.Ip., M.Si', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'OTKP', NULL, '2020-12-28 04:40:34', 1),
+('11132', 'IM', ' Imas Nurhasanah, S.Pd., M.Si', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'OTKP', NULL, '2020-12-28 04:40:34', 1),
+('11133', 'OP', 'Opick Satriayi, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'OTKP', NULL, '2020-12-28 04:40:34', 1),
+('11134', 'ELENA', 'Elenna', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'OTKP', NULL, '2020-12-28 04:40:34', 1),
+('11135', 'RD', 'Rida Junita, SE', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'OTKP', NULL, '2020-12-28 04:40:34', 1),
+('11136', 'DIANA', 'Radiana Ambarsari, SE', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'OTKP', NULL, '2020-12-28 04:40:34', 1),
+('11137', 'DD', ' Dadang Hidayat, S.E., M.M', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'OTKP', NULL, '2020-12-28 04:40:34', 1),
+('11138', 'DS', 'Desi Tri Pratiwi, S.Pd', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'OTKP', NULL, '2020-12-28 04:40:34', 1),
+('11139', 'JKR', 'Jakaria, S.Pd., M.Si', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'OTKP', NULL, '2020-12-28 04:40:34', 1),
+('11140', 'ZL', 'Zain Lisa, SE, MM', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'AKL', NULL, '2020-12-28 04:40:34', 1),
+('11141', 'SW', 'Sri Wulan, SE', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'AKL', NULL, '2020-12-28 04:40:34', 1),
+('11142', 'RAY', 'Raya Nurfala, S.Pd', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'AKL', NULL, '2020-12-28 04:40:34', 1),
+('11143', 'HER', 'Heri Setiawan, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'AKL', NULL, '2020-12-28 04:40:34', 1),
+('11144', 'ERICK', 'Erick Andika, M.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
+('11145', 'AZIS', 'Azis Sumadullah, A.Md.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
+('11146', 'SANDI', 'Sandi Putra Cahya Permadi, A.Md.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
+('11147', 'IH', 'Ihsan, S.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
+('11148', 'WK', 'Weli Kusnadi, S.Kom, M.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
+('11149', 'RI', 'Riki Iskandar', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
+('11150', 'LUT', 'Lufti M Yassin, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
+('11151', 'SAM', 'Samwiel A. Nugraha, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
+('11152', 'TE', 'Tatang Erwanto', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
+('11153', 'AGUS', 'Agus Permana, SM', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
+('11154', 'ADIT', 'Adit Bahrun Nur Pratama, S.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
+('11155', 'NILA', 'Nila Natalia', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'ANM', NULL, '2020-12-28 04:40:34', 1),
+('11156', 'AN', 'Moch. Asep Nazmudin, S.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'ANM', NULL, '2020-12-28 04:40:34', 1),
+('11157', 'IKH', 'Ikhsan Fikri Salmi, S.Ds', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'ANM', NULL, '2020-12-28 04:40:34', 1),
+('11158', 'SP', 'Septiawan', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'ANM', NULL, '2020-12-28 04:40:34', 1),
+('11159', 'NDEN', 'Nenden Muslihat', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'ANM', NULL, '2020-12-28 04:40:34', 1),
+('11160', 'DY', 'Dinny Yulanda, P.Si', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11161', 'MF', 'M Fiuji Hardiansyah', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('11162', 'JM', 'Joko Mulyantoro, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1);
 
 -- --------------------------------------------------------
 
@@ -103,12 +150,12 @@ CREATE TABLE `tb_jurusan` (
 --
 
 INSERT INTO `tb_jurusan` (`kodejurusan`, `namajurusan`, `nip`, `iduser`, `tglperbaharui`) VALUES
-('AKL', 'Akuntansi dan Keuangan Lembaga', '19801203202105001', 1, '2020-12-03 14:26:45'),
-('ANM', 'Animasi', '19801203202105004', 1, '2020-12-27 14:53:59'),
-('OTKP', 'Otomatisasi Tata Kelola Perkantoran', '19801203202105005', 1, '2020-12-27 14:54:47'),
-('PSPT', 'Produksi dan Siaran Program Televisi', '19801203202105002', 1, '2020-12-27 14:56:37'),
-('RPL', 'Rekayasa Perangkat Lunak', '19801203202105006', 1, '2020-12-27 14:53:21'),
-('TKJ', 'Teknik Komputer dan Jaringan', '19801203202105003', 1, '2020-12-27 14:52:54');
+('AKL', 'Akuntansi dan Keuangan Lembaga', '11143', 1, '2020-12-28 04:49:35'),
+('ANM', 'Animasi', '11157', 1, '2020-12-28 04:49:51'),
+('OTKP', 'Otomatisasi Tata Kelola Perkantoran', '11135', 1, '2020-12-28 04:50:04'),
+('PSPT', 'Produksi dan Siaran Program Televisi', '11150', 1, '2020-12-28 04:50:14'),
+('RPL', 'Rekayasa Perangkat Lunak', '11148', 1, '2020-12-28 04:50:24'),
+('TKJ', 'Teknik Komputer dan Jaringan', '11145', 1, '2020-12-28 04:50:36');
 
 -- --------------------------------------------------------
 
@@ -177,8 +224,8 @@ CREATE TABLE `tb_kompdasar` (
 --
 
 INSERT INTO `tb_kompdasar` (`idkd`, `kodekd`, `namakd`, `keterangankd`, `semester`, `kkm`, `kodemapel`, `iduser`) VALUES
-(1, 'KD 1.1', 'Larangan pergaulan bebas dan perbuatan zina', NULL, '1 (Satu)', 70, 'MP001', '1'),
-(2, 'KD 1.2', 'Makna beriman kepada malaikat - malaikat Allah SWT', NULL, '1 (Satu)', 70, 'MP001', '1'),
+(1, 'KD 1.1', 'Larangan pergaulan bebas dan perbuatan zina', NULL, '4 (Empat)', 70, 'MP001', '1'),
+(2, 'KD 1.2', 'Makna beriman kepada malaikat - malaikat Allah SWT', NULL, '4 (Empat)', 70, 'MP001', '1'),
 (3, 'KD 1.3', 'Semangat menuntut ilmu dan menyampaikannya kepada sesama', NULL, '1 (Satu)', 70, 'MP001', '1');
 
 -- --------------------------------------------------------
@@ -202,20 +249,20 @@ CREATE TABLE `tb_mapel` (
 --
 
 INSERT INTO `tb_mapel` (`kodemapel`, `namamapel`, `tingkatan`, `kelompok`, `kodejurusan`, `kkm`, `iduser`) VALUES
-('MP001', 'Pendidikan Agama dan Budi Pekerti', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1'),
-('MP002', 'Bahasa Indonesia', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1'),
-('MP003', 'Matematika', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1'),
+('MP001', 'Pendidikan Agama dan Budi Pekerti', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
+('MP002', 'Bahasa Indonesia', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
+('MP003', 'Matematika', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
 ('MP004', 'Sejarah Indonesia', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1'),
-('MP005', 'Pendidikan Pancasila dan Kewarganegaraan', 'I', NULL, 'Semua Jurusan', NULL, NULL),
-('MP006', 'Bahasa Inggris', 'I', NULL, 'Semua Jurusan', NULL, NULL),
-('MP007', 'Seni Budaya', 'I', NULL, 'Semua Jurusan', NULL, NULL),
-('MP008', 'Pendidikan Jasmani Olahraga dan Kesehatan', 'I', NULL, 'Semua Jurusan', NULL, NULL),
-('MP009', 'Bahasa Sunda', 'I', NULL, 'Semua Jurusan', NULL, NULL),
-('MP010', 'Simulasi dan Komunikasi Digital', 'I', NULL, 'RPL', NULL, NULL),
-('MP011', 'Sistem Komputer', 'I', NULL, 'RPL', NULL, NULL),
-('MP012', 'Komputer dan Jaringan Dasar', 'I', NULL, 'RPL', NULL, NULL),
-('MP013', 'Pemrograman Dasar', 'I', NULL, 'RPL', NULL, NULL),
-('MP014', 'Dasar Desain Grafis', 'I', NULL, 'RPL', NULL, NULL);
+('MP005', 'Pendidikan Pancasila dan Kewarganegaraan', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
+('MP006', 'Bahasa Inggris', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
+('MP007', 'Kewirausahaan', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1'),
+('MP008', 'Pendidikan Jasmani Olahraga dan Kesehatan', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1'),
+('MP009', 'Bahasa Jepang', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1'),
+('MP010', 'Pemodelan Perangkat Lunak', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1'),
+('MP011', 'Basis Data', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1'),
+('MP012', 'Pemrograman Berorientasi Objek', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1'),
+('MP013', 'Pemrograman Web dan Perangkat Bergerak', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1'),
+('MP014', 'Produk Kreatif dan Kewirausahaan', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1');
 
 -- --------------------------------------------------------
 
@@ -237,10 +284,22 @@ CREATE TABLE `tb_mengajar` (
 --
 
 INSERT INTO `tb_mengajar` (`idmengajar`, `kodemapel`, `nip`, `semester`, `kodekelas`, `periode_mengajar`) VALUES
-(1, 'MP001', '19801203202105001', 1, 'XIAKL', '2018 / 2019'),
-(2, 'MP002', '19801203202105001', 1, 'XIAKL', '2018 / 2019'),
-(3, 'MP003', '19801203202105001', 1, 'XIAKL', '2018 / 2019'),
-(4, 'MP004', '19801203202105001', 1, 'XIAKL', '2018 / 2019');
+(6, 'MP001', '11111', 4, 'XIRPL', '2020 / 2021'),
+(7, 'MP005', '11113', 4, 'XIRPL', '2020 / 2021'),
+(8, 'MP002', '11117', 4, 'XIRPL', '2020 / 2021'),
+(9, 'MP003', '11128', 4, 'XIRPL', '2020 / 2021'),
+(10, 'MP006', '11123', 4, 'XIRPL', '2020 / 2021'),
+(11, 'MP008', '11120', 4, 'XIRPL', '2020 / 2021'),
+(12, 'MP009', '11130', 4, 'XIRPL', '2020 / 2021'),
+(13, 'MP010', '11147', 4, 'XIRPL', '2020 / 2021'),
+(14, 'MP011', '11148', 4, 'XIRPL', '2020 / 2021'),
+(15, 'MP013', '11147', 4, 'XIRPL', '2020 / 2021'),
+(16, 'MP014', '11148', 4, 'XIRPL', '2020 / 2021'),
+(17, 'MP012', '11147', 4, 'XIRPL', '2020 / 2021'),
+(18, 'MP001', '11111', 4, 'XITKJ', '2020 / 2021'),
+(19, 'MP001', '11111', 4, 'XIPSPT1', '2020 / 2021'),
+(20, 'MP001', '11111', 4, 'XIPSPT2', '2020 / 2021'),
+(21, 'MP001', '11111', 4, 'XIANM', '2020 / 2021');
 
 -- --------------------------------------------------------
 
@@ -519,7 +578,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (11, 4, 'Modul Siswa', 'master/siswa', 'fas fa-fw fa-users', 1),
 (12, 4, 'Modul Mata Pelajaran', 'master/mapel', 'fas fa-fw fa-book', 1),
 (13, 4, 'Modul Mengajar', 'master/mengajar', 'fas fa-fw fa-archive', 1),
-(14, 5, 'Agenda Kegiatan', 'guru', 'fas fa-fw fa-clipboard', 1);
+(14, 5, 'Daftar Ampu', 'guru/ampu', 'fas fa-fw fa-pencil-alt', 1),
+(15, 5, 'Agenda Kegiatan', 'guru', 'fas fa-fw fa-clipboard', 1);
 
 --
 -- Indexes for dumped tables
@@ -671,7 +731,7 @@ ALTER TABLE `tb_kompdasar`
 -- AUTO_INCREMENT for table `tb_mengajar`
 --
 ALTER TABLE `tb_mengajar`
-  MODIFY `idmengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idmengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tb_nilai`
@@ -731,7 +791,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
