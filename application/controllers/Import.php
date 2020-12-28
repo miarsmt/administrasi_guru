@@ -7,7 +7,7 @@ use PhpOffice\PhpSpreadsheet\Reader\Csv;
 
 class Import extends CI_Controller
 {
-    public function uploadguru()
+    public function upload()
     {
         $file_mimes = ['application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
 
@@ -26,10 +26,11 @@ class Import extends CI_Controller
             $sheetData = $spreadsheet->getActiveSheet()->toArray();
             for ($i = 1; $i < count($sheetData); $i++) {
                 $data = [
-                    'nip'       => $sheetData[$i]['1'],
-                    'namaguru'  => $sheetData[$i]['2'],
-                    'jeniskelamin' => $sheetData[$i]['3'],
-                    'kodejurusan'  => $sheetData[$i]['9']
+                    'nip' => $sheetData[$i]['1'],
+                    'kodeguru' => $sheetData[$i]['2'],
+                    'namaguru' => $sheetData[$i]['3'],
+                    'jeniskelamin' => $sheetData[$i]['4'],
+                    'kodejurusan'  => $sheetData[$i]['10']
                 ];
 
                 $this->db->insert('tb_guru', $data);
