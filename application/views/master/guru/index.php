@@ -77,7 +77,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('import/uploadguru'); ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('import/upload'); ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="file">Unggah File Excel</label>
