@@ -17,6 +17,12 @@ class Master_model extends CI_Model
         return $result->result_array();
     }
 
+    public function getGuruProd()
+    {
+        $this->db->where('kodejurusan != "-"');
+        return $this->db->get('tb_guru')->result_array();
+    }
+
     public function save_guru($data)
     {
         $this->db->insert('tb_guru', $data);
