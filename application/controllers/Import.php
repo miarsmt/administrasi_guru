@@ -26,8 +26,10 @@ class Import extends CI_Controller
             $sheetData = $spreadsheet->getActiveSheet()->toArray();
             for ($i = 1; $i < count($sheetData); $i++) {
                 $data = [
-                    'nip' => $sheetData[$i]['1'],
-                    'namaguru' => $sheetData[$i]['2']
+                    'nip'       => $sheetData[$i]['1'],
+                    'namaguru'  => $sheetData[$i]['2'],
+                    'jeniskelamin' => $sheetData[$i]['3'],
+                    'kodejurusan'  => $sheetData[$i]['9']
                 ];
 
                 $this->db->insert('tb_guru', $data);
