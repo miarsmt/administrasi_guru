@@ -151,7 +151,7 @@ class Master extends CI_Controller
             'title'     => 'Modul Jurusan',
             'user'      => $this->admin->sesi(),
             'jurusan'   => $this->master->getJurusan(),
-            'guru'      => $this->master->getAllGuru()
+            'guru'      => $this->master->getGuruProd()
         ];
 
         $this->form_validation->set_rules('kodejur', 'Kode jurusan', 'required|trim|is_unique[tb_jurusan.kodejurusan]', [
