@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2020 at 02:33 PM
+-- Generation Time: Dec 29, 2020 at 02:24 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -32,7 +32,8 @@ CREATE TABLE `tb_absensi` (
   `tglabsen` date NOT NULL,
   `nis` int(11) NOT NULL,
   `keterangan` varchar(10) NOT NULL,
-  `idagenda` int(11) DEFAULT NULL
+  `idagenda` int(11) DEFAULT NULL,
+  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -46,10 +47,22 @@ CREATE TABLE `tb_agenda` (
   `tanggal` date NOT NULL,
   `jam_ke` int(2) NOT NULL,
   `kodekelas` varchar(15) NOT NULL,
+  `kodemapel` varchar(15) NOT NULL,
   `idkd` int(11) NOT NULL,
   `keterangan` varchar(30) NOT NULL,
-  `nip` varchar(30) NOT NULL
+  `status_tgs` int(2) DEFAULT NULL,
+  `nip` varchar(30) DEFAULT NULL,
+  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_agenda`
+--
+
+INSERT INTO `tb_agenda` (`idagenda`, `tanggal`, `jam_ke`, `kodekelas`, `kodemapel`, `idkd`, `keterangan`, `status_tgs`, `nip`, `tglperbaharui`) VALUES
+(2, '2020-12-29', 1, 'XIRPL', 'MP010', 4, 'Praktikum', NULL, NULL, '2020-12-29 10:12:09'),
+(3, '2020-12-31', 3, 'XIRPL', 'MP010', 5, 'Tugas', 1, NULL, '2020-12-29 13:16:40'),
+(7, '2020-12-30', 2, 'XIRPL', 'MP010', 5, 'Tugas', 0, NULL, '2020-12-29 13:20:02');
 
 -- --------------------------------------------------------
 
@@ -216,17 +229,20 @@ CREATE TABLE `tb_kompdasar` (
   `semester` varchar(50) DEFAULT NULL,
   `kkm` double DEFAULT NULL,
   `kodemapel` varchar(20) NOT NULL,
-  `iduser` varchar(15) DEFAULT NULL
+  `iduser` varchar(15) DEFAULT NULL,
+  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_kompdasar`
 --
 
-INSERT INTO `tb_kompdasar` (`idkd`, `kodekd`, `namakd`, `keterangankd`, `semester`, `kkm`, `kodemapel`, `iduser`) VALUES
-(1, 'KD 1.1', 'Larangan pergaulan bebas dan perbuatan zina', NULL, '4 (Empat)', 70, 'MP001', '1'),
-(2, 'KD 1.2', 'Makna beriman kepada malaikat - malaikat Allah SWT', NULL, '4 (Empat)', 70, 'MP001', '1'),
-(3, 'KD 1.3', 'Semangat menuntut ilmu dan menyampaikannya kepada sesama', NULL, '1 (Satu)', 70, 'MP001', '1');
+INSERT INTO `tb_kompdasar` (`idkd`, `kodekd`, `namakd`, `keterangankd`, `semester`, `kkm`, `kodemapel`, `iduser`, `tglperbaharui`) VALUES
+(1, 'KD 1.1', 'Larangan pergaulan bebas dan perbuatan zina', NULL, '4 (Empat)', 70, 'MP001', '1', '2020-12-29 10:12:52'),
+(2, 'KD 1.2', 'Makna beriman kepada malaikat - malaikat Allah SWT', NULL, '4 (Empat)', 70, 'MP001', '1', '2020-12-29 10:12:52'),
+(3, 'KD 1.3', 'Semangat menuntut ilmu dan menyampaikannya kepada sesama', NULL, '1 (Satu)', 70, 'MP001', '1', '2020-12-29 10:12:52'),
+(4, 'KD 1.1', 'Memahami alur kerja sistem berorientasi objek', NULL, '4 (Empat)', 75, 'MP010', '1', '2020-12-29 10:12:52'),
+(5, 'KD 1.2', 'Memahami hubungan antar class dalam sistem berorientasi objek', NULL, '4 (Empat)', 75, 'MP010', '1', '2020-12-29 10:12:52');
 
 -- --------------------------------------------------------
 
@@ -241,28 +257,29 @@ CREATE TABLE `tb_mapel` (
   `kelompok` varchar(70) DEFAULT NULL,
   `kodejurusan` varchar(30) NOT NULL,
   `kkm` double DEFAULT NULL,
-  `iduser` varchar(15) DEFAULT NULL
+  `iduser` varchar(15) DEFAULT NULL,
+  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_mapel`
 --
 
-INSERT INTO `tb_mapel` (`kodemapel`, `namamapel`, `tingkatan`, `kelompok`, `kodejurusan`, `kkm`, `iduser`) VALUES
-('MP001', 'Pendidikan Agama dan Budi Pekerti', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
-('MP002', 'Bahasa Indonesia', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
-('MP003', 'Matematika', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
-('MP004', 'Sejarah Indonesia', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1'),
-('MP005', 'Pendidikan Pancasila dan Kewarganegaraan', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
-('MP006', 'Bahasa Inggris', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1'),
-('MP007', 'Kewirausahaan', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1'),
-('MP008', 'Pendidikan Jasmani Olahraga dan Kesehatan', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1'),
-('MP009', 'Bahasa Jepang', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1'),
-('MP010', 'Pemodelan Perangkat Lunak', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1'),
-('MP011', 'Basis Data', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1'),
-('MP012', 'Pemrograman Berorientasi Objek', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1'),
-('MP013', 'Pemrograman Web dan Perangkat Bergerak', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1'),
-('MP014', 'Produk Kreatif dan Kewirausahaan', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1');
+INSERT INTO `tb_mapel` (`kodemapel`, `namamapel`, `tingkatan`, `kelompok`, `kodejurusan`, `kkm`, `iduser`, `tglperbaharui`) VALUES
+('MP001', 'Pendidikan Agama dan Budi Pekerti', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
+('MP002', 'Bahasa Indonesia', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
+('MP003', 'Matematika', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
+('MP004', 'Sejarah Indonesia', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1', '2020-12-29 10:09:11'),
+('MP005', 'Pendidikan Pancasila dan Kewarganegaraan', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
+('MP006', 'Bahasa Inggris', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
+('MP007', 'Kewirausahaan', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
+('MP008', 'Pendidikan Jasmani Olahraga dan Kesehatan', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
+('MP009', 'Bahasa Jepang', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
+('MP010', 'Pemodelan Perangkat Lunak', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11'),
+('MP011', 'Basis Data', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11'),
+('MP012', 'Pemrograman Berorientasi Objek', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11'),
+('MP013', 'Pemrograman Web dan Perangkat Bergerak', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11'),
+('MP014', 'Produk Kreatif dan Kewirausahaan', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11');
 
 -- --------------------------------------------------------
 
@@ -276,30 +293,32 @@ CREATE TABLE `tb_mengajar` (
   `nip` varchar(30) NOT NULL,
   `semester` int(3) NOT NULL,
   `kodekelas` varchar(15) NOT NULL,
-  `periode_mengajar` varchar(15) NOT NULL
+  `periode_mengajar` varchar(15) NOT NULL,
+  `iduser` varchar(15) DEFAULT NULL,
+  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_mengajar`
 --
 
-INSERT INTO `tb_mengajar` (`idmengajar`, `kodemapel`, `nip`, `semester`, `kodekelas`, `periode_mengajar`) VALUES
-(6, 'MP001', '11111', 4, 'XIRPL', '2020 / 2021'),
-(7, 'MP005', '11113', 4, 'XIRPL', '2020 / 2021'),
-(8, 'MP002', '11117', 4, 'XIRPL', '2020 / 2021'),
-(9, 'MP003', '11128', 4, 'XIRPL', '2020 / 2021'),
-(10, 'MP006', '11123', 4, 'XIRPL', '2020 / 2021'),
-(11, 'MP008', '11120', 4, 'XIRPL', '2020 / 2021'),
-(12, 'MP009', '11130', 4, 'XIRPL', '2020 / 2021'),
-(13, 'MP010', '11147', 4, 'XIRPL', '2020 / 2021'),
-(14, 'MP011', '11148', 4, 'XIRPL', '2020 / 2021'),
-(15, 'MP013', '11147', 4, 'XIRPL', '2020 / 2021'),
-(16, 'MP014', '11148', 4, 'XIRPL', '2020 / 2021'),
-(17, 'MP012', '11147', 4, 'XIRPL', '2020 / 2021'),
-(18, 'MP001', '11111', 4, 'XITKJ', '2020 / 2021'),
-(19, 'MP001', '11111', 4, 'XIPSPT1', '2020 / 2021'),
-(20, 'MP001', '11111', 4, 'XIPSPT2', '2020 / 2021'),
-(21, 'MP001', '11111', 4, 'XIANM', '2020 / 2021');
+INSERT INTO `tb_mengajar` (`idmengajar`, `kodemapel`, `nip`, `semester`, `kodekelas`, `periode_mengajar`, `iduser`, `tglperbaharui`) VALUES
+(6, 'MP001', '11111', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(7, 'MP005', '11113', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(8, 'MP002', '11117', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(9, 'MP003', '11128', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(10, 'MP006', '11123', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(11, 'MP008', '11120', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(12, 'MP009', '11130', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(13, 'MP010', '11147', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(14, 'MP011', '11148', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(15, 'MP013', '11147', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(16, 'MP014', '11148', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(17, 'MP012', '11147', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(18, 'MP001', '11111', 4, 'XITKJ', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(19, 'MP001', '11111', 4, 'XIPSPT1', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(20, 'MP001', '11111', 4, 'XIPSPT2', '2020 / 2021', '', '2020-12-29 10:09:42'),
+(21, 'MP001', '11111', 4, 'XIANM', '2020 / 2021', '', '2020-12-29 10:09:42');
 
 -- --------------------------------------------------------
 
@@ -311,7 +330,8 @@ CREATE TABLE `tb_nilai` (
   `idnilai` int(11) NOT NULL,
   `pts` double NOT NULL,
   `pat` double NOT NULL,
-  `id_agenda` int(11) DEFAULT NULL
+  `id_agenda` int(11) DEFAULT NULL,
+  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -453,6 +473,30 @@ INSERT INTO `tb_siswa` (`nis`, `namasiswa`, `nisn`, `jeniskelamin`, `tempatlahir
 ('171800029', 'Yuni Yuningsih', NULL, 'Perempuan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23'),
 ('171800030', 'Maulana Yusuf', NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23'),
 ('171800031', 'Ahmad Ziriel', NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_tugas`
+--
+
+CREATE TABLE `tb_tugas` (
+  `idtugas` int(11) NOT NULL,
+  `idagenda` int(11) NOT NULL,
+  `judul` varchar(50) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `fileupload` varchar(100) NOT NULL,
+  `keterangan` varchar(30) NOT NULL,
+  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_tugas`
+--
+
+INSERT INTO `tb_tugas` (`idtugas`, `idagenda`, `judul`, `deskripsi`, `fileupload`, `keterangan`, `tglperbaharui`) VALUES
+(3, 3, 'Merangkum', 'Merangkum buku administrasi jaringan', '', 'Belum Dikerjakan', '2020-12-29 12:26:12'),
+(4, 3, 'Kerjakan Soal', 'Soal essay', 'Tugas-20-12-292.PNG', 'Belum Dikerjakan', '2020-12-29 12:27:58');
 
 -- --------------------------------------------------------
 
@@ -676,6 +720,12 @@ ALTER TABLE `tb_siswa`
   ADD PRIMARY KEY (`nis`);
 
 --
+-- Indexes for table `tb_tugas`
+--
+ALTER TABLE `tb_tugas`
+  ADD PRIMARY KEY (`idtugas`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -713,7 +763,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `tb_agenda`
 --
 ALTER TABLE `tb_agenda`
-  MODIFY `idagenda` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idagenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_kelas_history`
@@ -725,7 +775,7 @@ ALTER TABLE `tb_kelas_history`
 -- AUTO_INCREMENT for table `tb_kompdasar`
 --
 ALTER TABLE `tb_kompdasar`
-  MODIFY `idkd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idkd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_mengajar`
@@ -764,6 +814,12 @@ ALTER TABLE `tb_nilai_proyek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tb_tugas`
+--
+ALTER TABLE `tb_tugas`
+  MODIFY `idtugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -791,7 +847,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
