@@ -20,7 +20,8 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="" data-toggle="modal" data-target="#newMapelModal" class="btn btn-info btn-sm float-right bg-gradient-info"><i class="fas fa-plus-circle"></i> Tambah Mata Pelajaran</a>
+                    <a href="" data-toggle="modal" data-target="#newMapelModal" class="btn btn-info btn-sm bg-gradient-info"><i class="fas fa-plus-circle"></i> Tambah Mata Pelajaran</a>
+                    <a href="" data-toggle="modal" data-target="#importMapel" class="btn btn-success btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Mapel</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -60,7 +61,6 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-                        <a href="" data-toggle="modal" data-target="#importMapel" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Mapel</a>
                     </div>
                 </div>
             </div>

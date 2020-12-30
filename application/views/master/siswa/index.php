@@ -12,7 +12,8 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="<?= base_url('master/addsiswa'); ?>" class="btn btn-info btn-sm float-right bg-gradient-info"><i class="fas fa-plus-circle"></i> Tambah Siswa</a>
+                    <a href="<?= base_url('master/addsiswa'); ?>" class="btn btn-info btn-sm bg-gradient-info"><i class="fas fa-plus-circle"></i> Tambah Siswa</a>
+                    <a href="" data-toggle="modal" data-target="#importSiswa" class="btn btn-success btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Siswa</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -49,7 +50,6 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-                        <a href="" data-toggle="modal" data-target="#importSiswa" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Siswa</a>
                     </div>
                 </div>
             </div>
