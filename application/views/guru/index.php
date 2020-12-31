@@ -43,7 +43,7 @@
                     <h5 class="card-title">Data Agenda Kegiatan</h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-responsive">
+                    <table class="table table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
