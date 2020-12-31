@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2020 at 02:24 PM
+-- Generation Time: Dec 31, 2020 at 10:41 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -32,7 +32,7 @@ CREATE TABLE `tb_absensi` (
   `tglabsen` date NOT NULL,
   `nis` int(11) NOT NULL,
   `keterangan` varchar(10) NOT NULL,
-  `idagenda` int(11) DEFAULT NULL,
+  `semester` int(11) DEFAULT NULL,
   `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -60,8 +60,8 @@ CREATE TABLE `tb_agenda` (
 --
 
 INSERT INTO `tb_agenda` (`idagenda`, `tanggal`, `jam_ke`, `kodekelas`, `kodemapel`, `idkd`, `keterangan`, `status_tgs`, `nip`, `tglperbaharui`) VALUES
-(2, '2020-12-29', 1, 'XIRPL', 'MP010', 4, 'Praktikum', NULL, NULL, '2020-12-29 10:12:09'),
-(3, '2020-12-31', 3, 'XIRPL', 'MP010', 5, 'Tugas', 1, NULL, '2020-12-29 13:16:40'),
+(2, '2020-12-29', 1, 'XIRPL', 'MP010', 4, 'Praktikum', NULL, '11147', '2020-12-30 10:24:23'),
+(3, '2020-12-31', 3, 'XIRPL', 'MP010', 5, 'Tugas', 1, '11147', '2020-12-30 10:24:31'),
 (7, '2020-12-30', 2, 'XIRPL', 'MP010', 5, 'Tugas', 0, NULL, '2020-12-29 13:20:02');
 
 -- --------------------------------------------------------
@@ -847,7 +847,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
