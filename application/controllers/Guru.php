@@ -240,7 +240,7 @@ class Guru extends CI_Controller
         $sql = $this->guru->save_absen($data);
         if ($sql) {
             $this->session->set_flashdata('message', 'data agenda berhasil ditambah-kan');
-            redirect('guru');
+            redirect('guru/absensi/' . $ambil['kodekelas'] . '/' . $ambil['kodemapel']);
         } else {
             echo "<script>alert('Data gagal disimpan');window.location = '" . base_url('guru') . "'</script>";
         }
