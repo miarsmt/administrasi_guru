@@ -11,10 +11,15 @@
 
             <div class="card shadow md-4">
                 <div class="card-header py-3">
-                    Data Agenda Kelas
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Mata Pelajaran</dt>
+                        <dd class="col-sm-8"><?= $mapel['namamapel']; ?></dd>
+                        <dt class="col-sm-4">Kelas</dt>
+                        <dd class="col-sm-8"><?= $kelas['kelas']; ?> <?= $kelas['namakelas']; ?></dd>
+                    </dl>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-responsive table-striped">
+                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -56,7 +61,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-absenLabel">Data Siswa</h5>
+                <h5 class="modal-title" id="modal-absenLabel">Tambah Data Absensi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
