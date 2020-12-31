@@ -189,4 +189,60 @@ class Guru extends CI_Controller
         $this->session->set_flashdata('message', 'data agenda berhasil di-hapus');
         redirect('guru');
     }
+
+    public function absensi($idkelas, $idmapel)
+    {
+        $data = [
+            'title' => 'Absensi Siswa',
+            'user'  => $this->admin->sesi(),
+            'agenda' => $this->guru->getAgendaByKelas($idkelas, $idmapel)
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('guru/absensi', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function getsiswa()
+    {
+        echo json_encode($this->guru->getDataSiswa($_POST['kelas']));
+    }
+
+    public function tambahabsen()
+    {
+        $kodsen = $this->guru->kode_absen();
+
+        $nis        = $_POST['nis'];
+        $keterangan = $_POST['keterangan'];
+        $semester   = $_POST['semester'];
+        $idagenda   = $_POST['id_agenda'];
+
+        $ambil = $this->guru->getAgendaById($idagenda);
+
+        $data = [];
+
+        $index = 0; // set index array awal dengan 0
+        foreach ($nis as $datanis) {
+            array_push($data, [
+                'kodeabsen' => $kodsen,
+                'tglabsen'  => $ambil['tanggal'],
+                'nis'       => $datanis,
+                'keterangan' => $keterangan[$index],
+                'semester'   => $semester[$index]
+            ]);
+
+            $index++;
+            $kodsen++;
+        }
+
+        $sql = $this->guru->save_absen($data);
+        if ($sql) {
+            $this->session->set_flashdata('message', 'data agenda berhasil ditambah-kan');
+            redirect('guru');
+        } else {
+            echo "<script>alert('Data gagal disimpan');window.location = '" . base_url('guru') . "'</script>";
+        }
+    }
 }

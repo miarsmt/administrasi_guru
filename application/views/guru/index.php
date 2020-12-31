@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <a href="<?= base_url('guru/addagenda/' . $row['kodekelas'] . '/' . $row['kodemapel']); ?>" class="btn btn-sm btn-block btn-outline-primary mt-2">Add Agenda</a>
-                        <a href="<?= base_url('guru/absensi/' . $row['kodekelas']); ?>" class="btn btn-sm btn-block btn-outline-success mt-2">Absensi Siswa</a>
+                        <a href="<?= base_url('guru/absensi/' . $row['kodekelas'] . '/' . $row['kodemapel']); ?>" class="btn btn-sm btn-block btn-outline-success mt-2">Absensi Siswa</a>
                     </div>
                 </div>
             </div>

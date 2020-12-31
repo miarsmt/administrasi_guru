@@ -67,6 +67,45 @@
             const id = $(this).data('id');
             $('#id_agenda').val(id);
         });
+
+        $('.tombolTambahAbsen').on('click', function() {
+            const kelas = $(this).data('kelas');
+            const id = $(this).data('idagenda');
+
+            $('#id_agenda').val(id);
+
+            $.ajax({
+                url: "<?= base_url('guru/getsiswa') ?>",
+                data: {
+                    kelas: kelas
+                },
+                method: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        html += '<tr>' +
+                            '<input type="hidden" name="nis[]" id="nis[]" class="form-control" value="' + data[i].nis + '">' +
+                            '<td>' + data[i].namasiswa + '</td>' +
+                            '<td>' + data[i].jeniskelamin + '</td>' +
+                            '<td>' + data[i].semester_aktif + '</td>' +
+                            '<input type="hidden" name="semester[]" id="semester[]" class="form-control" value="' + data[i].semester_aktif + '">' +
+                            '<td style="text-align:right;">' +
+                            '<select name="keterangan[]" id="keterangan[]" class="form-control">' +
+                            '<option value="A">Alfa</option>' +
+                            '<option value="H">Hadir</option>' +
+                            '<option value="S">Sakit</option>' +
+                            '<option value="I">Izin</option>' +
+                            '</select>' +
+                            '</td>' +
+                            '</tr>';
+                    }
+                    $('#show_data').html(html);
+                }
+            });
+
+        });
     });
 
     $('.custom-file-input').on('change', function() {

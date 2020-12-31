@@ -51,4 +51,51 @@ class Guru_model extends CI_Model
         $this->db->insert('tb_tugas', $data);
         return true;
     }
+
+    public function kode_absen()
+    {
+        $this->db->select('RIGHT(tb_absensi.kodeabsen, 2) as kode', FALSE);
+        $this->db->from('tb_absensi');
+        $this->db->order_by('kodeabsen', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get('');      //cek dulu apakah ada sudah ada kode di tabel.    
+        if ($query->num_rows() <> 0) {
+            //jika kode ternyata sudah ada.      
+            $data = $query->row();
+            $kode = intval($data->kode) + 1;
+        } else {
+            //jika kode belum ada      
+            $kode = 1;
+        }
+        $kodemax = str_pad($kode, 3, "0", STR_PAD_LEFT); // angka 3 menunjukkan jumlah digit angka 0
+        $kodehasil = "ABN" . $kodemax;
+        return $kodehasil;
+    }
+
+    public function getAgendaByKelas($idkelas, $kdmapel)
+    {
+        $this->db->select('tb_agenda.*, tb_mapel.namamapel');
+        $this->db->from('tb_agenda');
+        $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_agenda.kodemapel', 'left');
+        $this->db->where('tb_agenda.kodekelas', $idkelas);
+        $this->db->where('tb_agenda.kodemapel', $kdmapel);
+        $this->db->where('tb_agenda.nip', '11147');
+        $result = $this->db->get();
+        return $result->result_array();
+    }
+
+    public function getDataSiswa($kodekls)
+    {
+        return $this->db->get_where('tb_siswa', ['kodekelas' => $kodekls])->result();
+    }
+
+    public function getAgendaById($idagenda)
+    {
+        return $this->db->get_where('tb_agenda', ['idagenda' => $idagenda])->row_array();
+    }
+
+    public function save_absen($data)
+    {
+        return $this->db->insert_batch('tb_absensi', $data);
+    }
 }
