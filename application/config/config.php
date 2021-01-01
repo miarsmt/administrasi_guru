@@ -25,6 +25,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $config['base_url'] = 'http://localhost/administrasi_guru/';
 
+$config['fonts_path'] = 'assets/font/';
+
 /*
 |--------------------------------------------------------------------------
 | Index File
