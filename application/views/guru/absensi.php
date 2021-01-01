@@ -38,7 +38,7 @@
                                     <td><?= $a['jam_ke']; ?></td>
                                     <td><?= $a['namamapel']; ?></td>
                                     <td>
-                                        <button type="button" data-toggle="modal" data-target="#modal-absen" data-kelas="<?= $a['kodekelas']; ?>" data-idagenda="<?= $a['idagenda']; ?>" class="btn btn-sm btn-outline-info tombolTambahAbsen">Lihat Absen</button>
+                                        <button type="button" data-toggle="modal" data-target="#modal-absen" data-kelas="<?= $a['kodekelas']; ?>" data-idagenda="<?= $a['idagenda']; ?>" class="btn btn-sm btn-outline-info tombolTambahAbsen">Input Absen</button>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
