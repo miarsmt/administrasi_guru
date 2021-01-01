@@ -19,32 +19,34 @@
                     </dl>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Jam Ke</th>
-                                <th scope="col">Mata Pelajaran</th>
-                                <th scope="col">&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1; ?>
-                            <?php foreach ($agenda as $a) : ?>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
                                 <tr>
-                                    <th scope="row"><?= $i; ?></th>
-                                    <td><?= format_indo($a['tanggal']); ?></td>
-                                    <td><?= $a['jam_ke']; ?></td>
-                                    <td><?= $a['namamapel']; ?></td>
-                                    <td>
-                                        <button type="button" data-toggle="modal" data-target="#modal-absen" data-kelas="<?= $a['kodekelas']; ?>" data-idagenda="<?= $a['idagenda']; ?>" class="btn btn-sm btn-outline-info tombolTambahAbsen">Input Absen</button>
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Jam Ke</th>
+                                    <th scope="col">Mata Pelajaran</th>
+                                    <th scope="col">&nbsp;</th>
                                 </tr>
-                                <?php $i++; ?>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1; ?>
+                                <?php foreach ($agenda as $a) : ?>
+                                    <tr>
+                                        <th scope="row"><?= $i; ?></th>
+                                        <td><?= format_indo($a['tanggal']); ?></td>
+                                        <td><?= $a['jam_ke']; ?></td>
+                                        <td><?= $a['namamapel']; ?></td>
+                                        <td>
+                                            <button type="button" data-toggle="modal" data-target="#modal-absen" data-kelas="<?= $a['kodekelas']; ?>" data-idagenda="<?= $a['idagenda']; ?>" class="btn btn-sm btn-outline-info tombolTambahAbsen">Input Absen</button>
+                                        </td>
+                                    </tr>
+                                    <?php $i++; ?>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

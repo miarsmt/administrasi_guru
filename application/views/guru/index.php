@@ -43,42 +43,44 @@
                     <h5 class="card-title">Data Agenda Kegiatan</h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Jam Ke</th>
-                                <th scope="col">Kelas</th>
-                                <th scope="col">Mapel</th>
-                                <th scope="col">KD</th>
-                                <th scope="col">Keterangan</th>
-                                <th scope="col">&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1; ?>
-                            <?php foreach ($agenda as $ag) : ?>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
                                 <tr>
-                                    <th scope="row"><?= $i; ?></th>
-                                    <td><?= format_indo($ag['tanggal']); ?></td>
-                                    <td><?= $ag['jam_ke']; ?></td>
-                                    <td><?= $ag['kelas']; ?> <?= $ag['namakelas']; ?></td>
-                                    <td><?= $ag['namamapel']; ?></td>
-                                    <td><?= $ag['kodekd']; ?> <?= $ag['namakd']; ?></td>
-                                    <td><?= $ag['keterangan']; ?></td>
-                                    <td>
-                                        <?php if ($ag['keterangan'] == 'Tugas' && $ag['status_tgs'] == 0) { ?>
-                                            <a href="" data-toggle="modal" data-target="#modal-tugas" data-id="<?= $ag['idagenda']; ?>" class="badge badge-success tombolTambahTugas">Tugas</a>
-                                        <?php } else { ?>
-                                            <a href="<?= base_url('guru/delete_agenda/' . $ag['idagenda']); ?>" class="badge badge-danger tombol-hapus">Delete</a>
-                                        <?php } ?>
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Jam Ke</th>
+                                    <th scope="col">Kelas</th>
+                                    <th scope="col">Mapel</th>
+                                    <th scope="col">KD</th>
+                                    <th scope="col">Keterangan</th>
+                                    <th scope="col">&nbsp;</th>
                                 </tr>
-                                <?php $i++; ?>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1; ?>
+                                <?php foreach ($agenda as $ag) : ?>
+                                    <tr>
+                                        <th scope="row"><?= $i; ?></th>
+                                        <td><?= format_indo($ag['tanggal']); ?></td>
+                                        <td><?= $ag['jam_ke']; ?></td>
+                                        <td><?= $ag['kelas']; ?> <?= $ag['namakelas']; ?></td>
+                                        <td><?= $ag['namamapel']; ?></td>
+                                        <td><?= $ag['kodekd']; ?> <?= $ag['namakd']; ?></td>
+                                        <td><?= $ag['keterangan']; ?></td>
+                                        <td>
+                                            <?php if ($ag['keterangan'] == 'Tugas' && $ag['status_tgs'] == 0) { ?>
+                                                <a href="" data-toggle="modal" data-target="#modal-tugas" data-id="<?= $ag['idagenda']; ?>" class="badge badge-success tombolTambahTugas">Tugas</a>
+                                            <?php } else { ?>
+                                                <a href="<?= base_url('guru/delete_agenda/' . $ag['idagenda']); ?>" class="badge badge-danger tombol-hapus">Delete</a>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <?php $i++; ?>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
