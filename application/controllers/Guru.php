@@ -193,7 +193,7 @@ class Guru extends CI_Controller
     public function absensi($idkelas, $idmapel)
     {
         $data = [
-            'title' => 'Data Agenda Kelas',
+            'title' => 'Agenda Kegiatan',
             'user'  => $this->admin->sesi(),
             'agenda' => $this->guru->getAgendaByKelas($idkelas, $idmapel),
             'kelas'     => $this->master->getKelasById($idkelas),
