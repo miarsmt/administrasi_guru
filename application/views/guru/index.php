@@ -70,9 +70,9 @@
                                         <td><?= $ag['keterangan']; ?></td>
                                         <td>
                                             <?php if ($ag['keterangan'] == 'Tugas' && $ag['status_tgs'] == 0) { ?>
-                                                <a href="" data-toggle="modal" data-target="#modal-tugas" data-id="<?= $ag['idagenda']; ?>" class="badge badge-success tombolTambahTugas">Tugas</a>
+                                                <a href="" data-toggle="modal" data-target="#modal-tugas" data-id="<?= $ag['idagenda']; ?>" class="badge badge-success tombolTambahTugas" title="Input Tugas">Tugas</a>
                                             <?php } else { ?>
-                                                <a href="<?= base_url('guru/delete_agenda/' . $ag['idagenda']); ?>" class="badge badge-danger tombol-hapus">Delete</a>
+                                                <a href="<?= base_url('guru/delete_agenda/' . $ag['idagenda']); ?>" class="badge badge-danger tombol-hapus" title="Hapus Data">Delete</a>
                                             <?php } ?>
                                         </td>
                                     </tr>

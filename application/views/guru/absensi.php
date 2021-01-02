@@ -39,7 +39,8 @@
                                         <td><?= $a['jam_ke']; ?></td>
                                         <td><?= $a['namamapel']; ?></td>
                                         <td>
-                                            <button type="button" data-toggle="modal" data-target="#modal-absen" data-kelas="<?= $a['kodekelas']; ?>" data-idagenda="<?= $a['idagenda']; ?>" class="btn btn-sm btn-outline-info tombolTambahAbsen">Input Absen</button>
+                                            <button type="button" data-toggle="modal" data-target="#modal-absen" data-kelas="<?= $a['kodekelas']; ?>" data-idagenda="<?= $a['idagenda']; ?>" class="btn btn-sm btn-circle btn-outline-info tombolTambahAbsen" title="Input Absen"><i class="fas fa-fw fa-edit"></i></button>
+                                            <a href="<?= base_url('guru/coba/' . $a['kodekelas']); ?>" class="btn btn-sm btn-circle btn-outline-primary" title="Lihat Absen"><i class="fas fa-fw fa-search"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>

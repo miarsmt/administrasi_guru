@@ -34,8 +34,8 @@
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $m['menu']; ?></td>
                                         <td>
-                                            <a href="" data-toggle="modal" data-target="#editMenuModal<?= $m['id']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>menu/deletemenu/<?= $m['id']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
+                                            <a href="" data-toggle="modal" data-target="#editMenuModal<?= $m['id']; ?>" class="btn btn-outline-warning btn-sm btn-circle" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="<?= base_url(); ?>menu/deletemenu/<?= $m['id']; ?>" class="btn btn-outline-danger btn-sm btn-circle tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>

@@ -52,8 +52,8 @@
                                         <td><?= $sm['icon']; ?></td>
                                         <td><?= $active ?></td>
                                         <td>
-                                            <a href="<?= base_url(); ?>menu/editsubmenu/<?= $sm['id']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning"><i class="fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>menu/deletesubmenu/<?= $sm['id']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus"><i class="fas fa-trash"></i></a>
+                                            <a href="<?= base_url(); ?>menu/editsubmenu/<?= $sm['id']; ?>" class="btn btn-outline-warning btn-sm btn-circle"><i class="fas fa-edit"></i></a>
+                                            <a href="<?= base_url(); ?>menu/deletesubmenu/<?= $sm['id']; ?>" class="btn btn-outline-danger btn-sm btn-circle tombol-hapus"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>

@@ -42,8 +42,8 @@
                                         <td><?= $sw['kelas']; ?> <?= $sw['namakelas']; ?></td>
                                         <td><?= $sw['semester_aktif'] ?></td>
                                         <td>
-                                            <a href="<?= base_url(); ?>master/editsiswa/<?= $sw['nis']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>master/deletesiswa/<?= $sw['nis']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
+                                            <a href="<?= base_url(); ?>master/editsiswa/<?= $sw['nis']; ?>" class="btn btn-outline-warning btn-circle btn-sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="<?= base_url(); ?>master/deletesiswa/<?= $sw['nis']; ?>" class="btn btn-outline-danger btn-circle btn-sm tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>

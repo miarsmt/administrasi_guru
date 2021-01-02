@@ -35,9 +35,9 @@
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $r['role']; ?></td>
                                         <td>
-                                            <a href="<?= base_url('admin/roleAccess/' . $r['id']); ?>" class="btn btn-success btn-circle btn-sm bg-gradient-success" title="Role Access"><i class="fas fa-check"></i></a>
-                                            <a href="" data-toggle="modal" data-target="#editRoleModal<?= $r['id']; ?>" class="btn btn-warning btn-circle btn-sm bg-gradient-warning" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>admin/deleterole/<?= $r['id']; ?>" class="btn btn-danger btn-circle btn-sm bg-gradient-danger tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
+                                            <a href="<?= base_url('admin/roleAccess/' . $r['id']); ?>" class="btn btn-sm btn-outline-success btn-circle" title="Role Access"><i class="fas fa-check"></i></a>
+                                            <a href="" data-toggle="modal" data-target="#editRoleModal<?= $r['id']; ?>" class="btn btn-outline-warning btn-sm btn-circle" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="<?= base_url(); ?>admin/deleterole/<?= $r['id']; ?>" class="btn btn-outline-danger btn-sm btn-circle tombol-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
