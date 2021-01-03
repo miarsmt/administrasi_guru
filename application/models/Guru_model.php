@@ -84,6 +84,18 @@ class Guru_model extends CI_Model
         return $result->result_array();
     }
 
+    public function getDataAgenda($nip)
+    {
+        $this->db->select('tb_agenda.*, tb_kelas.kelas, tb_kelas.namakelas, tb_mapel.namamapel, tb_kompdasar.kodekd, tb_kompdasar.namakd');
+        $this->db->from('tb_agenda');
+        $this->db->join('tb_kelas', 'tb_agenda.kodekelas = tb_kelas.kodekelas', 'left');
+        $this->db->join('tb_mapel', 'tb_agenda.kodemapel = tb_mapel.kodemapel', 'left');
+        $this->db->join('tb_kompdasar', 'tb_agenda.idkd = tb_kompdasar.idkd', 'left');
+        $this->db->where('tb_agenda.nip', $nip);
+        $result = $this->db->get();
+        return $result->result();
+    }
+
     public function getDataSiswa($kodekls)
     {
         return $this->db->get_where('tb_siswa', ['kodekelas' => $kodekls])->result();

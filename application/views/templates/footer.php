@@ -68,6 +68,7 @@
             $('#id_agenda').val(id);
         });
 
+        // ajax menampilkan data siswa dari data agenda yg dipilih
         $('.tombolTambahAbsen').on('click', function() {
             const kelas = $(this).data('kelas');
             const id = $(this).data('idagenda');
@@ -105,6 +106,35 @@
                 }
             });
 
+        });
+
+        // ajax menampilkan data kelas berdasarkan jurusan untuk rekap data siswa
+        $('.tombolFilterSiswa').on('click', function() {
+            const id = $(this).data('id');
+
+            $.ajax({
+                url: "<?= base_url('laporan/getkelas'); ?>",
+                data: {
+                    id: id
+                },
+                method: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+
+                    for (i = 0; i < data.length; i++) {
+                        html += '<tr>' +
+                            '<td>' + data[i].kelas + ' ' + data[i].namakelas + '</td>' +
+                            '<td>' + data[i].angkatankelas + '</td>' +
+                            '<td>' +
+                            '<a href="<?= base_url(); ?>/laporan/reportsiswa/' + data[i].kodekelas + '" class="badge badge-success">Cetak</a>' +
+                            '</td>' +
+                            '</tr>';
+                    }
+                    $('#show_kelas').html(html);
+                }
+            });
         });
     });
 

@@ -113,6 +113,26 @@ class Master_model extends CI_Model
         return $result->result_array();
     }
 
+    public function getKelasByTingkatan($Tingkat)
+    {
+        $this->db->select('tb_kelas.*, tb_jurusan.namajurusan');
+        $this->db->from('tb_kelas');
+        $this->db->join('tb_jurusan', 'tb_kelas.kodejurusan = tb_jurusan.kodejurusan', 'left');
+        $this->db->where('tb_kelas.kelas', $Tingkat);
+        $result = $this->db->get();
+        return $result->result();
+    }
+
+    public function getDataKelas($id)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_kelas');
+        $this->db->where('kodejurusan', $id);
+        $this->db->order_by('angkatankelas', 'DESC');
+        $result = $this->db->get();
+        return $result->result();
+    }
+
     public function save_kelas($data)
     {
         $this->db->insert('tb_kelas', $data);
@@ -154,6 +174,16 @@ class Master_model extends CI_Model
         $this->db->join('tb_kelas', 'tb_siswa.kodekelas = tb_kelas.kodekelas', 'left');
         $result = $this->db->get();
         return $result->result_array();
+    }
+
+    public function getDataSiswa($Kelas)
+    {
+        $this->db->select('tb_siswa.*, tb_kelas.kelas, tb_kelas.namakelas');
+        $this->db->from('tb_siswa');
+        $this->db->join('tb_kelas', 'tb_siswa.kodekelas = tb_kelas.kodekelas', 'left');
+        $this->db->where('tb_siswa.kodekelas', $Kelas);
+        $result = $this->db->get();
+        return $result->result();
     }
 
     public function save_siswa($data)
@@ -286,6 +316,19 @@ class Master_model extends CI_Model
         $this->db->join('tb_kelas', 'tb_kelas.kodekelas = tb_mengajar.kodekelas', 'left');
         $result = $this->db->get();
         return $result->result_array();
+    }
+
+    public function getAmpu($kelas, $semeter)
+    {
+        $this->db->select('tb_mengajar.*, tb_kelas.kelas, tb_kelas.namakelas, tb_guru.kodeguru, tb_guru.namaguru, tb_mapel.namamapel, tb_mapel.kelompok');
+        $this->db->from('tb_mengajar');
+        $this->db->join('tb_kelas', 'tb_mengajar.kodekelas = tb_kelas.kodekelas', 'left');
+        $this->db->join('tb_mapel', 'tb_mengajar.kodemapel = tb_mapel.kodemapel', 'left');
+        $this->db->join('tb_guru', 'tb_mengajar.nip = tb_guru.nip', 'left');
+        $this->db->where('tb_kelas.kelas', $kelas);
+        $this->db->where('tb_mengajar.semester', $semeter);
+        $result = $this->db->get();
+        return $result->result();
     }
 
     public function save_mengajar($data)
