@@ -30,8 +30,8 @@
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
                             </div>
                         </div>
-                        <a href="<?= base_url('guru/addagenda/' . $row['kodekelas'] . '/' . $row['kodemapel']); ?>" class="btn btn-sm btn-block btn-outline-primary mt-2">Add Agenda</a>
-                        <a href="<?= base_url('guru/absensi/' . $row['kodekelas'] . '/' . $row['kodemapel']); ?>" class="btn btn-sm btn-block btn-outline-success mt-2">Absensi Siswa</a>
+                        <a href="<?= base_url('guru/addagenda/' . $row['idmengajar']); ?>" class="btn btn-sm btn-block btn-outline-primary mt-2">Add Agenda</a>
+                        <a href="<?= base_url('guru/absensi/' . $row['idmengajar']); ?>" class="btn btn-sm btn-block btn-outline-success mt-2">Absensi Siswa</a>
                     </div>
                 </div>
             </div>
@@ -66,11 +66,15 @@
                                         <td><?= $ag['jam_ke']; ?></td>
                                         <td><?= $ag['kelas']; ?> <?= $ag['namakelas']; ?></td>
                                         <td><?= $ag['namamapel']; ?></td>
-                                        <td><?= $ag['kodekd']; ?> <?= $ag['namakd']; ?></td>
+                                        <td>
+                                            <dt class="col-sm-3"><?= $ag['kodekd']; ?></dt>
+                                            <dd class="col-sm-9"><?= $ag['namakd']; ?>
+                                        </td>
+                                        </dd>
                                         <td><?= $ag['keterangan']; ?></td>
                                         <td>
                                             <?php if ($ag['keterangan'] == 'Tugas' && $ag['status_tgs'] == 0) { ?>
-                                                <a href="" data-toggle="modal" data-target="#modal-tugas" data-id="<?= $ag['idagenda']; ?>" class="badge badge-success tombolTambahTugas" title="Input Tugas">Tugas</a>
+                                                <a href="javascript:;" data-toggle="modal" data-target="#modal-tugas" data-id="<?= $ag['idagenda']; ?>" class="badge badge-success tombolTambahTugas" title="Input Tugas">Tugas</a>
                                             <?php } else { ?>
                                                 <a href="<?= base_url('guru/delete_agenda/' . $ag['idagenda']); ?>" class="badge badge-danger tombol-hapus" title="Hapus Data">Delete</a>
                                             <?php } ?>
