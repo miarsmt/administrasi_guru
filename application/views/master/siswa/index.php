@@ -68,27 +68,24 @@
 <div class="modal fade" id="importSiswa" tabindex="-1" aria-labelledby="importSiswaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="importSiswaLabel">Import Data Siswa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?= base_url('import/uploadsiswa'); ?>" method="post" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="file">Unggah File Excel</label>
-                        <div class="custom-file">
-                            <input type="file" name="berkas_excel" id="berkas" class="custom-file-input" accept=".xlsx, .xls">
-                            <label for="berkas" class="custom-file-label">Choose file</label>
-                        </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body text-center">
+                        <p>Gunakan format file .xls, .xlxs untuk <br> mengunggah data guru</p>
+                        <p class="mt-5">Unggah File</p>
+                        <form action="<?= base_url('import/uploadsiswa'); ?>" method="post" enctype="multipart/form-data">
+                            <div class="custom-file col-sm-6">
+                                <input type="file" name="berkas_excel" id="berkas" class="custom-file-input" accept=".xlsx, .xls">
+                                <label for="berkas" class="custom-file-label text-left">Choose file</label>
+                            </div>
+                            <p>Khusus format file excel</p>
+                            <button type="submit" class="btn btn-primary">Unggah</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </form>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
