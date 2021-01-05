@@ -39,7 +39,7 @@
                                     <td><?= $am['kelas']; ?> <?= $am['namakelas']; ?></td>
                                     <td><?= $am['periode_mengajar']; ?></td>
                                     <td>
-                                        <a href="<?= base_url('guru/addkomp/' . $am['kodemapel']); ?>" class="badge badge-info">Detail</a>
+                                        <a href="<?= base_url('guru/addkomp/' . $am['kodemapel']); ?>" class="badge badge-info">Cek KD</a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
