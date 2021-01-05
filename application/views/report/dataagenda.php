@@ -46,22 +46,17 @@ $pdf->SetFont('helvetica', 'BU', 13);
 $pdf->Cell(0, 10, $title, 0, 0, 'C');
 $pdf->Ln(25);
 
-$pdf->Ln();
-$nilaiY = $pdf->GetY();
-$pdf->SetX(52);
+$pdf->SetLeftMargin(35);
+$pdf->Ln(15);
 $pdf->SetFont('helvetica', '', 10);
-$pdf->Cell(32, 10, 'NIP', 0, 0, "C");
-$pdf->Cell(82, 10, ':', 0, 0, "C");
-$pdf->Cell(-35, 10, $guru['nip'], 0, 0, "C");
-$pdf->Ln();
-$nilaiY = $pdf->GetY();
-
-$pdf->SetX(60);
-$pdf->Cell(50, 25, 'Nama Guru', 0, 0, "C");
-$pdf->Cell(30, 25, ':', 0, 0, "C");
-$pdf->Cell(50, 25, $guru['namaguru'], 0, 0, "C");
-$pdf->Ln();
-$nilaiY = $pdf->GetY();
+$pdf->Cell(60, 10, 'NIP', 0, 0, 'L');
+$pdf->Cell(10, 10, ':', 0, 0, 'L');
+$pdf->Cell(150, 10, $guru['nip'], 0, 0, 'L');
+$pdf->Ln(15);
+$pdf->Cell(60, 10, 'Nama Guru', 0, 0, 'L');
+$pdf->Cell(10, 10, ':', 0, 0, 'L');
+$pdf->Cell(150, 10, $guru['namaguru'], 0, 0, 'L');
+$pdf->Ln(15);
 
 $pdf->SetFont('helvetica', 'B', 10);
 $pdf->SetLineWidth(1, 5);
