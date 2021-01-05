@@ -7,7 +7,7 @@
     <!-- kalau lolos -->
 
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-6">
             <div class="card shadow mb-4">
                 <div class="card-header">
                     <dl class="row mb-0">
