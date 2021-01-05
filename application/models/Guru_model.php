@@ -3,9 +3,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Guru_model extends CI_Model
 {
-    public function getListKelas()
+    public function getMengajar()
     {
-        $this->db->select('tb_kelas.kelas, tb_kelas.namakelas, tb_mapel.namamapel, tb_mengajar.kodekelas, tb_mengajar.kodemapel, tb_mengajar.semester, tb_mengajar.periode_mengajar');
+        $this->db->select('tb_kelas.kelas, tb_kelas.namakelas, tb_mapel.namamapel, tb_mengajar.*');
         $this->db->from('tb_mengajar');
         $this->db->join('tb_kelas', 'tb_kelas.kodekelas = tb_mengajar.kodekelas', 'left');
         $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_mengajar.kodemapel', 'left');
@@ -27,9 +27,11 @@ class Guru_model extends CI_Model
     {
         $this->db->select('tb_agenda.*, tb_kelas.kelas, tb_kelas.namakelas, tb_kompdasar.kodekd, tb_kompdasar.namakd, tb_mapel.namamapel');
         $this->db->from('tb_agenda');
-        $this->db->join('tb_kelas', 'tb_kelas.kodekelas = tb_agenda.kodekelas', 'left');
-        $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_agenda.kodemapel', 'left');
+        $this->db->join('tb_mengajar', 'tb_mengajar.idmengajar = tb_agenda.idmengajar', 'left');
+        $this->db->join('tb_kelas', 'tb_kelas.kodekelas = tb_mengajar.kodekelas', 'left');
+        $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_mengajar.kodemapel', 'left');
         $this->db->join('tb_kompdasar', 'tb_kompdasar.idkd = tb_agenda.idkd', 'left');
+        $this->db->where('tb_mengajar.nip', '11147');
         $result = $this->db->get();
         return $result->result_array();
     }
@@ -74,12 +76,13 @@ class Guru_model extends CI_Model
 
     public function getAgendaByKelas($idkelas, $kdmapel)
     {
-        $this->db->select('tb_agenda.*, tb_mapel.namamapel');
+        $this->db->select('tb_agenda.*, tb_mapel.namamapel, tb_mengajar.kodekelas');
         $this->db->from('tb_agenda');
-        $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_agenda.kodemapel', 'left');
-        $this->db->where('tb_agenda.kodekelas', $idkelas);
-        $this->db->where('tb_agenda.kodemapel', $kdmapel);
-        $this->db->where('tb_agenda.nip', '11147');
+        $this->db->join('tb_mengajar', 'tb_agenda.idmengajar = tb_mengajar.idmengajar', 'left');
+        $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_mengajar.kodemapel', 'left');
+        $this->db->where('tb_mengajar.kodekelas', $idkelas);
+        $this->db->where('tb_mengajar.kodemapel', $kdmapel);
+        $this->db->where('tb_mengajar.nip', '11147');
         $result = $this->db->get();
         return $result->result_array();
     }
@@ -88,10 +91,11 @@ class Guru_model extends CI_Model
     {
         $this->db->select('tb_agenda.*, tb_kelas.kelas, tb_kelas.namakelas, tb_mapel.namamapel, tb_kompdasar.kodekd, tb_kompdasar.namakd');
         $this->db->from('tb_agenda');
-        $this->db->join('tb_kelas', 'tb_agenda.kodekelas = tb_kelas.kodekelas', 'left');
-        $this->db->join('tb_mapel', 'tb_agenda.kodemapel = tb_mapel.kodemapel', 'left');
+        $this->db->join('tb_mengajar', 'tb_agenda.idmengajar = tb_mengajar.idmengajar', 'left');
+        $this->db->join('tb_kelas', 'tb_mengajar.kodekelas = tb_kelas.kodekelas', 'left');
+        $this->db->join('tb_mapel', 'tb_mengajar.kodemapel = tb_mapel.kodemapel', 'left');
         $this->db->join('tb_kompdasar', 'tb_agenda.idkd = tb_kompdasar.idkd', 'left');
-        $this->db->where('tb_agenda.nip', $nip);
+        $this->db->where('tb_mengajar.nip', $nip);
         $result = $this->db->get();
         return $result->result();
     }
@@ -109,5 +113,11 @@ class Guru_model extends CI_Model
     public function save_absen($data)
     {
         return $this->db->insert_batch('tb_absensi', $data);
+    }
+
+    public function delkomp($id)
+    {
+        $this->db->delete('tb_kompdasar', ['idkd' => $id]);
+        return true;
     }
 }
