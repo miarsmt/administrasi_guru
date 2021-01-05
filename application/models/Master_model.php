@@ -307,6 +307,11 @@ class Master_model extends CI_Model
         return $result->result_array();
     }
 
+    public function getKompById($id)
+    {
+        return $this->db->get_where('tb_kompdasar', ['idkd' => $id])->row_array();
+    }
+
     public function getAjar()
     {
         $this->db->select('tb_mengajar.*, tb_mapel.namamapel, tb_guru.namaguru, tb_kelas.namakelas, tb_kelas.kelas');
