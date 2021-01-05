@@ -19,6 +19,25 @@
     <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="<?= base_url('assets/img/logo.png'); ?>">
 
+    <style>
+        #login {
+            height: 100vh;
+            background-image: url('assets/img/background/safar.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .card-login {
+            background-color: rgba(0, 0, 0, .7);
+            box-shadow: rgba(255, 255, 255, .3);
+        }
+
+        .fm-input {
+            background-color: transparent;
+            color: #fff;
+        }
+    </style>
 </head>
 
-<body class="bg-gradient-primary">
+<body id="login">
