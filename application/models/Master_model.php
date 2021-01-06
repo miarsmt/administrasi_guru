@@ -232,9 +232,10 @@ class Master_model extends CI_Model
 
     public function getMapel()
     {
-        $this->db->select('tb_mapel.*, tb_jurusan.namajurusan');
+        $this->db->select('tb_mapel.*, tb_jurusan.namajurusan, tb_mapel_kelompok.namakelompokmapel');
         $this->db->from('tb_mapel');
         $this->db->join('tb_jurusan', 'tb_jurusan.kodejurusan = tb_mapel.kodejurusan', 'left');
+        $this->db->join('tb_mapel_kelompok', 'tb_mapel_kelompok.idkelompokmapel = tb_mapel.idkelompokmapel', 'left');
         $result = $this->db->get();
         return $result->result_array();
     }
@@ -275,7 +276,7 @@ class Master_model extends CI_Model
         $data = [
             'namamapel'     => $this->input->post('namamp', true),
             'tingkatan'     => $this->input->post('tingkatan', true),
-            'kelompok'      => $this->input->post('kelompok', true),
+            'idkelompokmapel' => $this->input->post('kelompok', true),
             'kodejurusan'   => $this->input->post('kodejur', true),
             'kkm'           => $this->input->post('kkm', true),
             'iduser'        => $this->session->userdata('role_id')
@@ -310,6 +311,11 @@ class Master_model extends CI_Model
     public function getKompById($id)
     {
         return $this->db->get_where('tb_kompdasar', ['idkd' => $id])->row_array();
+    }
+
+    public function getKelompok()
+    {
+        return $this->db->get('tb_mapel_kelompok')->result_array();
     }
 
     public function getAjar()

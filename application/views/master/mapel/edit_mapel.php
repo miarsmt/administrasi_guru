@@ -28,8 +28,11 @@
                         </div>
                         <div class="form-group">
                             <label for="kelompok">Kelompok</label>
-                            <input type="text" name="kelompok" id="kelompok" class="form-control" value="<?= $dtmapel['kelompok']; ?>">
-                            <?= form_error('kelompok', '<small class="text-danger">', '</small>'); ?>
+                            <select name="kelompok" id="kelompok" class="form-control">
+                                <?php foreach ($kelompok as $k) : ?>
+                                    <option value="<?= $k['idkelompokmapel']; ?>" <?= ($dtmapel['idkelompokmapel'] == $k['idkelompokmapel']) ? 'selected' : ''; ?>><?= $k['namakelompokmapel']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="kodejur">Jurusan</label>

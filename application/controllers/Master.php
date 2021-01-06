@@ -8,6 +8,7 @@ class Master extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Master_model', 'master');
+        $this->load->helper('download');
     }
 
     public function guru()
@@ -500,7 +501,8 @@ class Master extends CI_Controller
             'user'      => $this->admin->sesi(),
             'mapel'     => $this->master->getMapel(),
             'kodemp'    => $this->master->kode_mp(),
-            'jrsn'      => $this->master->getAllJurusan()
+            'jrsn'      => $this->master->getAllJurusan(),
+            'kelompok'  => $this->master->getKelompok()
         ];
 
         $this->form_validation->set_rules('namamp', 'Nama mapel', 'required|trim', [
@@ -529,7 +531,7 @@ class Master extends CI_Controller
                 'kodemapel'     => $this->input->post('kodemp', true),
                 'namamapel'     => $this->input->post('namamp', true),
                 'tingkatan'     => $this->input->post('tingkatan', true),
-                'kelompok'      => $this->input->post('kelompok', true),
+                'idkelompokmapel' => $this->input->post('kelompok', true),
                 'kodejurusan'   => $this->input->post('kodejur', true),
                 'kkm'           => $this->input->post('kkm', true),
                 'iduser'        => $this->session->userdata('role_id')
@@ -547,7 +549,8 @@ class Master extends CI_Controller
             'title'     => 'Edit Data Mapel',
             'user'      => $this->admin->sesi(),
             'dtmapel'   => $this->master->getMapelById($id),
-            'jurusan'   => $this->master->getAllJurusan()
+            'jurusan'   => $this->master->getAllJurusan(),
+            'kelompok'  => $this->master->getKelompok()
         ];
 
         $this->form_validation->set_rules('namamp', 'Nama mapel', 'required|trim', [
@@ -658,5 +661,20 @@ class Master extends CI_Controller
         $this->master->delajar($id);
         $this->session->set_flashdata('message', 'data mengajar berhasil di-hapus');
         redirect('master/mengajar');
+    }
+
+    public function download_formatguru()
+    {
+        force_download('assets\file\format_data_guru.xlsx', null);
+    }
+
+    public function download_formatmapel()
+    {
+        force_download('assets\file\format_data_mapel.xlsx', null);
+    }
+
+    public function download_formatsiswa()
+    {
+        force_download('assets\file\format_data_siswa.xlsx', null);
     }
 }
