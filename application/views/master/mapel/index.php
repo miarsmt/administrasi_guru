@@ -20,8 +20,11 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="" data-toggle="modal" data-target="#newMapelModal" class="btn btn-info btn-sm bg-gradient-info"><i class="fas fa-plus-circle"></i> Tambah Mata Pelajaran</a>
-                    <a href="" data-toggle="modal" data-target="#importMapel" class="btn btn-success btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Mapel</a>
+                    <a href="" data-toggle="modal" data-target="#newMapelModal" class="btn btn-outline-info btn-sm "><i class="fas fa-plus-circle"></i> Tambah Mata Pelajaran</a>
+                    <div class="btn-group">
+                        <a href="<?= base_url('master/download_formatmapel'); ?>" class="btn btn-outline-success btn-sm"><i class="fas fa-fw fa-download"></i> Download Format Import</a>
+                        <a href="" data-toggle="modal" data-target="#importMapel" class="btn btn-outline-success btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Mapel</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -50,7 +53,7 @@
                                         <td><?= $mp['kodemapel']; ?></td>
                                         <td><?= $mp['namamapel']; ?></td>
                                         <td><?= $mp['kkm']; ?></td>
-                                        <td><?= $mp['kelompok']; ?></td>
+                                        <td><?= $mp['namakelompokmapel']; ?></td>
                                         <td><?= $jurusan; ?></td>
                                         <td>
                                             <a href="<?= base_url(); ?>master/editmapel/<?= $mp['kodemapel']; ?>" class="btn btn-outline-warning btn-circle btn-sm " title="Edit Data"><i class="fas fa-edit"></i></a>
@@ -97,11 +100,16 @@
                         <input type="text" class="form-control" name="tingkatan" id="tingkatan" placeholder="Tingkatan">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="kelompok" id="kelompok" placeholder="Kelompok Mapel">
+                        <select name="kelompok" id="kelompok" class="form-control">
+                            <option value="">- Pilih Kelompok -</option>
+                            <?php foreach ($kelompok as $k) : ?>
+                                <option value="<?= $k['idkelompokmapel']; ?>"><?= $k['namakelompokmapel']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <select name="kodejur" id="kodejur" class="form-control">
-                            <option value="">-- Jurusan --</option>
+                            <option value="">- Jurusan -</option>
                             <option value="Semua Jurusan">Semua Jurusan</option>
                             <?php foreach ($jrsn as $jr) : ?>
                                 <option value="<?= $jr['kodejurusan']; ?>"><?= $jr['namajurusan']; ?></option>

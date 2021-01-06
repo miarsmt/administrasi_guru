@@ -12,8 +12,11 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="<?= base_url('master/addguru'); ?>" class="btn btn-info btn-sm bg-gradient-info"><i class="fas fa-plus-circle"></i> Tambah Guru</a>
-                    <a href="" data-toggle="modal" data-target="#importGuru" class="btn btn-success btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Guru</a>
+                    <a href="<?= base_url('master/addguru'); ?>" class="btn btn-outline-info btn-sm"><i class="fas fa-plus-circle"></i> Tambah Guru</a>
+                    <div class="btn-group">
+                        <a href="<?= base_url('master/download_formatguru'); ?>" class="btn btn-outline-success btn-sm"><i class="fas fa-fw fa-download"></i> Download Format Import</a>
+                        <a href="" data-toggle="modal" data-target="#importGuru" class="btn btn-outline-success btn-sm"><i class="fas fa-fw fa-file-excel"></i> Import Data Guru</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
