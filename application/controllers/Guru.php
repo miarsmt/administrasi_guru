@@ -82,7 +82,7 @@ class Guru extends CI_Controller
     public function ampu()
     {
         $data = [
-            'title' => 'Daftar Ampu',
+            'title' => 'Mapel Diampu',
             'user'  => $this->admin->sesi(),
             'ampu'  => $this->guru->getMengajar()
         ];
