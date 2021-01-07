@@ -18,7 +18,7 @@ class Guru extends CI_Controller
         $data = [
             'title'     => 'Agenda Kegiatan',
             'user'      => $this->admin->sesi(),
-            'dtkelas'   => $this->guru->getListKelas(),
+            'dtkelas'   => $this->guru->getMengajar(),
             'agenda'    => $this->guru->getAgenda()
         ];
 
@@ -84,7 +84,7 @@ class Guru extends CI_Controller
         $data = [
             'title' => 'Daftar Ampu',
             'user'  => $this->admin->sesi(),
-            'ampu'  => $this->guru->getListKelas()
+            'ampu'  => $this->guru->getMengajar()
         ];
 
         $this->load->view('templates/header', $data);
@@ -94,8 +94,9 @@ class Guru extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function addkomp($id)
+    public function addkomp()
     {
+        $id = $this->uri->segment(3);
         $data = [
             'title'     => 'Add Kompetensi Dasar',
             'user'      => $this->admin->sesi(),
@@ -103,18 +104,16 @@ class Guru extends CI_Controller
             'mapel'     => $this->master->getMapelById($id)
         ];
 
-        $dmapel    = $this->master->getMapelById($id);
-
         $this->form_validation->set_rules('kodekd', 'Kode KD', 'required|trim', [
             'required' => '%s tidak boleh kosong'
         ]);
         $this->form_validation->set_rules('namakd', 'Nama KD', 'required|trim', [
             'required' => '%s tidak boleh kosong'
         ]);
-        $this->form_validation->set_rules('semester', 'Semester', 'required|trim', [
+        $this->form_validation->set_rules('ket', 'Keterangan', 'required|trim', [
             'required' => '%s tidak boleh kosong'
         ]);
-        $this->form_validation->set_rules('kkm', 'KKM', 'required|trim', [
+        $this->form_validation->set_rules('semester', 'Semester', 'required|trim', [
             'required' => '%s tidak boleh kosong'
         ]);
 
@@ -126,28 +125,40 @@ class Guru extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $data = [
-                'kodekd'    => $this->input->post('kodekd', true),
-                'namakd'    => $this->input->post('namakd', true),
-                'semester'  => $this->input->post('semester', true),
-                'kkm'       => $this->input->post('kkm', true),
-                'kodemapel' => $id,
-                'iduser'    => $this->session->userdata('role_id')
+                'kodekd'        => $this->input->post('kodekd', true),
+                'namakd'        => $this->input->post('namakd', true),
+                'keterangankd'  => $this->input->post('kkm', true),
+                'semester'      => $this->input->post('semester', true),
+                'kodemapel'     => $this->input->post('kodemapel', true)
             ];
 
             $this->master->save_komp($data);
-            $this->session->set_flashdata('message', 'data kompetensi dasar ' . $dmapel['namamapel'] . ' berhasil ditambah-kan');
-            redirect('guru/ampu');
+            $this->session->set_flashdata('message', 'data kompetensi dasar ' . $id . ' berhasil ditambah-kan');
+            redirect('guru/addkomp/' . $this->input->post('kodemapel'));
         }
     }
 
-    public function addagenda($kdkelas, $kdmapel)
+    public function deletekomp()
     {
+        $id = $this->uri->segment(3);
+        $ambil = $this->master->getKompById($id);
+        if ($ambil) {
+            $this->guru->delkomp($id);
+            $this->session->set_flashdata('message', 'data kompetensi dasar berhasil di-hapus');
+            redirect('guru/addkomp/' . $ambil['kodemapel']);
+        }
+    }
+
+    public function addagenda()
+    {
+        $id = $this->uri->segment(3);
+        $ambil = $this->master->getAjarById($id);
         $data = [
             'title'     => 'Tambah Agenda Kegiatan',
             'user'      => $this->admin->sesi(),
-            'kompdasar' => $this->guru->getListKd($kdmapel),
-            'kelas'     => $this->master->getKelasById($kdkelas),
-            'mapel'     => $this->master->getMapelById($kdmapel)
+            'kompdasar' => $this->guru->getListKd($ambil['kodemapel']),
+            'kelas'     => $this->master->getKelasById($ambil['kodekelas']),
+            'mapel'     => $this->master->getMapelById($ambil['kodemapel'])
         ];
 
         $this->form_validation->set_rules('tgl', 'Tanggal', 'required', [
@@ -168,10 +179,9 @@ class Guru extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $data = [
+                'idmengajar'  => $id,
                 'tanggal'   => $this->input->post('tgl', true),
                 'jam_ke'    => $this->input->post('jamke', true),
-                'kodekelas' => $kdkelas,
-                'kodemapel' => $kdmapel,
                 'idkd'      => $this->input->post('kompdsr', true),
                 'keterangan' => $this->input->post('ket', true),
                 'status_tgs' => 0,
@@ -190,14 +200,16 @@ class Guru extends CI_Controller
         redirect('guru');
     }
 
-    public function absensi($idkelas, $idmapel)
+    public function absensi()
     {
+        $idajar = $this->uri->segment(3);
+        $ambil = $this->master->getAjarById($idajar);
         $data = [
-            'title' => 'Agenda Kegiatan',
-            'user'  => $this->admin->sesi(),
-            'agenda' => $this->guru->getAgendaByKelas($idkelas, $idmapel),
-            'kelas'     => $this->master->getKelasById($idkelas),
-            'mapel'     => $this->master->getMapelById($idmapel)
+            'title'     => 'Agenda Kegiatan',
+            'user'      => $this->admin->sesi(),
+            'agenda'    => $this->guru->getAgendaByKelas($ambil['kodekelas'], $ambil['kodemapel']),
+            'kelas'     => $this->master->getKelasById($ambil['kodekelas']),
+            'mapel'     => $this->master->getMapelById($ambil['kodemapel'])
         ];
 
         $this->load->view('templates/header', $data);
@@ -242,7 +254,7 @@ class Guru extends CI_Controller
         $sql = $this->guru->save_absen($data);
         if ($sql) {
             $this->session->set_flashdata('message', 'data agenda berhasil ditambah-kan');
-            redirect('guru/absensi/' . $ambil['kodekelas'] . '/' . $ambil['kodemapel']);
+            redirect('guru/absensi/' . $ambil['idmengajar']);
         } else {
             echo "<script>alert('Data gagal disimpan');window.location = '" . base_url('guru') . "'</script>";
         }
