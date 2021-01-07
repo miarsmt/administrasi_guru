@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2020 at 10:41 AM
+-- Generation Time: Jan 07, 2021 at 08:04 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -32,9 +32,138 @@ CREATE TABLE `tb_absensi` (
   `tglabsen` date NOT NULL,
   `nis` int(11) NOT NULL,
   `keterangan` varchar(10) NOT NULL,
-  `semester` int(11) DEFAULT NULL,
-  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `semester` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_absensi`
+--
+
+INSERT INTO `tb_absensi` (`kodeabsen`, `tglabsen`, `nis`, `keterangan`, `semester`) VALUES
+('ABN001', '2020-12-29', 171800001, 'H', 4),
+('ABN002', '2020-12-29', 171800002, 'H', 4),
+('ABN003', '2020-12-29', 171800003, 'H', 4),
+('ABN004', '2020-12-29', 171800004, 'H', 4),
+('ABN005', '2020-12-29', 171800005, 'H', 4),
+('ABN006', '2020-12-29', 171800006, 'H', 4),
+('ABN007', '2020-12-29', 171800007, 'S', 4),
+('ABN008', '2020-12-29', 171800008, 'H', 4),
+('ABN009', '2020-12-29', 171800009, 'H', 4),
+('ABN010', '2020-12-29', 171800010, 'H', 4),
+('ABN011', '2020-12-29', 171800011, 'A', 4),
+('ABN012', '2020-12-29', 171800012, 'A', 4),
+('ABN013', '2020-12-29', 171800013, 'A', 4),
+('ABN014', '2020-12-29', 171800014, 'A', 4),
+('ABN015', '2020-12-29', 171800015, 'A', 4),
+('ABN016', '2020-12-29', 171800016, 'A', 4),
+('ABN017', '2020-12-29', 171800017, 'A', 4),
+('ABN018', '2020-12-29', 171800018, 'A', 4),
+('ABN019', '2020-12-29', 171800019, 'A', 4),
+('ABN020', '2020-12-29', 171800020, 'A', 4),
+('ABN021', '2020-12-29', 171800021, 'A', 4),
+('ABN022', '2020-12-29', 171800022, 'A', 4),
+('ABN023', '2020-12-29', 171800023, 'A', 4),
+('ABN024', '2020-12-29', 171800024, 'A', 4),
+('ABN025', '2020-12-29', 171800025, 'A', 4),
+('ABN026', '2020-12-29', 171800026, 'A', 4),
+('ABN027', '2020-12-29', 171800027, 'S', 4),
+('ABN028', '2020-12-29', 171800028, 'I', 4),
+('ABN029', '2020-12-29', 171800029, 'A', 4),
+('ABN030', '2020-12-29', 171800030, 'H', 4),
+('ABN031', '2020-12-29', 171800031, 'H', 4),
+('ABN032', '2020-12-31', 171800001, 'H', 4),
+('ABN033', '2020-12-31', 171800002, 'H', 4),
+('ABN034', '2020-12-31', 171800003, 'H', 4),
+('ABN035', '2020-12-31', 171800004, 'H', 4),
+('ABN036', '2020-12-31', 171800005, 'H', 4),
+('ABN037', '2020-12-31', 171800006, 'H', 4),
+('ABN038', '2020-12-31', 171800007, 'H', 4),
+('ABN039', '2020-12-31', 171800008, 'H', 4),
+('ABN040', '2020-12-31', 171800009, 'H', 4),
+('ABN041', '2020-12-31', 171800010, 'A', 4),
+('ABN042', '2020-12-31', 171800011, 'A', 4),
+('ABN043', '2020-12-31', 171800012, 'A', 4),
+('ABN044', '2020-12-31', 171800013, 'A', 4),
+('ABN045', '2020-12-31', 171800014, 'A', 4),
+('ABN046', '2020-12-31', 171800015, 'A', 4),
+('ABN047', '2020-12-31', 171800016, 'A', 4),
+('ABN048', '2020-12-31', 171800017, 'A', 4),
+('ABN049', '2020-12-31', 171800018, 'A', 4),
+('ABN050', '2020-12-31', 171800019, 'A', 4),
+('ABN051', '2020-12-31', 171800020, 'A', 4),
+('ABN052', '2020-12-31', 171800021, 'A', 4),
+('ABN053', '2020-12-31', 171800022, 'A', 4),
+('ABN054', '2020-12-31', 171800023, 'A', 4),
+('ABN055', '2020-12-31', 171800024, 'H', 4),
+('ABN056', '2020-12-31', 171800025, 'A', 4),
+('ABN057', '2020-12-31', 171800026, 'H', 4),
+('ABN058', '2020-12-31', 171800027, 'S', 4),
+('ABN059', '2020-12-31', 171800028, 'H', 4),
+('ABN060', '2020-12-31', 171800029, 'H', 4),
+('ABN061', '2020-12-31', 171800030, 'I', 4),
+('ABN062', '2020-12-31', 171800031, 'H', 4),
+('ABN063', '2021-01-05', 171800001, 'H', 4),
+('ABN064', '2021-01-05', 171800002, 'H', 4),
+('ABN065', '2021-01-05', 171800003, 'H', 4),
+('ABN066', '2021-01-05', 171800004, 'H', 4),
+('ABN067', '2021-01-05', 171800005, 'H', 4),
+('ABN068', '2021-01-05', 171800006, 'H', 4),
+('ABN069', '2021-01-05', 171800007, 'S', 4),
+('ABN070', '2021-01-05', 171800008, 'H', 4),
+('ABN071', '2021-01-05', 171800009, 'H', 4),
+('ABN072', '2021-01-05', 171800010, 'I', 4),
+('ABN073', '2021-01-05', 171800011, 'A', 4),
+('ABN074', '2021-01-05', 171800012, 'A', 4),
+('ABN075', '2021-01-05', 171800013, 'A', 4),
+('ABN076', '2021-01-05', 171800014, 'A', 4),
+('ABN077', '2021-01-05', 171800015, 'A', 4),
+('ABN078', '2021-01-05', 171800016, 'A', 4),
+('ABN079', '2021-01-05', 171800017, 'A', 4),
+('ABN080', '2021-01-05', 171800018, 'A', 4),
+('ABN081', '2021-01-05', 171800019, 'A', 4),
+('ABN082', '2021-01-05', 171800020, 'A', 4),
+('ABN083', '2021-01-05', 171800021, 'A', 4),
+('ABN084', '2021-01-05', 171800022, 'A', 4),
+('ABN085', '2021-01-05', 171800023, 'A', 4),
+('ABN086', '2021-01-05', 171800024, 'A', 4),
+('ABN087', '2021-01-05', 171800025, 'A', 4),
+('ABN088', '2021-01-05', 171800026, 'A', 4),
+('ABN089', '2021-01-05', 171800027, 'S', 4),
+('ABN090', '2021-01-05', 171800028, 'A', 4),
+('ABN091', '2021-01-05', 171800029, 'I', 4),
+('ABN092', '2021-01-05', 171800030, 'H', 4),
+('ABN093', '2021-01-05', 171800031, 'H', 4),
+('ABN094', '2021-01-06', 171800001, 'H', 4),
+('ABN095', '2021-01-06', 171800002, 'H', 4),
+('ABN096', '2021-01-06', 171800003, 'S', 4),
+('ABN097', '2021-01-06', 171800004, 'H', 4),
+('ABN098', '2021-01-06', 171800005, 'H', 4),
+('ABN099', '2021-01-06', 171800006, 'I', 4),
+('ABN100', '2021-01-06', 171800007, 'H', 4),
+('ABN101', '2021-01-06', 171800008, 'A', 4),
+('ABN102', '2021-01-06', 171800009, 'S', 4),
+('ABN103', '2021-01-06', 171800010, 'A', 4),
+('ABN104', '2021-01-06', 171800011, 'A', 4),
+('ABN105', '2021-01-06', 171800012, 'A', 4),
+('ABN106', '2021-01-06', 171800013, 'A', 4),
+('ABN107', '2021-01-06', 171800014, 'A', 4),
+('ABN108', '2021-01-06', 171800015, 'A', 4),
+('ABN109', '2021-01-06', 171800016, 'A', 4),
+('ABN110', '2021-01-06', 171800017, 'A', 4),
+('ABN111', '2021-01-06', 171800018, 'A', 4),
+('ABN112', '2021-01-06', 171800019, 'A', 4),
+('ABN113', '2021-01-06', 171800020, 'A', 4),
+('ABN114', '2021-01-06', 171800021, 'A', 4),
+('ABN115', '2021-01-06', 171800022, 'A', 4),
+('ABN116', '2021-01-06', 171800023, 'A', 4),
+('ABN117', '2021-01-06', 171800024, 'A', 4),
+('ABN118', '2021-01-06', 171800025, 'A', 4),
+('ABN119', '2021-01-06', 171800026, 'A', 4),
+('ABN120', '2021-01-06', 171800027, 'H', 4),
+('ABN121', '2021-01-06', 171800028, 'H', 4),
+('ABN122', '2021-01-06', 171800029, 'S', 4),
+('ABN123', '2021-01-06', 171800030, 'H', 4),
+('ABN124', '2021-01-06', 171800031, 'H', 4);
 
 -- --------------------------------------------------------
 
@@ -44,25 +173,21 @@ CREATE TABLE `tb_absensi` (
 
 CREATE TABLE `tb_agenda` (
   `idagenda` int(11) NOT NULL,
+  `idmengajar` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   `jam_ke` int(2) NOT NULL,
-  `kodekelas` varchar(15) NOT NULL,
-  `kodemapel` varchar(15) NOT NULL,
   `idkd` int(11) NOT NULL,
   `keterangan` varchar(30) NOT NULL,
-  `status_tgs` int(2) DEFAULT NULL,
-  `nip` varchar(30) DEFAULT NULL,
-  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `status_tgs` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_agenda`
 --
 
-INSERT INTO `tb_agenda` (`idagenda`, `tanggal`, `jam_ke`, `kodekelas`, `kodemapel`, `idkd`, `keterangan`, `status_tgs`, `nip`, `tglperbaharui`) VALUES
-(2, '2020-12-29', 1, 'XIRPL', 'MP010', 4, 'Praktikum', NULL, '11147', '2020-12-30 10:24:23'),
-(3, '2020-12-31', 3, 'XIRPL', 'MP010', 5, 'Tugas', 1, '11147', '2020-12-30 10:24:31'),
-(7, '2020-12-30', 2, 'XIRPL', 'MP010', 5, 'Tugas', 0, NULL, '2020-12-29 13:20:02');
+INSERT INTO `tb_agenda` (`idagenda`, `idmengajar`, `tanggal`, `jam_ke`, `idkd`, `keterangan`, `status_tgs`) VALUES
+(1, 13, '2021-01-05', 1, 4, 'Tugas', 1),
+(2, 13, '2021-01-06', 5, 5, 'Praktikum', 0);
 
 -- --------------------------------------------------------
 
@@ -126,7 +251,7 @@ INSERT INTO `tb_guru` (`nip`, `kodeguru`, `namaguru`, `jeniskelamin`, `tempatlah
 ('11143', 'HER', 'Heri Setiawan, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'AKL', NULL, '2020-12-28 04:40:34', 1),
 ('11144', 'ERICK', 'Erick Andika, M.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
 ('11145', 'AZIS', 'Azis Sumadullah, A.Md.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
-('11146', 'SANDI', 'Sandi Putra Cahya Permadi, A.Md.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
+('11146', 'SANDI', 'Sandi P C Permadi, A.Md.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2021-01-01 02:39:07', 1),
 ('11147', 'IH', 'Ihsan, S.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
 ('11148', 'WK', 'Weli Kusnadi, S.Kom, M.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
 ('11149', 'RI', 'Riki Iskandar', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
@@ -134,7 +259,7 @@ INSERT INTO `tb_guru` (`nip`, `kodeguru`, `namaguru`, `jeniskelamin`, `tempatlah
 ('11151', 'SAM', 'Samwiel A. Nugraha, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
 ('11152', 'TE', 'Tatang Erwanto', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
 ('11153', 'AGUS', 'Agus Permana, SM', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
-('11154', 'ADIT', 'Adit Bahrun Nur Pratama, S.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
+('11154', 'ADIT', 'Adit B Nur Pratama, S.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2021-01-01 10:52:45', 1),
 ('11155', 'NILA', 'Nila Natalia', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'ANM', NULL, '2020-12-28 04:40:34', 1),
 ('11156', 'AN', 'Moch. Asep Nazmudin, S.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'ANM', NULL, '2020-12-28 04:40:34', 1),
 ('11157', 'IKH', 'Ikhsan Fikri Salmi, S.Ds', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'ANM', NULL, '2020-12-28 04:40:34', 1),
@@ -142,7 +267,33 @@ INSERT INTO `tb_guru` (`nip`, `kodeguru`, `namaguru`, `jeniskelamin`, `tempatlah
 ('11159', 'NDEN', 'Nenden Muslihat', 'Perempuan', NULL, NULL, NULL, NULL, NULL, 'ANM', NULL, '2020-12-28 04:40:34', 1),
 ('11160', 'DY', 'Dinny Yulanda, P.Si', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
 ('11161', 'MF', 'M Fiuji Hardiansyah', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
-('11162', 'JM', 'Joko Mulyantoro, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1);
+('11162', 'JM', 'Joko Mulyantoro, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
+('19950310202105003', NULL, 'Najwa Shihab', 'Perempuan', 'Sukabumi', '1995-03-10', 'Jl. Prana Kp. Babakan Jampang RT 001/RW 018', '085896600511', 'najwashihab@gmail.com', 'RPL', 1, '2021-01-03 07:57:50', 1);
+
+--
+-- Triggers `tb_guru`
+--
+DELIMITER $$
+CREATE TRIGGER `auto_user_guru` AFTER INSERT ON `tb_guru` FOR EACH ROW BEGIN
+ DECLARE lastNo varchar(15);
+    DECLARE nextNo varchar(15);
+    DECLARE formatID varchar(15);
+
+    SET formatID = CONCAT('USR-',DATE_FORMAT(NOW(), '%Y'));
+    SELECT MAX(RIGHT(iduser, 5)) into lastNo from user_login WHERE iduser LIKE CONCAT(formatID, '%');
+    IF lastNo IS NULL THEN
+     BEGIN
+      set nextNo = CONCAT(formatID, '00001'); 
+     END;
+    ELSE
+     BEGIN
+      set nextNo = CONCAT(formatID, LPAD(lastNo + 1, 3, '0'));
+     END;
+    END IF;
+ INSERT INTO user_login (iduser, namauser, namalengkapuser, passuser, role_id, is_active, kodejurusan,semester_aktif) VALUES (nextNo, new.nip, new.namaguru, md5(new.nip), 3, 1, new.kodejurusan,'-' );
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -193,13 +344,14 @@ CREATE TABLE `tb_kelas` (
 
 INSERT INTO `tb_kelas` (`kodekelas`, `kodejurusan`, `namakelas`, `kelas`, `angkatankelas`, `is_active`, `iduser`, `tglperbaharui`) VALUES
 ('XIAKL', 'AKL', 'AKL', 'XI', 2019, 1, 1, '2020-12-03 14:28:14'),
-('XIANM', 'ANM', 'Animasi', 'XI', 2019, 1, 1, '2020-12-27 16:05:29'),
+('XIANM', 'ANM', 'ANIMASI', 'XI', 2019, 1, 1, '2021-01-01 11:16:34'),
 ('XIOTKP1', 'OTKP', 'OTKP 1', 'XI', 2019, 1, 1, '2020-12-27 16:07:00'),
 ('XIOTKP2', 'OTKP', 'OTKP 2', 'XI', 2019, 1, 1, '2020-12-27 16:07:25'),
 ('XIPSPT1', 'PSPT', 'PSPT 1', 'XI', 2019, 1, 1, '2020-12-27 16:06:02'),
 ('XIPSPT2', 'PSPT', 'PSPT 2', 'XI', 2019, 1, 1, '2020-12-27 16:06:31'),
 ('XIRPL', 'RPL', 'RPL', 'XI', 2019, 1, 1, '2020-12-27 16:04:20'),
-('XITKJ', 'TKJ', 'TKJ', 'XI', 2019, 1, 1, '2020-12-27 16:04:58');
+('XITKJ', 'TKJ', 'TKJ', 'XI', 2019, 1, 1, '2020-12-27 16:04:58'),
+('XTKJ', 'TKJ', 'TKJ', 'X', 2020, 1, 1, '2021-01-01 17:34:14');
 
 -- --------------------------------------------------------
 
@@ -227,22 +379,19 @@ CREATE TABLE `tb_kompdasar` (
   `namakd` varchar(256) NOT NULL,
   `keterangankd` text DEFAULT NULL,
   `semester` varchar(50) DEFAULT NULL,
-  `kkm` double DEFAULT NULL,
-  `kodemapel` varchar(20) NOT NULL,
-  `iduser` varchar(15) DEFAULT NULL,
-  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `kodemapel` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_kompdasar`
 --
 
-INSERT INTO `tb_kompdasar` (`idkd`, `kodekd`, `namakd`, `keterangankd`, `semester`, `kkm`, `kodemapel`, `iduser`, `tglperbaharui`) VALUES
-(1, 'KD 1.1', 'Larangan pergaulan bebas dan perbuatan zina', NULL, '4 (Empat)', 70, 'MP001', '1', '2020-12-29 10:12:52'),
-(2, 'KD 1.2', 'Makna beriman kepada malaikat - malaikat Allah SWT', NULL, '4 (Empat)', 70, 'MP001', '1', '2020-12-29 10:12:52'),
-(3, 'KD 1.3', 'Semangat menuntut ilmu dan menyampaikannya kepada sesama', NULL, '1 (Satu)', 70, 'MP001', '1', '2020-12-29 10:12:52'),
-(4, 'KD 1.1', 'Memahami alur kerja sistem berorientasi objek', NULL, '4 (Empat)', 75, 'MP010', '1', '2020-12-29 10:12:52'),
-(5, 'KD 1.2', 'Memahami hubungan antar class dalam sistem berorientasi objek', NULL, '4 (Empat)', 75, 'MP010', '1', '2020-12-29 10:12:52');
+INSERT INTO `tb_kompdasar` (`idkd`, `kodekd`, `namakd`, `keterangankd`, `semester`, `kodemapel`) VALUES
+(1, 'KD 1.1', 'Larangan pergaulan bebas dan perbuatan zina', NULL, '4 (Empat)', 'MP001'),
+(2, 'KD 1.2', 'Makna beriman kepada malaikat - malaikat Allah SWT', NULL, '4 (Empat)', 'MP001'),
+(3, 'KD 1.3', 'Semangat menuntut ilmu dan menyampaikannya kepada sesama', NULL, '1 (Satu)', 'MP001'),
+(4, 'KD 1.1', 'Memahami alur kerja sistem berorientasi objek', NULL, '4 (Empat)', 'MP010'),
+(5, 'KD 1.2', 'Memahami hubungan antar class dalam sistem berorientasi objek', NULL, '4 (Empat)', 'MP010');
 
 -- --------------------------------------------------------
 
@@ -254,32 +403,53 @@ CREATE TABLE `tb_mapel` (
   `kodemapel` varchar(20) NOT NULL,
   `namamapel` varchar(256) DEFAULT NULL,
   `tingkatan` varchar(10) NOT NULL,
-  `kelompok` varchar(70) DEFAULT NULL,
+  `idkelompokmapel` char(5) NOT NULL,
   `kodejurusan` varchar(30) NOT NULL,
   `kkm` double DEFAULT NULL,
-  `iduser` varchar(15) DEFAULT NULL,
-  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `iduser` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_mapel`
 --
 
-INSERT INTO `tb_mapel` (`kodemapel`, `namamapel`, `tingkatan`, `kelompok`, `kodejurusan`, `kkm`, `iduser`, `tglperbaharui`) VALUES
-('MP001', 'Pendidikan Agama dan Budi Pekerti', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
-('MP002', 'Bahasa Indonesia', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
-('MP003', 'Matematika', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
-('MP004', 'Sejarah Indonesia', 'I', 'Muatan Nasional', 'Semua Jurusan', 70, '1', '2020-12-29 10:09:11'),
-('MP005', 'Pendidikan Pancasila dan Kewarganegaraan', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
-('MP006', 'Bahasa Inggris', 'II', 'Muatan Nasional', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
-('MP007', 'Kewirausahaan', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
-('MP008', 'Pendidikan Jasmani Olahraga dan Kesehatan', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
-('MP009', 'Bahasa Jepang', 'II', 'Muatan Kewilayahan', 'Semua Jurusan', 75, '1', '2020-12-29 10:09:11'),
-('MP010', 'Pemodelan Perangkat Lunak', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11'),
-('MP011', 'Basis Data', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11'),
-('MP012', 'Pemrograman Berorientasi Objek', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11'),
-('MP013', 'Pemrograman Web dan Perangkat Bergerak', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11'),
-('MP014', 'Produk Kreatif dan Kewirausahaan', 'II', 'C3. Kompetensi Keahlian', 'RPL', 75, '1', '2020-12-29 10:09:11');
+INSERT INTO `tb_mapel` (`kodemapel`, `namamapel`, `tingkatan`, `idkelompokmapel`, `kodejurusan`, `kkm`, `iduser`) VALUES
+('MP001', 'Pendidikan Agama dan Budi Pekerti', 'II', 'MN', 'Semua Jurusan', 75, '1'),
+('MP002', 'Bahasa Indonesia', 'II', 'MN', 'Semua Jurusan', 75, '1'),
+('MP003', 'Matematika', 'II', 'MN', 'Semua Jurusan', 75, '1'),
+('MP004', 'Sejarah Indonesia', 'I', 'MN', 'Semua Jurusan', 70, '1'),
+('MP005', 'Pendidikan Pancasila dan Kewarganegaraan', 'II', 'MN', 'Semua Jurusan', 75, '1'),
+('MP006', 'Bahasa Inggris', 'II', 'MN', 'Semua Jurusan', 75, '1'),
+('MP007', 'Kewirausahaan', 'II', 'MK', 'Semua Jurusan', 75, '1'),
+('MP008', 'Pendidikan Jasmani Olahraga dan Kesehatan', 'II', 'MK', 'Semua Jurusan', 75, '1'),
+('MP009', 'Bahasa Jepang', 'II', 'MK', 'Semua Jurusan', 75, '1'),
+('MP010', 'Pemodelan Perangkat Lunak', 'II', 'C3', 'RPL', 75, '1'),
+('MP011', 'Basis Data', 'II', 'C3', 'RPL', 75, '1'),
+('MP012', 'Pemrograman Berorientasi Objek', 'II', 'C3', 'RPL', 75, '1'),
+('MP013', 'Pemrograman Web dan Perangkat Bergerak', 'II', 'C3', 'RPL', 75, '1'),
+('MP014', 'Produk Kreatif dan Kewirausahaan', 'II', 'C3', 'RPL', 75, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_mapel_kelompok`
+--
+
+CREATE TABLE `tb_mapel_kelompok` (
+  `idkelompokmapel` char(10) NOT NULL,
+  `namakelompokmapel` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_mapel_kelompok`
+--
+
+INSERT INTO `tb_mapel_kelompok` (`idkelompokmapel`, `namakelompokmapel`) VALUES
+('C1', 'C1. Dasar Bidang Keahlian'),
+('C2', 'C2. Dasar Program Keahlian'),
+('C3', 'C3. Kompetensi Keahlian'),
+('MK', 'Muatan Kewilayahan'),
+('MN', 'Muatan Nasional');
 
 -- --------------------------------------------------------
 
@@ -293,32 +463,30 @@ CREATE TABLE `tb_mengajar` (
   `nip` varchar(30) NOT NULL,
   `semester` int(3) NOT NULL,
   `kodekelas` varchar(15) NOT NULL,
-  `periode_mengajar` varchar(15) NOT NULL,
-  `iduser` varchar(15) DEFAULT NULL,
-  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `periode_mengajar` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_mengajar`
 --
 
-INSERT INTO `tb_mengajar` (`idmengajar`, `kodemapel`, `nip`, `semester`, `kodekelas`, `periode_mengajar`, `iduser`, `tglperbaharui`) VALUES
-(6, 'MP001', '11111', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(7, 'MP005', '11113', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(8, 'MP002', '11117', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(9, 'MP003', '11128', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(10, 'MP006', '11123', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(11, 'MP008', '11120', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(12, 'MP009', '11130', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(13, 'MP010', '11147', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(14, 'MP011', '11148', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(15, 'MP013', '11147', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(16, 'MP014', '11148', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(17, 'MP012', '11147', 4, 'XIRPL', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(18, 'MP001', '11111', 4, 'XITKJ', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(19, 'MP001', '11111', 4, 'XIPSPT1', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(20, 'MP001', '11111', 4, 'XIPSPT2', '2020 / 2021', '', '2020-12-29 10:09:42'),
-(21, 'MP001', '11111', 4, 'XIANM', '2020 / 2021', '', '2020-12-29 10:09:42');
+INSERT INTO `tb_mengajar` (`idmengajar`, `kodemapel`, `nip`, `semester`, `kodekelas`, `periode_mengajar`) VALUES
+(6, 'MP001', '11111', 4, 'XIRPL', '2020 / 2021'),
+(7, 'MP005', '11113', 4, 'XIRPL', '2020 / 2021'),
+(8, 'MP002', '11117', 4, 'XIRPL', '2020 / 2021'),
+(9, 'MP003', '11128', 4, 'XIRPL', '2020 / 2021'),
+(10, 'MP006', '11123', 4, 'XIRPL', '2020 / 2021'),
+(11, 'MP008', '11120', 4, 'XIRPL', '2020 / 2021'),
+(12, 'MP009', '11130', 4, 'XIRPL', '2020 / 2021'),
+(13, 'MP010', '11147', 4, 'XIRPL', '2020 / 2021'),
+(14, 'MP011', '11148', 4, 'XIRPL', '2020 / 2021'),
+(15, 'MP013', '11147', 4, 'XIRPL', '2020 / 2021'),
+(16, 'MP014', '11148', 4, 'XIRPL', '2020 / 2021'),
+(17, 'MP012', '11147', 4, 'XIRPL', '2020 / 2021'),
+(18, 'MP001', '11111', 4, 'XITKJ', '2020 / 2021'),
+(19, 'MP001', '11111', 4, 'XIPSPT1', '2020 / 2021'),
+(20, 'MP001', '11111', 4, 'XIPSPT2', '2020 / 2021'),
+(21, 'MP001', '11111', 4, 'XIANM', '2020 / 2021');
 
 -- --------------------------------------------------------
 
@@ -328,10 +496,11 @@ INSERT INTO `tb_mengajar` (`idmengajar`, `kodemapel`, `nip`, `semester`, `kodeke
 
 CREATE TABLE `tb_nilai` (
   `idnilai` int(11) NOT NULL,
-  `pts` double NOT NULL,
-  `pat` double NOT NULL,
-  `id_agenda` int(11) DEFAULT NULL,
-  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `nis` varchar(20) NOT NULL,
+  `pts` double DEFAULT NULL,
+  `pat` double DEFAULT NULL,
+  `idmengajar` int(11) NOT NULL,
+  `dekripsi` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -346,6 +515,7 @@ CREATE TABLE `tb_nilai_penugasan` (
   `idkd` int(11) NOT NULL,
   `nilai` double NOT NULL,
   `ket` varchar(15) NOT NULL,
+  `idtugas` int(11) NOT NULL,
   `idnilai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -472,7 +642,33 @@ INSERT INTO `tb_siswa` (`nis`, `namasiswa`, `nisn`, `jeniskelamin`, `tempatlahir
 ('171800028', 'Muhammad Sufyan Tsauri', NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23'),
 ('171800029', 'Yuni Yuningsih', NULL, 'Perempuan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23'),
 ('171800030', 'Maulana Yusuf', NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23'),
-('171800031', 'Ahmad Ziriel', NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23');
+('171800031', 'Ahmad Ziriel', NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23'),
+('202100100', 'Puspita Negara Sitompul', '202100100', 'Perempuan', 'Sukabumi', '2005-04-11', 'Sukabumi', '-', 'puspita@gmail.com', '-', '2020-06-13', '-', '-', 'XTKJ', 'TKJ', 2, 1, '1', '2021-01-03 07:22:26');
+
+--
+-- Triggers `tb_siswa`
+--
+DELIMITER $$
+CREATE TRIGGER `auto_user_siswa` AFTER INSERT ON `tb_siswa` FOR EACH ROW BEGIN
+ DECLARE lastNo varchar(15);
+    DECLARE nextNo varchar(15);
+    DECLARE formatID varchar(15);
+
+    SET formatID = CONCAT('USR-',DATE_FORMAT(NOW(), '%Y'));
+    SELECT MAX(RIGHT(iduser, 5)) into lastNo from user_login WHERE iduser LIKE CONCAT(formatID, '%');
+    IF lastNo IS NULL THEN
+     BEGIN
+      set nextNo = CONCAT(formatID, '00001'); 
+     END;
+    ELSE
+     BEGIN
+      set nextNo = CONCAT(formatID, LPAD(lastNo + 1, 3, '0'));
+     END;
+    END IF;
+ INSERT INTO user_login (iduser, namauser, namalengkapuser, passuser, role_id, is_active, kodejurusan,semester_aktif) VALUES (nextNo, new.nis, new.namasiswa, md5(new.nis), 5, 1, new.kodejurusan,new.semester_aktif );
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -486,17 +682,17 @@ CREATE TABLE `tb_tugas` (
   `judul` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL,
   `fileupload` varchar(100) NOT NULL,
-  `keterangan` varchar(30) NOT NULL,
-  `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `keterangan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_tugas`
 --
 
-INSERT INTO `tb_tugas` (`idtugas`, `idagenda`, `judul`, `deskripsi`, `fileupload`, `keterangan`, `tglperbaharui`) VALUES
-(3, 3, 'Merangkum', 'Merangkum buku administrasi jaringan', '', 'Belum Dikerjakan', '2020-12-29 12:26:12'),
-(4, 3, 'Kerjakan Soal', 'Soal essay', 'Tugas-20-12-292.PNG', 'Belum Dikerjakan', '2020-12-29 12:27:58');
+INSERT INTO `tb_tugas` (`idtugas`, `idagenda`, `judul`, `deskripsi`, `fileupload`, `keterangan`) VALUES
+(3, 3, 'Merangkum', 'Merangkum buku administrasi jaringan', '', 'Belum Dikerjakan'),
+(4, 3, 'Kerjakan Soal', 'Soal essay', 'Tugas-20-12-292.PNG', 'Belum Dikerjakan'),
+(7, 1, 'Merangkum', 'Merangkum jaringan komputer', 'Tugas-21-01-05.PNG', 'Belum Dikerjakan');
 
 -- --------------------------------------------------------
 
@@ -545,7 +741,37 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (3, 2, 2),
 (4, 1, 3),
 (5, 1, 4),
-(7, 1, 5);
+(7, 1, 5),
+(8, 1, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_login`
+--
+
+CREATE TABLE `user_login` (
+  `iduser` varchar(15) NOT NULL,
+  `namauser` varchar(30) DEFAULT NULL,
+  `passuser` varchar(256) DEFAULT NULL,
+  `namalengkapuser` varchar(100) DEFAULT NULL,
+  `avataruser` varchar(256) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `is_active` int(2) DEFAULT NULL,
+  `tglbuat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `tglperbaharui` datetime DEFAULT NULL,
+  `tgllogakhir` datetime DEFAULT NULL,
+  `kodejurusan` char(10) NOT NULL,
+  `semester_aktif` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_login`
+--
+
+INSERT INTO `user_login` (`iduser`, `namauser`, `passuser`, `namalengkapuser`, `avataruser`, `role_id`, `is_active`, `tglbuat`, `tglperbaharui`, `tgllogakhir`, `kodejurusan`, `semester_aktif`) VALUES
+('USR-202100001', '19950310202105003', 'ffa034e00cad2295ad0e7c58157b596c', 'Najwa Shihab', NULL, 3, 1, '2021-01-03 07:10:59', NULL, NULL, 'RPL', 0),
+('USR-2021002', '202100100', '0c59763a42eef689bca5a2d3b990087b', 'Puspita Negara Sitompul', NULL, 5, 1, '2021-01-03 07:22:26', NULL, NULL, 'TKJ', 2);
 
 -- --------------------------------------------------------
 
@@ -568,7 +794,8 @@ INSERT INTO `user_menu` (`id`, `menu`, `urutan`) VALUES
 (2, 'User', 5),
 (3, 'Menu', 4),
 (4, 'Master', 2),
-(5, 'Guru', 3);
+(5, 'Guru', 3),
+(6, 'Laporan', 6);
 
 -- --------------------------------------------------------
 
@@ -622,8 +849,14 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (11, 4, 'Modul Siswa', 'master/siswa', 'fas fa-fw fa-users', 1),
 (12, 4, 'Modul Mata Pelajaran', 'master/mapel', 'fas fa-fw fa-book', 1),
 (13, 4, 'Modul Mengajar', 'master/mengajar', 'fas fa-fw fa-archive', 1),
-(14, 5, 'Daftar Ampu', 'guru/ampu', 'fas fa-fw fa-pencil-alt', 1),
-(15, 5, 'Agenda Kegiatan', 'guru', 'fas fa-fw fa-clipboard', 1);
+(14, 5, 'Mapel Diampu', 'guru/ampu', 'fas fa-fw fa-pencil-alt', 1),
+(15, 5, 'Agenda Kegiatan', 'guru', 'fas fa-fw fa-clipboard', 1),
+(19, 6, 'Data Guru', 'laporan/dataguru', 'fas fa-fw fa-database', 1),
+(20, 6, 'Data Kelas', 'laporan/datakelas', 'fas fa-fw fa-database', 1),
+(21, 6, 'Data Siswa', 'laporan/datasiswa', 'fas fa-fw fa-database', 1),
+(22, 6, 'Data Ampu', 'laporan/dataampu', 'fas fa-fw fa-database', 1),
+(23, 6, 'Data Agenda', 'laporan/dataagenda', 'fas fa-fw fa-database', 1),
+(24, 5, 'Riwayat Mengajar', 'guru/rekapnilai', 'fas fa-fw fa-chalkboard-teacher', 1);
 
 --
 -- Indexes for dumped tables
@@ -676,6 +909,12 @@ ALTER TABLE `tb_kompdasar`
 --
 ALTER TABLE `tb_mapel`
   ADD PRIMARY KEY (`kodemapel`);
+
+--
+-- Indexes for table `tb_mapel_kelompok`
+--
+ALTER TABLE `tb_mapel_kelompok`
+  ADD PRIMARY KEY (`idkelompokmapel`);
 
 --
 -- Indexes for table `tb_mengajar`
@@ -738,6 +977,12 @@ ALTER TABLE `user_access_menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_login`
+--
+ALTER TABLE `user_login`
+  ADD PRIMARY KEY (`iduser`);
+
+--
 -- Indexes for table `user_menu`
 --
 ALTER TABLE `user_menu`
@@ -763,7 +1008,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `tb_agenda`
 --
 ALTER TABLE `tb_agenda`
-  MODIFY `idagenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idagenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_kelas_history`
@@ -775,25 +1020,25 @@ ALTER TABLE `tb_kelas_history`
 -- AUTO_INCREMENT for table `tb_kompdasar`
 --
 ALTER TABLE `tb_kompdasar`
-  MODIFY `idkd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idkd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_mengajar`
 --
 ALTER TABLE `tb_mengajar`
-  MODIFY `idmengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idmengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
-  MODIFY `idnilai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idnilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_nilai_penugasan`
 --
 ALTER TABLE `tb_nilai_penugasan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_nilai_portofolio`
@@ -817,7 +1062,7 @@ ALTER TABLE `tb_nilai_proyek`
 -- AUTO_INCREMENT for table `tb_tugas`
 --
 ALTER TABLE `tb_tugas`
-  MODIFY `idtugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idtugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -829,13 +1074,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -847,7 +1092,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
