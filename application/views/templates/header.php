@@ -22,6 +22,9 @@
     <link href="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="<?= base_url('assets/img/logo.png'); ?>">
 
+    <!-- Jquery -->
+    <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
+
 </head>
 
 <body id="page-top">
