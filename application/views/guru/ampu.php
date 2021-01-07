@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-warning bg-warning" style="color: #000">
+            <div class="alert alert-warning bg-warning" style="color: #000; font-size: small;">
                 <b>Petunjuk : </b><br>
                 Menu ini digunakan untuk menginput nilai pada setiap masing-masing mata pelajaran diampu. Silakan klik menu <b><i>Nilai Pengetahuan</i></b> untuk menginput nilai pengetahuan, dan <b><i>Nilai Keterampilan</i></b> untuk menginput nilai keterampilan.
             </div>
