@@ -14,6 +14,17 @@ class Guru_model extends CI_Model
         return $result->result_array();
     }
 
+    public function getMengajarById($id)
+    {
+        $this->db->select('tb_kelas.kelas, tb_kelas.namakelas, tb_mapel.namamapel, tb_mengajar.*');
+        $this->db->from('tb_mengajar');
+        $this->db->join('tb_kelas', 'tb_kelas.kodekelas = tb_mengajar.kodekelas', 'left');
+        $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_mengajar.kodemapel', 'left');
+        $this->db->where('tb_mengajar.idmengajar', $id);
+        $result = $this->db->get();
+        return $result->row_array();
+    }
+
     public function getListKd($kdmapel)
     {
         $this->db->select('*');
@@ -118,6 +129,7 @@ class Guru_model extends CI_Model
     public function delkomp($id)
     {
         $this->db->delete('tb_kompdasar', ['idkd' => $id]);
+        $this->db->delete('tb_agenda', ['idkd' => $id]);
         return true;
     }
 }
