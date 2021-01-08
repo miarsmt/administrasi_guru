@@ -25,6 +25,24 @@
     <!-- Jquery -->
     <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
 
+    <!-- Notify -->
+    <script src="<?= base_url('assets/'); ?>vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <script>
+        base_url = "<?= base_url(); ?>";
+
+        function noti(tipe, value) {
+            $.notify({
+                icon: 'fas fa-fw fa-info-circle',
+                message: '<strong>Informasi</strong><p>' + value + '</p>'
+            }, {
+                type: tipe,
+                timer: 1000
+            });
+            return true;
+        }
+    </script>
+
 </head>
 
 <body id="page-top">
