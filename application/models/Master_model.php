@@ -299,11 +299,12 @@ class Master_model extends CI_Model
         return true;
     }
 
-    public function getKompdasar($id)
+    public function getKompdasarP($id)
     {
         $this->db->select('*');
         $this->db->from('tb_kompdasar');
         $this->db->where('kodemapel', $id);
+        $this->db->where('jenis', 'P');
         $result = $this->db->get();
         return $result->result_array();
     }
