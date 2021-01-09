@@ -127,7 +127,8 @@ class Guru extends CI_Controller
         $id = $this->uri->segment(3);
         $ambil = $this->master->getAjarById($id);
         $data = [
-            'title'     => 'Tambah Agenda Kegiatan',
+            'title'     => 'Agenda Kegiatan',
+            'subtitle'  => 'Input Agenda',
             'user'      => $this->admin->sesi(),
             'kompdasar' => $this->guru->getListKd($ambil['kodemapel']),
             'kelas'     => $this->master->getKelasById($ambil['kodekelas']),
@@ -158,6 +159,7 @@ class Guru extends CI_Controller
                 'idkd'      => $this->input->post('kompdsr', true),
                 'keterangan' => $this->input->post('ket', true),
                 'status_tgs' => 0,
+                'status_absen' => 0
             ];
 
             $this->guru->save_agenda($data);
@@ -179,6 +181,7 @@ class Guru extends CI_Controller
         $ambil = $this->master->getAjarById($idajar);
         $data = [
             'title'     => 'Agenda Kegiatan',
+            'subtitle'  => 'Input Absen',
             'user'      => $this->admin->sesi(),
             'agenda'    => $this->guru->getAgendaByKelas($ambil['kodekelas'], $ambil['kodemapel']),
             'kelas'     => $this->master->getKelasById($ambil['kodekelas']),
@@ -226,6 +229,9 @@ class Guru extends CI_Controller
 
         $sql = $this->guru->save_absen($data);
         if ($sql) {
+            $this->db->set('status_absen', 1);
+            $this->db->where('idagenda', $idagenda);
+            $this->db->update('tb_agenda');
             $this->session->set_flashdata('message', 'data agenda berhasil ditambah-kan');
             redirect('guru/absensi/' . $ambil['idmengajar']);
         } else {
