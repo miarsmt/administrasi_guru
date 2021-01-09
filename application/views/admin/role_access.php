@@ -2,7 +2,10 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">
+        <span><a href="#"><?= $title; ?></a></span>
+        <span> / <?= $subtitle; ?></span>
+    </h1>
 
     <div class="row">
         <div class="col-lg-7">

@@ -2,7 +2,10 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">
+        <span><a href="#"><?= $title; ?></a></span>
+        <span> / <?= $subtitle; ?></span>
+    </h1>
 
     <!-- kalau lolos -->
 
@@ -31,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="kodekls">Kelas</label>
-                            <input type="text" name="kodekls" id="kodekls" class="form-control" value="<?= $kelas['kelas']; ?> <?= $kelas['namakelas']; ?>">
+                            <input type="text" name="kodekls" id="kodekls" class="form-control" value="<?= $kelas['kelas']; ?> <?= $kelas['namakelas']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="kompdsr">Kompetensi Dasar</label>

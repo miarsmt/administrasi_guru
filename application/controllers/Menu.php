@@ -130,7 +130,8 @@ class Menu extends CI_Controller
     public function editsubmenu($id)
     {
         $data = [
-            'title' => 'Edit Submenu',
+            'title'    => 'Submenu Management',
+            'subtitle' => 'Edit Submenu',
             'user'  => $this->admin->sesi(),
             'submenu' => $this->menu->getSubmenuById($id),
             'menu'    => $this->menu->getAllMenu()

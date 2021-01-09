@@ -96,7 +96,8 @@ class Admin extends CI_Controller
     public function roleAccess($role_id)
     {
         $data = [
-            'title' => 'Role Access',
+            'title' => 'Role',
+            'subtitle' => 'Role Access',
             'user'  => $this->admin->sesi(),
             'role'  => $this->role->getRoleById($role_id),
             'menu'  => $this->menu->getMenu()

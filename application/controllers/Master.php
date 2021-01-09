@@ -29,7 +29,8 @@ class Master extends CI_Controller
     public function addguru()
     {
         $data = [
-            'title' => 'Tambah Data Guru',
+            'title'   => 'Modul Guru',
+            'subtitle' => 'Input Guru',
             'user'  => $this->admin->sesi(),
             'jurusan' => $this->master->getAllJurusan()
         ];
@@ -94,7 +95,8 @@ class Master extends CI_Controller
     public function editguru($nip)
     {
         $data = [
-            'title' => 'Edit Data Guru',
+            'title'    => 'Modul Guru',
+            'subtitle' => 'Update Guru',
             'user'  => $this->admin->sesi(),
             'dtguru' => $this->master->getGuruById($nip),
             'jurusan' => $this->master->getAllJurusan()
@@ -189,7 +191,8 @@ class Master extends CI_Controller
     public function editjurusan($id)
     {
         $data = [
-            'title'     => 'Edit Jurusan',
+            'title'     => 'Modul Jurusan',
+            'subtitle'  => 'Edit Jurusan',
             'user'      => $this->admin->sesi(),
             'dtjurusan' => $this->master->getJurusanById($id),
             'guru'      => $this->master->getAllGuru()
@@ -271,7 +274,8 @@ class Master extends CI_Controller
     public function editkelas($id)
     {
         $data = [
-            'title'     => 'Edit Data Kelas',
+            'title'     => 'Modul Kelas',
+            'subtitle'  => 'Update Kelas',
             'user'      => $this->admin->sesi(),
             'dtkelas'   => $this->master->getKelasById($id),
             'jurusan'   => $this->master->getAllJurusan()
@@ -322,7 +326,8 @@ class Master extends CI_Controller
     public function addsiswa()
     {
         $data = [
-            'title' => 'Tambah Data Siswa',
+            'title'    => 'Modul Siswa',
+            'subtitle' => 'Input Siswa',
             'user' => $this->admin->sesi(),
             'jurusan' => $this->master->getAllJurusan(),
             'kelas' => $this->master->getKelas()
@@ -423,7 +428,8 @@ class Master extends CI_Controller
     public function editsiswa($id)
     {
         $data = [
-            'title' => 'Edit Data Siswa',
+            'title'    => 'Modul Siswa',
+            'subtitle' => 'Update Siswa',
             'user' => $this->admin->sesi(),
             'dtsiswa' => $this->master->getSiswaById($id),
             'jurusan' => $this->master->getAllJurusan(),
@@ -546,7 +552,8 @@ class Master extends CI_Controller
     public function editmapel($id)
     {
         $data = [
-            'title'     => 'Edit Data Mapel',
+            'title'     => 'Modul Mata Pelajaran',
+            'subtitle'  => 'Update Mapel',
             'user'      => $this->admin->sesi(),
             'dtmapel'   => $this->master->getMapelById($id),
             'jurusan'   => $this->master->getAllJurusan(),
@@ -628,7 +635,8 @@ class Master extends CI_Controller
     public function editajar($id)
     {
         $data = [
-            'title'     => 'Edit Data Mengajar',
+            'title'     => 'Modul Mengajar',
+            'subtitle'  => 'Update Mengajar',
             'user'      => $this->admin->sesi(),
             'dtajar'    => $this->master->getAjarById($id),
             'mapel'     => $this->master->getMapel(),
