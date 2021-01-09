@@ -130,6 +130,8 @@ class Guru_model extends CI_Model
     {
         $this->db->delete('tb_kompdasar', ['idkd' => $id]);
         $this->db->delete('tb_agenda', ['idkd' => $id]);
+        $this->db->delete('tb_nilai', ['idkd' => $id]);
+        $this->db->delete('tb_nilai_ket', ['idkd' => $id]);
         return true;
     }
 }
