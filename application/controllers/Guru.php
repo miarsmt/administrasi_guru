@@ -247,7 +247,8 @@ class Guru extends CI_Controller
 
         $list_kd = $this->db->query("SELECT *
                         FROM tb_kompdasar
-                        WHERE kodemapel = '" . $ambil['kodemapel'] . "'")->result_array();
+                        WHERE kodemapel = '" . $ambil['kodemapel'] . "'
+                        AND jenis = 'P'")->result_array();
 
         $data = [
             'title'         => 'Mapel Diampu',
@@ -300,6 +301,7 @@ class Guru extends CI_Controller
     public function simpankd($id)
     {
         $detil_mp = $this->guru->getMengajarById($id);
+        $j = $this->uri->segment(4);
         $p = $this->input->post();
 
         $d['status'] = "";
@@ -307,7 +309,7 @@ class Guru extends CI_Controller
 
 
         if ($p['_mode'] == "add") {
-            $this->db->query("INSERT INTO tb_kompdasar (kodekd, namakd, jenis, semester, kodemapel) VALUES ('" . $p['kode'] . "', '" . $p['nama'] . "', 'P', '" . $p['semester'] . "', '" . $detil_mp['kodemapel'] . "')");
+            $this->db->query("INSERT INTO tb_kompdasar (kodekd, namakd, jenis, semester, kodemapel) VALUES ('" . $p['kode'] . "', '" . $p['nama'] . "', '$j', '" . $p['semester'] . "', '" . $detil_mp['kodemapel'] . "')");
 
             $d['status'] = "ok";
             $d['data'] = "Data KD berhasil di-simpan";
@@ -432,7 +434,55 @@ class Guru extends CI_Controller
             $i++;
         }
 
-        $this->session->set_flashdata('message', '' . $i . ' Data nilai berhasil ditambah-kan');
+        $this->session->set_flashdata('message', '' . $i . ' Data nilai pengetahuan berhasil ditambah-kan');
+        redirect('guru/ampu');
+    }
+
+    public function n_keterampilan()
+    {
+        $id = $this->uri->segment(3);
+        $ambil = $this->guru->getMengajarById($id);
+
+        $list_data = $this->db->query("SELECT 
+                        b.nis, b.namasiswa, 0 nilai
+                        FROM tb_kelas a
+                        INNER JOIN tb_siswa b ON a.kodekelas = b.kodekelas
+                        WHERE a.kodekelas = '" . $ambil['kodekelas'] . "' 
+                        ORDER BY b.namasiswa ASC")->result_array();
+
+        $list_kd = $this->db->query("SELECT *
+                        FROM tb_kompdasar
+                        WHERE kodemapel = '" . $ambil['kodemapel'] . "'
+                        AND jenis = 'K'")->result_array();
+
+        $data = [
+            'title'         => 'Mapel Diampu',
+            'subtitle'      => 'Nilai Keterampilan',
+            'user'          => $this->admin->sesi(),
+            'detil_mp'      => $ambil,
+            'ambil_siswa'   => $list_data,
+            'ambil_kd'      => $list_kd
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('guru/n_keterampilan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function simpan_nilaiket()
+    {
+        $p = $this->input->post();
+        $i = 0;
+
+        foreach ($p['nilai'] as $s) {
+            $this->db->query("INSERT INTO tb_nilai_ket (idmengajar, idkd, nis, nilai) VALUES ('" . $p['idmengajar'] . "', '" . $p['idkd'] . "', '" . $p['nis'][$i] . "', '" . $s . "')");
+
+            $i++;
+        }
+
+        $this->session->set_flashdata('message', '' . $i . ' Data nilai keterampilan berhasil ditambah-kan');
         redirect('guru/ampu');
     }
 }
