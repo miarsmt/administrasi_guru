@@ -11,13 +11,15 @@
     <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
 
     <div class="row">
-        <div class="alert alert-warning bg-warning" style="color: #000; font-size: small;">
-            <b>Petunjuk : </b><br>
-            <ul>
-                <li>Menu ini digunakan untuk menginput nilai keterampilan pada mata pelajaran <b><i><?php echo $detil_mp['namamapel'] . ", kelas " . $detil_mp['kelas'] . " " . $detil_mp['namakelas']; ?>.</i></b> </li>
-                <li>Jika kompetensi dasar belum ada, silakan klik tombol <b><i>Tambah KD</i></b>. Untuk mengubah atau menghapus nama KD, silakan klik tombol "<i class="fas fa-fw fa-pencil-alt"></i>" atau "<i class="fas fa-fw fa-times"></i>". </li>
-                <li>Untuk mengisikan nilai keterampilan pada masing-masing KD, silakan pilih nama KD pada form input nilai. Nilai dalam <b><i>skala 1-100</i></b>. Jangan lupa klik tombol <b><i>Simpan</i></b> di sebelah bawah.</li>
-            </ul>
+        <div class="col-md-12">
+            <div class="alert alert-warning bg-warning" style="color: #000; font-size: small;">
+                <b>Petunjuk : </b><br>
+                <ul>
+                    <li>Menu ini digunakan untuk menginput nilai keterampilan pada mata pelajaran <b><i><?php echo $detil_mp['namamapel'] . ", kelas " . $detil_mp['kelas'] . " " . $detil_mp['namakelas']; ?>.</i></b> </li>
+                    <li>Jika kompetensi dasar belum ada, silakan klik tombol <b><i>Tambah KD</i></b>. Untuk mengubah atau menghapus nama KD, silakan klik tombol "<i class="fas fa-fw fa-pencil-alt"></i>" atau "<i class="fas fa-fw fa-times"></i>". </li>
+                    <li>Untuk mengisikan nilai keterampilan pada masing-masing KD, silakan pilih nama KD pada form input nilai. Nilai dalam <b><i>skala 1-100</i></b>. Jangan lupa klik tombol <b><i>Simpan</i></b> di sebelah bawah.</li>
+                </ul>
+            </div>
         </div>
 
         <div class="col-md-12">
