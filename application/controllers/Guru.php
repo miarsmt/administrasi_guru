@@ -98,44 +98,17 @@ class Guru extends CI_Controller
     {
         $id = $this->uri->segment(3);
         $data = [
-            'title'     => 'Add Kompetensi Dasar',
-            'user'      => $this->admin->sesi(),
-            'kompdasar' => $this->master->getKompdasar($id),
-            'mapel'     => $this->master->getMapelById($id)
+            'kodekd'        => $this->input->post('kode', true),
+            'namakd'        => $this->input->post('nama', true),
+            'semester'      => $this->input->post('semester', true),
+            'kodemapel'     => $this->input->post('kodemapel', true)
         ];
 
-        $this->form_validation->set_rules('kodekd', 'Kode KD', 'required|trim', [
-            'required' => '%s tidak boleh kosong'
-        ]);
-        $this->form_validation->set_rules('namakd', 'Nama KD', 'required|trim', [
-            'required' => '%s tidak boleh kosong'
-        ]);
-        $this->form_validation->set_rules('ket', 'Keterangan', 'required|trim', [
-            'required' => '%s tidak boleh kosong'
-        ]);
-        $this->form_validation->set_rules('semester', 'Semester', 'required|trim', [
-            'required' => '%s tidak boleh kosong'
-        ]);
+        $mapel = $this->master->getMapelById($this->input->post('kodemapel'));
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('guru/add_komp', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $data = [
-                'kodekd'        => $this->input->post('kodekd', true),
-                'namakd'        => $this->input->post('namakd', true),
-                'keterangankd'  => $this->input->post('kkm', true),
-                'semester'      => $this->input->post('semester', true),
-                'kodemapel'     => $this->input->post('kodemapel', true)
-            ];
-
-            $this->master->save_komp($data);
-            $this->session->set_flashdata('message', 'data kompetensi dasar ' . $id . ' berhasil ditambah-kan');
-            redirect('guru/addkomp/' . $this->input->post('kodemapel'));
-        }
+        $this->master->save_komp($data);
+        $this->session->set_flashdata('message', 'data kompetensi dasar ' . $mapel['namamapel'] . ' berhasil ditambah-kan');
+        redirect('guru/n_pengetahuan/' . $id);
     }
 
     public function deletekomp()
@@ -258,5 +231,208 @@ class Guru extends CI_Controller
         } else {
             echo "<script>alert('Data gagal disimpan');window.location = '" . base_url('guru') . "'</script>";
         }
+    }
+
+    public function n_pengetahuan()
+    {
+        $id = $this->uri->segment(3);
+        $ambil = $this->guru->getMengajarById($id);
+
+        $list_data = $this->db->query("SELECT 
+                        b.nis, b.namasiswa, 0 nilai
+                        FROM tb_kelas a
+                        INNER JOIN tb_siswa b ON a.kodekelas = b.kodekelas
+                        WHERE a.kodekelas = '" . $ambil['kodekelas'] . "' 
+                        ORDER BY b.namasiswa ASC")->result_array();
+
+        $list_kd = $this->db->query("SELECT *
+                        FROM tb_kompdasar
+                        WHERE kodemapel = '" . $ambil['kodemapel'] . "'")->result_array();
+
+        $data = [
+            'title'         => 'Mapel Diampu',
+            'subtitle'      => 'Nilai Pengetahuan',
+            'user'          => $this->admin->sesi(),
+            'detil_mp'      => $ambil,
+            'idmengajar'    => $id,
+            'ambil_siswa'   => $list_data,
+            'ambil_kd'      => $list_kd
+        ];
+
+        $this->session->set_userdata("idmengajar", $id);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('guru/n_pengetahuan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function list_kd($id)
+    {
+        $detil_mp = $this->guru->getMengajarById($id);
+        $list_data = $this->master->getKompdasarP($detil_mp['kodemapel']);
+
+        echo json_encode($list_data);
+    }
+
+    public function editkd($id)
+    {
+        $query = $this->db->query("SELECT *, 'edit' AS mode FROM tb_kompdasar WHERE idkd = '$id'")->row_array();
+
+        $d = [];
+
+        if (empty($query)) {
+            $d['data']['idkd'] = "";
+            $d['data']['mode'] = "add";
+            $d['data']['kodekd'] = "";
+            $d['data']['namakd'] = "";
+            $d['data']['jenis'] = "";
+            $d['data']['semester'] = "";
+            $d['data']['kodemapel'] = "";
+        } else {
+            $d['data'] = $query;
+        }
+
+        echo json_encode($d);
+    }
+
+    public function simpankd($id)
+    {
+        $detil_mp = $this->guru->getMengajarById($id);
+        $p = $this->input->post();
+
+        $d['status'] = "";
+        $d['data'] = "";
+
+
+        if ($p['_mode'] == "add") {
+            $this->db->query("INSERT INTO tb_kompdasar (kodekd, namakd, jenis, semester, kodemapel) VALUES ('" . $p['kode'] . "', '" . $p['nama'] . "', 'P', '" . $p['semester'] . "', '" . $detil_mp['kodemapel'] . "')");
+
+            $d['status'] = "ok";
+            $d['data'] = "Data KD berhasil di-simpan";
+        } else if ($p['_mode'] == "edit") {
+            $this->db->query("UPDATE tb_kompdasar SET kodekd = '" . $p['kode'] . "', namakd = '" . $p['nama'] . "', jenis = '" . $p['jenis'] . "', semester = '" . $p['semester'] . "', kodemapel = '" . $p['kodemapel'] . "' WHERE idkd = '" . $p['_id'] . "'");
+
+            $d['status'] = "ok";
+            $d['data'] = "Data KD berhasil disimpan";
+        } else {
+            $d['status'] = "gagal";
+            $d['data'] = "Kesalahan sistem";
+        }
+
+        echo json_encode($d);
+    }
+
+    public function hapuskd($id)
+    {
+        $this->guru->delkomp($id);
+
+        $d['status'] = "ok";
+        $d['data'] = "Data KD berhasil di-hapus";
+
+        echo json_encode($d);
+    }
+
+    public function simpan()
+    {
+        $p = $this->input->post();
+        $jumlah_sudah = 0;
+        $i = 0;
+
+        $query = [];
+
+        foreach ($p['nilai'] as $s) {
+            $cek = $this->db->query("SELECT id FROM tb_nilai WHERE idmengajar = '" . $p['idmengajar'] . "' AND idkd = '" . $p['idkd'] . "' AND nis = '" . $p['nis'][$i] . "' AND jenis = '" . $p['jenis'] . "'")->num_rows();
+
+            if ($cek > 0) {
+                $jumlah_sudah++;
+                $this->db->query("UPDATE tb_nilai SET nilai = '$s' WHERE idmengajar = '" . $p['idmengajar'] . "' AND idkd = '" . $p['idkd'] . "' AND nis = '" . $p['nis'][$i] . "' AND jenis = '" . $p['jenis'] . "'");
+            } else {
+                $this->db->query("INSERT INTO tb_nilai (jenis, idmengajar, idkd, nis, nilai) VALUES ('" . $p['jenis'] . "', '" . $p['idmengajar'] . "', '" . $p['idkd'] . "', '" . $p['nis'][$i] . "', '" . $s . "')");
+            }
+            $i++;
+        }
+
+        $d['status'] = "ok";
+        $d['data'] = $i . " Data nilai berhasil di-simpan ";
+        echo json_encode($d);
+    }
+
+    public function ambil_siswa($kelas)
+    {
+        $id_kd = $this->uri->segment(4);
+        $jenis = $this->uri->segment(5);
+
+        $idmengajar = $this->session->userdata('idmengajar');
+
+        $list_data = [];
+        if ($jenis == "h") {
+            $ambil_nilai = $this->db->query("SELECT
+                        b.nis,
+                        b.namasiswa,
+                        IFNULL(a.nilai, 0) nilai
+                        FROM tb_siswa b
+                        INNER JOIN tb_nilai a ON a.nis = b.nis
+                        INNER JOIN tb_mengajar c ON a.idmengajar = c.idmengajar
+                        INNER JOIN tb_kompdasar d ON a.idkd = d.idkd
+                        INNER JOIN tb_guru e ON c.nip = e.nip
+                        INNER JOIN tb_mapel f ON c.kodemapel = f.kodemapel
+                        INNER JOIN tb_kelas g ON c.kodekelas = g.kodekelas
+                        WHERE g.kodekelas = '" . $kelas . "' AND a.idkd = '" . $id_kd . "'
+                        AND a.jenis = '" . $jenis . "'
+                        ORDER BY b.namasiswa ASC")->result_array();
+
+            $ambil_nilai = $this->db->query("SELECT
+                        tb_nilai.nis, tb_siswa.namasiswa, IFNULL(tb_nilai.nilai, 0) nilai
+                        FROM tb_nilai
+                        INNER JOIN tb_mengajar ON tb_nilai.idmengajar = tb_mengajar.idmengajar
+                        INNER JOIN tb_siswa ON tb_nilai.nis = tb_siswa.nis
+                        WHERE tb_mengajar.idmengajar = '" . $idmengajar . "'
+                        AND tb_nilai.idkd = '" . $id_kd . "'
+                        AND tb_nilai.jenis = '" . $jenis . "'")->result_array();
+        } else {
+            $ambil_nilai = $this->db->query("SELECT
+                        tb_nilai.nis, tb_siswa.namasiswa, IFNULL(tb_nilai.nilai, 0) nilai
+                        FROM tb_nilai
+                        INNER JOIN tb_mengajar ON tb_nilai.idmengajar = tb_mengajar.idmengajar
+                        INNER JOIN tb_siswa ON tb_nilai.nis = tb_siswa.nis
+                        WHERE tb_mengajar.idmengajar = '" . $idmengajar . "'
+                        AND tb_nilai.jenis = '" . $jenis . "'")->result_array();
+        }
+
+
+        if (empty($ambil_nilai)) {
+            $list_data = $this->db->query("SELECT 
+                        b.nis, b.namasiswa, 0 nilai
+                        FROM tb_kelas a
+                        INNER JOIN tb_siswa b ON a.kodekelas = b.kodekelas
+                        WHERE a.kodekelas = '" . $kelas . "' 
+                        ORDER BY b.namasiswa ASC")->result_array();
+            $d['sik_endi'] = "belum ada";
+        } else {
+            $list_data = $ambil_nilai;
+            $d['sik_endi'] = "sudah ada";
+        }
+
+        $d['idmengajar'] = $idmengajar;
+        $d['status'] = "ok";
+        $d['data'] = $list_data;
+        echo json_encode($d);
+    }
+
+    public function simpan_nilai()
+    {
+        $p = $this->input->post();
+        $i = 0;
+
+        foreach ($p['nilai'] as $s) {
+            $this->db->query("INSERT INTO tb_nilai (jenis, idmengajar, idkd, nis, nilai) VALUES ('" . $p['jenis'] . "', '" . $p['idmengajar'] . "', '" . $p['idkd'] . "', '" . $p['nis'][$i] . "', '" . $s . "')");
+
+            $i++;
+        }
+
+        $this->session->set_flashdata('message', '' . $i . ' Data nilai berhasil ditambah-kan');
+        redirect('guru/ampu');
     }
 }
