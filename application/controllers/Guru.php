@@ -524,4 +524,43 @@ class Guru extends CI_Controller
         $this->load->view('guru/n_pts', $data);
         $this->load->view('templates/footer');
     }
+
+    public function n_pas()
+    {
+        $id = $this->uri->segment(3);
+        $ambil = $this->guru->getMengajarById($id);
+
+        $list_data = $this->db->query("SELECT 
+                        b.nis, b.namasiswa, 0 nilai
+                        FROM tb_kelas a
+                        INNER JOIN tb_siswa b ON a.kodekelas = b.kodekelas
+                        WHERE a.kodekelas = '" . $ambil['kodekelas'] . "' 
+                        ORDER BY b.namasiswa ASC")->result_array();
+
+        $list_kdk = $this->db->query("SELECT *
+                        FROM tb_kompdasar
+                        WHERE kodemapel = '" . $ambil['kodemapel'] . "'
+                        AND jenis = 'K'")->result_array();
+
+        $list_kdp = $this->db->query("SELECT *
+                        FROM tb_kompdasar
+                        WHERE kodemapel = '" . $ambil['kodemapel'] . "'
+                        AND jenis = 'P'")->result_array();
+
+        $data = [
+            'title'         => 'Mapel Diampu',
+            'subtitle'      => 'Nilai PAS',
+            'user'          => $this->admin->sesi(),
+            'detil_mp'      => $ambil,
+            'ambil_kdp'     => $list_kdp,
+            'ambil_kdk'     => $list_kdk,
+            'ambil_siswa'   => $list_data
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('guru/n_pas', $data);
+        $this->load->view('templates/footer');
+    }
 }
