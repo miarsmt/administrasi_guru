@@ -569,4 +569,106 @@ class Guru extends CI_Controller
         $this->load->view('guru/n_pas', $data);
         $this->load->view('templates/footer');
     }
+
+    public function cetak($bawa)
+    {
+        $strq_detail_guru = "SELECT 
+                a.periode_mengajar, a.semester, b.namaguru, c.kelas, c.namakelas, d.namamapel
+                FROM tb_mengajar a
+                INNER JOIN tb_guru b ON a.nip = b.nip
+                INNER JOIN tb_kelas c ON a.kodekelas = c.kodekelas
+                INNER JOIN tb_mapel d ON a.kodemapel = d.kodemapel
+                WHERE a.idmengajar = '" . $bawa . "'";
+        $detil_guru = $this->db->query($strq_detail_guru)->row_array();
+
+        $strq_np = "SELECT
+                a.nis, a.jenis, a.idkd, a.nilai
+                FROM tb_nilai a
+                WHERE a.idmengajar = '" . $bawa . "'
+                GROUP BY a.nis, a.jenis, a.idkd";
+
+
+        $strq_kd = "SELECT
+                b.idkd, b.kodekd
+                FROM tb_nilai a
+                INNER JOIN tb_kompdasar b ON a.idkd = b.idkd
+                WHERE a.idmengajar = '" . $bawa . "' AND b.jenis = 'P' 
+                GROUP BY a.idkd";
+
+        $strq_siswa = "SELECT
+                b.nis, b.namasiswa
+                FROM tb_mengajar a
+                INNER JOIN tb_siswa b ON a.kodekelas = b.kodekelas
+                WHERE a.idmengajar = '" . $bawa . "'";
+
+        $queri_np = $this->db->query($strq_np)->result_array();
+        $queri_kd = $this->db->query($strq_kd)->result_array();
+        $jml_kd = $this->db->query($strq_kd)->num_rows();
+        $queri_siswa = $this->db->query($strq_siswa)->result_array();
+
+        $data_np = [];
+        foreach ($queri_np as $a) {
+            $idx1 = $a['nis'];
+            $idx2 = $a['jenis'];
+            $idx3 = $a['idkd'];
+            if ($a['jenis'] == "t") {
+                $data_np[$idx1][$idx2] = $a['nilai'];
+            } else if ($a['jenis'] == "a") {
+                $data_np[$idx1][$idx2] = $a['nilai'];
+            } else {
+                $data_np[$idx1][$idx2][$idx3] = $a['nilai'];
+            }
+        }
+
+        $html = '<p align="left"><b>REKAP NILAI PENGETAHUAN</b>
+                <br>
+                Mata Pelajaran : ' . $detil_guru['namamapel'] . '<br/> Kelas : ' . $detil_guru['kelas'] . ' ' . $detil_guru['namakelas'] . '<br/> Guru : ' . $detil_guru['namaguru'] . '. <br/> Tahun Pelajaran ' . $detil_guru['periode_mengajar'] . ' <br/> Semester : ' . $detil_guru['semester'] . '<hr style="border: solid 1px #000; margin-top: -10px"></p>';
+
+        $html .= '<table class="table"><tr><td rowspan="2">Nama</td><td colspan="' . $jml_kd . '">NH</td><td rowspan="2">Rata-rata NH</td><td rowspan="2">PTS</td><td rowspan="2">PAS</td><td rowspan="2">Nilai Akhir</td></tr><tr>';
+
+        foreach ($queri_kd as $k) {
+            $html .= '<td>' . $k['kodekd'] . '</td>';
+        }
+
+        $html .= '</tr>';
+
+        foreach ($queri_siswa as $s) {
+            $idxs = $s['nis'];
+            $html .= '<tr><td>' . $s['namasiswa'] . '</td>';
+            $jml_nilai_kd = 0;
+            foreach ($queri_kd as $k) {
+                $idxk = $k['idkd'];
+                $nilai_kd = !empty($data_np[$idxs]['h'][$idxk]) ? number_format($data_np[$idxs]['h'][$idxk]) : 0;
+                $jml_nilai_kd += $nilai_kd;
+
+                $html .= '<td>' . $nilai_kd . '</td>';
+            }
+            if ($jml_kd > 0) {
+                $rata_rata_nilai_kd = number_format($jml_nilai_kd / $jml_kd);
+            } else {
+                $rata_rata_nilai_kd = 0;
+            }
+            $nilai_uts = !empty($data_np[$idxs]['t']) ? number_format($data_np[$idxs]['t']) : 0;
+            $nilai_uas = !empty($data_np[$idxs]['a']) ? number_format($data_np[$idxs]['a']) : 0;
+            $html .= '<td>' . $rata_rata_nilai_kd . '</td><td>' . $nilai_uts . '</td><td>' . $nilai_uas . '</td>';
+
+            $p_h = $this->config->item('pnp_h');
+            $p_t = $this->config->item('pnp_t');
+            $p_a = $this->config->item('pnp_a');
+            $jml = $p_h + $p_t + $p_a;
+
+            $p_h = ($p_h / $jml) * 100;
+            $p_t = ($p_t / $jml) * 100;
+            $p_a = ($p_a / $jml) * 100;
+
+            $na_np = number_format((($rata_rata_nilai_kd * $p_h) + ($nilai_uts * $p_t) + ($nilai_uas * $p_a)) / 100);
+
+            $html .= '<td>' . $na_np . '</td></tr>';
+        }
+
+        $html .= '</table>';
+
+        $this->d['html'] = $html;
+        $this->load->view('nilai/cetak', $this->d);
+    }
 }

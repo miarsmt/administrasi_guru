@@ -27,6 +27,16 @@ $config['base_url'] = 'http://localhost/administrasi_guru/';
 
 $config['fonts_path'] = 'assets/font/';
 
+// =================
+// Config tambahan 
+// =================
+
+
+// config porsi nilai
+$config['pnp_h'] = 2; // porsi nilai ulangan harian
+$config['pnp_t'] = 1; // porsi nilai UTS
+$config['pnp_a'] = 1; // porsi nilai UAS
+
 /*
 |--------------------------------------------------------------------------
 | Index File

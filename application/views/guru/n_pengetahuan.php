@@ -26,6 +26,7 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <a href="<?php echo base_url(); ?>guru/ampu" class="btn btn-outline-info"><i class="fa fa-arrow-left"></i> Kembali</a>
+                    <a href="<?php echo base_url(); ?>guru/cetak/<?php echo $idmengajar; ?>" class="btn btn-outline-warning" target="_blank"><i class="fas fa-fw fa-print"></i> Cetak</a>
                 </div>
             </div>
         </div>
