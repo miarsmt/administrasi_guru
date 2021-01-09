@@ -31,7 +31,7 @@
                                 <li class="list-group-item"><a href="<?= base_url('guru/n_pengetahuan/' . $a['idmengajar']); ?>"><i class="fas fa-fw fa-chevron-right"></i> Nilai Pengetahuan</a></li>
                                 <li class="list-group-item"><a href="<?= base_url('guru/n_keterampilan/' . $a['idmengajar']); ?>"><i class="fas fa-fw fa-chevron-right"></i> Nilai Keterampilan</a></li>
                                 <li class="list-group-item"><a href="<?= base_url('guru/n_pts/' . $a['idmengajar']); ?>"><i class="fas fa-fw fa-chevron-right"></i> Penilaian Tengah Semester</a></li>
-                                <li class="list-group-item"><a href="<?= base_url('guru/n_pat/' . $a['idmengajar']); ?>"><i class="fas fa-fw fa-chevron-right"></i> Penilaian Akhir Tahun</a></li>
+                                <li class="list-group-item"><a href="<?= base_url('guru/n_pas/' . $a['idmengajar']); ?>"><i class="fas fa-fw fa-chevron-right"></i> Penilaian Akhir Semester</a></li>
                             </ul>
                         </div>
                     </div>
