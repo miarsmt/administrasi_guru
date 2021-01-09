@@ -17,6 +17,18 @@
         </div>
     <?php endif; ?>
     <div class="row">
+
+        <div class="col-md-12">
+            <div class="alert alert-warning bg-warning" style="color: #000; font-size: small;">
+                <b>Petunjuk : </b><br>
+                <ul>
+                    <li>Menu ini digunakan untuk menginput agenda kegiatan pada setiap mata pelajaran yang diampu, klik tombol <b><i>Add Agenda</i></b> untuk menyimpan data agenda.</li>
+                    <li>Pada menu ini juga terdapat menu kehadiran siswa tatap muka. Input absen dilakukan setelah menambahkan agenda kegiatan, apabila data agenda belum ada maka input absensi tidak dapat dilakukan. Silahkan klik tombol <b><i>Absensi Siswa</i></b> untuk menambahkan </li>
+                    <li>Tabel di bawah berisi daftar agenda kegiatan yang telah disimpan. Apabila agenda kegiatan berupa tugas, maka untuk mengupload tugas tersedia apabila terdapat label tulisan <b><i>" Tugas "</i></b> </li>
+                </ul>
+            </div>
+        </div>
+
         <?php foreach ($dtkelas as $row) : ?>
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow">

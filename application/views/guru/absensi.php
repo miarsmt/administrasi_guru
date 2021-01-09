@@ -2,11 +2,22 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">
+        <span><a href="#"><?= $title; ?></a></span>
+        <span> / <?= $subtitle; ?></span>
+    </h1>
 
     <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
 
     <div class="row">
+
+        <div class="col-lg-12">
+            <div class="alert alert-warning bg-warning" style="color: #000; font-size: small;">
+                <b>Petunjuk : </b><br>
+                Menu ini digunakan untuk menginput absensi siswa pada setiap masing-masing agenda kegiatan. Silakan klik tombol " <i class="fas fa-fw fa-edit"></i> " , dan akan muncul modal daftar siswa serta isian keterangan. Jangan lupa klik tombol <b><i>Simpan</i></b> di bagian bawah.</li>
+            </div>
+        </div>
+
         <div class="col-lg-8">
 
             <div class="card shadow md-4">
@@ -86,7 +97,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
