@@ -16,7 +16,7 @@
             <ul>
                 <li>Menu ini digunakan untuk menginput nilai pengetahuan pada mata pelajaran <b><i><?php echo $detil_mp['namamapel'] . ", kelas " . $detil_mp['kelas'] . " " . $detil_mp['namakelas']; ?>.</i></b> </li>
                 <li>Jika kompetensi dasar belum ada, silakan klik tombol <b><i>Tambah KD</i></b>. Untuk mengubah atau menghapus nama KD, silakan klik tombol "<i class="fas fa-fw fa-pencil-alt"></i>" atau "<i class="fas fa-fw fa-times"></i>". </li>
-                <li>Untuk mengisikan nilai pengetahuan pada masing-masing KD, silakan klik nama KD, dan akan muncul daftar siswa serta isian nilai. Nilai dalam <b><i>skala 1-100</i></b>. Jangan lupa klik tombol <b><i>Simpan</i></b> di sebelah bawah.</li>
+                <li>Untuk mengisikan nilai pengetahuan pada masing-masing KD, silakan pilih nama KD pada form input nilai. Nilai dalam <b><i>skala 1-100</i></b>. Jangan lupa klik tombol <b><i>Simpan</i></b> di sebelah bawah.</li>
             </ul>
         </div>
 
@@ -58,7 +58,7 @@
                         <div class="form-group row mb-4">
                             <label for="idkd" class="col-sm-3 col-form-label-sm">Kompetensi Dasar</label>
                             <div class="col-sm-9">
-                                <select name="idkd" id="idkd" class="form-control form-control-sm">
+                                <select name="idkd" id="idkd" class="form-control form-control-sm" required>
                                     <option value="">Pilih KD</option>
                                     <?php foreach ($ambil_kd as $k) : ?>
                                         <option value="<?= $k['idkd']; ?>"><?= $k['namakd']; ?></option>
@@ -157,7 +157,8 @@
 <script>
     $(function() {
         id_mengajar = <?= $detil_mp['idmengajar'] ?>;
-        view_kd(0, 0);
+        jenis = "P";
+        // view_kd(0, 0);
         list_kd();
 
         $('#list_kd li').on('click', function() {
@@ -165,30 +166,30 @@
             $(this).addClass('active');
         })
 
-        $("#f_input_nilai").on("submit", function() {
-            var data = $(this).serialize();
+        // $("#f_input_nilai").on("submit", function() {
+        //     var data = $(this).serialize();
 
-            $.ajax({
-                type: "POST",
-                data: data,
-                url: "<?= base_url('guru/simpan_nilai'); ?>",
-                dataType: 'json',
-                beforeSend: function() {
-                    $("#tbSimpan").attr("disabled", true);
-                },
-                success: function(r) {
-                    $("#tbSimpan").attr("disabled", false);
-                    if (r.status == "gagal") {
-                        noti("danger", r.data);
-                    } else {
-                        $("#modal_data").modal('hide');
-                        noti("success", r.data);
-                        // pagination("datatabel", base_url + "data_guru/datatable", []);
-                    }
-                }
-            });
-            return false;
-        });
+        //     $.ajax({
+        //         type: "POST",
+        //         data: data,
+        //         url: "<?= base_url('guru/simpan_nilai'); ?>",
+        //         dataType: 'json',
+        //         beforeSend: function() {
+        //             $("#tbSimpan").attr("disabled", true);
+        //         },
+        //         success: function(r) {
+        //             $("#tbSimpan").attr("disabled", false);
+        //             if (r.status == "gagal") {
+        //                 noti("danger", r.data);
+        //             } else {
+        //                 $("#modal_data").modal('hide');
+        //                 noti("success", r.data);
+        //                 // pagination("datatabel", base_url + "data_guru/datatable", []);
+        //             }
+        //         }
+        //     });
+        //     return false;
+        // });
 
     });
 
@@ -201,7 +202,7 @@
         $("#kode").prop("readonly", true);
         $("#nama").prop("readonly", true);
         $("#semester").prop("readonly", true);
-        $("#tbSimpan").prop("disabled", true);
+        // $("#tbSimpan").prop("disabled", true);
         $("#kode").val('');
         $("#nama").val('');
         $("#semester").val('');
@@ -220,7 +221,7 @@
                 $("#kode").prop("readonly", false);
                 $("#nama").prop("readonly", false);
                 $("#semester").prop("readonly", false);
-                $("#tbSimpan").prop("disabled", false);
+                // $("#tbSimpan").prop("disabled", false);
             }
         });
         return false;
@@ -232,7 +233,7 @@
         $.ajax({
             type: "POST",
             data: data,
-            url: "<?= base_url('guru/simpankd/') ?>" + id_mengajar,
+            url: "<?= base_url('guru/simpankd/') ?>" + id_mengajar + "/" + jenis,
             dataType: 'json',
             beforeSend: function() {
                 $("#tbSimpanKd").attr("disabled", true);
@@ -282,8 +283,7 @@
                 var h = '';
                 if (data.length > 0) {
                     $.each(data, function(i, v) {
-                        h += '<li class="list-group-item">' +
-                            '<a href="#" onclick="return view_kd(<?= $detil_mp['kodekelas']; ?>, ' + v.idkd + ');">(' + v.kodekd + ') ' + v.namakd + '</a>' +
+                        h += '<li class="list-group-item">(' + v.kodekd + ') ' + v.namakd + '</a>' +
                             '<div class="pull-right">' +
                             '<a href="#" onclick="return edit(' + v.idkd + ');" class="btn btn-sm btn-outline-success"><i class="fas fa-fw fa-pencil-alt"></i></a>' +
                             ' <a href="#" onclick="return hapus(' + v.idkd + ');" class="btn btn-sm btn-outline-danger tombol-hapus"><i class="fas fa-fw fa-times"></i></a>' +
@@ -299,50 +299,50 @@
         });
     }
 
-    function view_kd(kelas, id, jenis = 'h') {
+    // function view_kd(kelas, id, jenis = 'h') {
 
-        if (id == 0 && kelas == 0) {
-            $("#load_nilai").html('<div class="alert alert-warning">Silakan pilih KD di samping</div>');
-        } else {
-            $("#idkd").val(id);
-            $("#jenis").val(jenis);
+    //     if (id == 0 && kelas == 0) {
+    //         $("#load_nilai").html('<div class="alert alert-warning">Silakan pilih KD di samping</div>');
+    //     } else {
+    //         $("#idkd").val(id);
+    //         $("#jenis").val(jenis);
 
-            $("#load_nilai").html("Loading...");
-            $.getJSON("<?= base_url(); ?>/guru/ambil_siswa/" + kelas + "/" + id + "/" + jenis, function(data) {
-                $("#load_nilai").show('slow');
-                html = '<table class="table table-condensed table-bordered table-hover">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th width="10%">No</th>' +
-                    '<th width="60%">Nama</th>' +
-                    '<th width="30%">Nilai</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>';
-                var i = 1;
-                $.each(data.data, function(k, v) {
-                    html += '<tr>' +
-                        '<td>' + i + '</td>' +
-                        '<td>' + v.namasiswa + '</td>' +
-                        '<td>' +
-                        '<input name="nis[]" type="hidden" value="' + v.nis + '">' +
-                        '<input name="nilai[]" type="number" min="0" max="100" class="form-control form-control-sm" value="' + v.nilai + '" required>' +
-                        '</td>' +
-                        '</tr>';
-                    i++;
-                });
-                html += '</tbody>' +
-                    '</table>' +
-                    '<p>' +
-                    '<button type="submit" class="btn btn-outline-success" id="tbSimpan">' +
-                    '<i class="fas fa-fw fa-check-circle"></i> Simpan</button> &nbsp; ' +
-                    '<a href="#" class="btn btn-outline-warning" onclick="return view_kd(0, 0);">' +
-                    '<i class="fas fa-fw fa-minus-circle"></i> Batal</a>' +
-                    '</p>';
-                $("#load_nilai").html(html);
-            });
+    //         $("#load_nilai").html("Loading...");
+    //         $.getJSON("<?= base_url(); ?>/guru/ambil_siswa/" + kelas + "/" + id + "/" + jenis, function(data) {
+    //             $("#load_nilai").show('slow');
+    //             html = '<table class="table table-condensed table-bordered table-hover">' +
+    //                 '<thead>' +
+    //                 '<tr>' +
+    //                 '<th width="10%">No</th>' +
+    //                 '<th width="60%">Nama</th>' +
+    //                 '<th width="30%">Nilai</th>' +
+    //                 '</tr>' +
+    //                 '</thead>' +
+    //                 '<tbody>';
+    //             var i = 1;
+    //             $.each(data.data, function(k, v) {
+    //                 html += '<tr>' +
+    //                     '<td>' + i + '</td>' +
+    //                     '<td>' + v.namasiswa + '</td>' +
+    //                     '<td>' +
+    //                     '<input name="nis[]" type="hidden" value="' + v.nis + '">' +
+    //                     '<input name="nilai[]" type="number" min="0" max="100" class="form-control form-control-sm" value="' + v.nilai + '" required>' +
+    //                     '</td>' +
+    //                     '</tr>';
+    //                 i++;
+    //             });
+    //             html += '</tbody>' +
+    //                 '</table>' +
+    //                 '<p>' +
+    //                 '<button type="submit" class="btn btn-outline-success" id="tbSimpan">' +
+    //                 '<i class="fas fa-fw fa-check-circle"></i> Simpan</button> &nbsp; ' +
+    //                 '<a href="#" class="btn btn-outline-warning" onclick="return view_kd(0, 0);">' +
+    //                 '<i class="fas fa-fw fa-minus-circle"></i> Batal</a>' +
+    //                 '</p>';
+    //             $("#load_nilai").html(html);
+    //         });
 
-        }
-        return false;
-    }
+    //     }
+    //     return false;
+    // }
 </script>
