@@ -94,6 +94,7 @@ class Guru_model extends CI_Model
         $this->db->where('tb_mengajar.kodekelas', $idkelas);
         $this->db->where('tb_mengajar.kodemapel', $kdmapel);
         $this->db->where('tb_mengajar.nip', '11147');
+        $this->db->where('tb_agenda.status_absen', 0);
         $result = $this->db->get();
         return $result->result_array();
     }
@@ -129,7 +130,6 @@ class Guru_model extends CI_Model
     public function delkomp($id)
     {
         $this->db->delete('tb_kompdasar', ['idkd' => $id]);
-        $this->db->delete('tb_agenda', ['idkd' => $id]);
         $this->db->delete('tb_nilai', ['idkd' => $id]);
         $this->db->delete('tb_nilai_ket', ['idkd' => $id]);
         return true;
