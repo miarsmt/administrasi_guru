@@ -14,15 +14,15 @@
                 <div class="card-body">
                     <?= form_open_multipart('user/edit'); ?>
                     <div class="form-group row">
-                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <label for="namauser" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="email" name="email" value="<?= $user['email']; ?>" readonly>
+                            <input type="text" class="form-control" id="namauser" name="namauser" value="<?= $user['namauser']; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Full name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" value="<?= $user['name']; ?>">
+                            <input type="text" class="form-control" id="name" name="name" value="<?= $user['namalengkapuser']; ?>">
                             <?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                     </div>
@@ -31,7 +31,11 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <img src="<?= base_url('assets/img/profile/') . $user['image']; ?>" class="img-thumbnail">
+                                    <?php if ($user['avataruser'] == null) : ?>
+                                        <img src="<?= base_url('assets/img/profile/default.jpg'); ?>" class="img-thumbnail">
+                                    <?php else : ?>
+                                        <img src="<?= base_url('assets/img/profile/') . $user['avataruser']; ?>" class="img-thumbnail">
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="custom-file">

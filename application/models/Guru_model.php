@@ -9,7 +9,7 @@ class Guru_model extends CI_Model
         $this->db->from('tb_mengajar');
         $this->db->join('tb_kelas', 'tb_kelas.kodekelas = tb_mengajar.kodekelas', 'left');
         $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_mengajar.kodemapel', 'left');
-        $this->db->where('tb_mengajar.nip = 11147');
+        $this->db->where('tb_mengajar.nip', $this->session->userdata('namauser'));
         $result = $this->db->get();
         return $result->result_array();
     }
@@ -42,7 +42,7 @@ class Guru_model extends CI_Model
         $this->db->join('tb_kelas', 'tb_kelas.kodekelas = tb_mengajar.kodekelas', 'left');
         $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_mengajar.kodemapel', 'left');
         $this->db->join('tb_kompdasar', 'tb_kompdasar.idkd = tb_agenda.idkd', 'left');
-        $this->db->where('tb_mengajar.nip', '11147');
+        $this->db->where('tb_mengajar.nip', $this->session->userdata('namauser'));
         $result = $this->db->get();
         return $result->result_array();
     }
@@ -93,7 +93,7 @@ class Guru_model extends CI_Model
         $this->db->join('tb_mapel', 'tb_mapel.kodemapel = tb_mengajar.kodemapel', 'left');
         $this->db->where('tb_mengajar.kodekelas', $idkelas);
         $this->db->where('tb_mengajar.kodemapel', $kdmapel);
-        $this->db->where('tb_mengajar.nip', '11147');
+        $this->db->where('tb_mengajar.nip', $this->session->userdata('namauser'));
         $this->db->where('tb_agenda.status_absen', 0);
         $result = $this->db->get();
         return $result->result_array();

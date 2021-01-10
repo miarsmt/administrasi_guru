@@ -13,28 +13,34 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-light mb-4">Login Page</h1>
+                                    <h1 class="h4 text-light">SIADMINGUR</h1>
+                                    <p class="text-light mb-4">Sistem Informasi Administrasi Guru SMK PASIM Plus</p>
                                     <?= $this->session->flashdata('message'); ?>
                                 </div>
-                                <form class="user" method="POST" action="<?= base_url('auth'); ?>">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user fm-input" id="email" name="email" value="<?= set_value('email'); ?>" placeholder="Enter Email Address...">
-                                        <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="<?= base_url('assets/img/logo.png'); ?>" class="card-img pt-1" height="120px">
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user fm-input" id="password" name="password" placeholder="Password">
-                                        <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    <div class="col-md-9">
+                                        <form class="user" method="POST" action="<?= base_url('auth'); ?>">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-user fm-input" id="username" name="username" value="<?= set_value('username'); ?>" placeholder="Username">
+                                                <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control form-control-user fm-input" id="password" name="password" placeholder="Password">
+                                                <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-user btn-block bg-gradient-primary">
+                                                Login
+                                            </button>
+                                        </form>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block bg-gradient-primary">
-                                        Login
-                                    </button>
-                                </form>
-                                <hr>
-                                <div class="text-center">
-                                    <a class="small" href="<?= base_url('auth/forgotPassword'); ?>">Forgot Password?</a>
                                 </div>
-                                <div class="text-center">
-                                    <a class="small" href="<?= base_url('auth/registration'); ?>">Create an Account</a>
+
+                                <hr>
+                                <div class="text-center text-muted small">
+                                    Copyright &copy; 2020. <a href="#">SMK PASIM Plus Kota Sukabumi</a>
                                 </div>
                             </div>
                         </div>

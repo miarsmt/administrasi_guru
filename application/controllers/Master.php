@@ -54,7 +54,7 @@ class Master extends CI_Controller
                 'notelpseluler' => $this->input->post('notelp', true),
                 'emailguru'    => $this->input->post('emailguru', true),
                 'kodejurusan'   => $this->input->post('kodejurusan', true),
-                'iduser'        => $this->session->userdata('role_id'),
+                'iduser'        => $this->session->userdata('iduser'),
                 'is_active'     => $this->input->post('is_active', true)
             ];
 
@@ -179,7 +179,7 @@ class Master extends CI_Controller
                 'kodejurusan' => $this->input->post('kodejur', true),
                 'namajurusan' => $this->input->post('namajur', true),
                 'nip'         => $this->input->post('nip', true),
-                'iduser'      => $this->session->userdata('role_id')
+                'iduser'      => $this->session->userdata('iduser')
             ];
 
             $this->master->save_jurusan($data);
@@ -262,7 +262,7 @@ class Master extends CI_Controller
                 'kelas'     => $this->input->post('kls', true),
                 'angkatankelas' => $this->input->post('angkatan', true),
                 'is_active' => $this->input->post('is_active', true),
-                'iduser'    => $this->session->userdata('role_id')
+                'iduser'    => $this->session->userdata('iduser')
             ];
 
             $this->master->save_kelas($data);
@@ -360,7 +360,7 @@ class Master extends CI_Controller
                 'kodejurusan'  => $this->input->post('kodejur', true),
                 'semester_aktif' => $this->input->post('semester', true),
                 'is_active'    => 1,
-                'iduser'       => $this->session->userdata('role_id')
+                'iduser'       => $this->session->userdata('iduser')
             ];
 
             $this->master->save_siswa($data);
@@ -540,7 +540,7 @@ class Master extends CI_Controller
                 'idkelompokmapel' => $this->input->post('kelompok', true),
                 'kodejurusan'   => $this->input->post('kodejur', true),
                 'kkm'           => $this->input->post('kkm', true),
-                'iduser'        => $this->session->userdata('role_id')
+                'iduser'        => $this->session->userdata('iduser')
             ];
 
             $this->master->save_mapel($data);

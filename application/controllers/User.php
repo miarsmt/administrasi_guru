@@ -42,7 +42,7 @@ class User extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $name = $this->input->post('name', true);
-            $email = $this->input->post('email');
+            $uname = $this->input->post('namauser');
 
             //cek jika ada upload gambar
             $upload_image = $_FILES['image']['name'];
@@ -61,15 +61,15 @@ class User extends CI_Controller
                     }
 
                     $new_image = $this->upload->data('file_name');
-                    $this->db->set('image', $new_image);
+                    $this->db->set('avataruser', $new_image);
                 } else {
                     echo $this->upload->display_errors();
                 }
             }
 
-            $this->db->set('name', $name);
-            $this->db->where('email', $email);
-            $this->db->update('user');
+            $this->db->set('namalengkapuser', $name);
+            $this->db->where('namauser', $uname);
+            $this->db->update('user_login');
             $this->session->set_flashdata('message', 'Profile anda telah berhasil di-ubah!');
             redirect('user');
         }
@@ -103,11 +103,11 @@ class User extends CI_Controller
             $this->load->view('user/change_password', $data);
             $this->load->view('templates/footer');
         } else {
-            $current_password = $this->input->post('current_password', true);
-            $new_password = $this->input->post('new_password1', true);
+            $current_password = md5($this->input->post('current_password', true));
+            $new_password = md5($this->input->post('new_password1', true));
 
-            if (!password_verify($current_password, $data['user']['password'])) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Passwrod lama salah!</div>');
+            if ($current_password != $data['user']['passuser']) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password lama salah!</div>');
                 redirect('user/changepassword');
             } else {
                 if ($current_password == $new_password) {
@@ -115,9 +115,9 @@ class User extends CI_Controller
                     redirect('user/changepassword');
                 } else {
                     // password ok
-                    $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+                    // $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 
-                    $this->user->changePass($password_hash);
+                    $this->user->changePass($new_password);
 
                     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password telah berhasil di-ubah!</div>');
                     redirect('user/changepassword');

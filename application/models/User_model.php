@@ -8,6 +8,11 @@ class User_model extends CI_Model
         return $this->db->get_where('user', $data)->row_array();
     }
 
+    public function getUserByUname($data)
+    {
+        return $this->db->get_where('user_login', $data)->row_array();
+    }
+
     public function getUserByEmailActive($email)
     {
         return $this->db->get_where('user', ['email' => $email, 'is_active' => 1])->row_array();
@@ -42,11 +47,11 @@ class User_model extends CI_Model
         $this->db->update('user');
     }
 
-    public function changePass($password_hash)
+    public function changePass($new_password)
     {
-        $this->db->set('password', $password_hash);
-        $this->db->where('email', $this->session->userdata('email'));
-        $this->db->update('user');
+        $this->db->set('passuser', $new_password);
+        $this->db->where('namauser', $this->session->userdata('namauser'));
+        $this->db->update('user_login');
     }
 
     public function deleteUser($data)

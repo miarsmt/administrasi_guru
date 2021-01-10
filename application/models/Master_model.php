@@ -45,7 +45,7 @@ class Master_model extends CI_Model
             'notelpseluler' => $this->input->post('notelp', true),
             'emailguru'    => $this->input->post('emailguru', true),
             'kodejurusan'   => $this->input->post('kodejurusan', true),
-            'iduser'        => $this->session->userdata('role_id'),
+            'iduser'        => $this->session->userdata('iduser'),
             'is_active'     => $this->input->post('is_active', true)
         ];
 
@@ -90,7 +90,7 @@ class Master_model extends CI_Model
         $data = [
             'namajurusan' => $this->input->post('namajur', true),
             'nip'         => $this->input->post('nip', true),
-            'iduser'      => $this->session->userdata('role_id')
+            'iduser'      => $this->session->userdata('iduser')
         ];
 
         $this->db->where('kodejurusan', $this->input->post('kode'));
@@ -152,7 +152,7 @@ class Master_model extends CI_Model
             'kelas'       => $this->input->post('kls', true),
             'angkatankelas' => $this->input->post('angkatan', true),
             'is_active'   => $this->input->post('is_active', true),
-            'iduser'      => $this->session->userdata('role_id')
+            'iduser'      => $this->session->userdata('iduser')
         ];
 
         $this->db->where('kodekelas', $this->input->post('kode'));
@@ -216,7 +216,7 @@ class Master_model extends CI_Model
             'kodejurusan'  => $this->input->post('kodejur', true),
             'semester_aktif' => $this->input->post('semester', true),
             'is_active'    => 1,
-            'iduser'       => $this->session->userdata('role_id')
+            'iduser'       => $this->session->userdata('iduser')
         ];
 
         $this->db->where('nis', $this->input->post('dnis'));
@@ -279,7 +279,7 @@ class Master_model extends CI_Model
             'idkelompokmapel' => $this->input->post('kelompok', true),
             'kodejurusan'   => $this->input->post('kodejur', true),
             'kkm'           => $this->input->post('kkm', true),
-            'iduser'        => $this->session->userdata('role_id')
+            'iduser'        => $this->session->userdata('iduser')
         ];
 
         $this->db->where('kodemapel', $this->input->post('kode'));
