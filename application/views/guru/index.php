@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <a href="<?= base_url('guru/addagenda/' . $row['idmengajar']); ?>" class="btn btn-sm btn-block btn-outline-primary mt-2">Add Agenda</a>
-                        <a href="<?= base_url('guru/absensi/' . $row['idmengajar']); ?>" class="btn btn-sm btn-block btn-outline-success mt-2">Absensi Siswa</a>
+                        <a href="<?= base_url('guru/absensi/' . $row['idmengajar']); ?>" class="btn btn-sm btn-block btn-outline-success mt-2">Input Absensi</a>
                     </div>
                 </div>
             </div>
