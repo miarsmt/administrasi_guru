@@ -7,6 +7,12 @@ use PhpOffice\PhpSpreadsheet\Reader\Csv;
 
 class Import extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        is_logged_in();
+    }
+
     public function upload()
     {
         $file_mimes = ['application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
