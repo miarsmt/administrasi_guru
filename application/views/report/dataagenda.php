@@ -46,7 +46,7 @@ $pdf->SetFont('helvetica', 'BU', 13);
 $pdf->Cell(0, 10, $title, 0, 0, 'C');
 $pdf->Ln(25);
 
-$pdf->SetLeftMargin(35);
+$pdf->SetLeftMargin(60);
 $pdf->Ln(15);
 $pdf->SetFont('helvetica', '', 10);
 $pdf->Cell(60, 10, 'NIP', 0, 0, 'L');

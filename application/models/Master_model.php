@@ -332,10 +332,11 @@ class Master_model extends CI_Model
 
     public function getAmpu($kelas, $semeter)
     {
-        $this->db->select('tb_mengajar.*, tb_kelas.kelas, tb_kelas.namakelas, tb_guru.kodeguru, tb_guru.namaguru, tb_mapel.namamapel, tb_mapel.kelompok');
+        $this->db->select('tb_mengajar.*, tb_kelas.kelas, tb_kelas.namakelas, tb_guru.kodeguru, tb_guru.namaguru, tb_mapel.namamapel, tb_mapel_kelompok.namakelompokmapel');
         $this->db->from('tb_mengajar');
         $this->db->join('tb_kelas', 'tb_mengajar.kodekelas = tb_kelas.kodekelas', 'left');
         $this->db->join('tb_mapel', 'tb_mengajar.kodemapel = tb_mapel.kodemapel', 'left');
+        $this->db->join('tb_mapel_kelompok', 'tb_mapel.idkelompokmapel = tb_mapel_kelompok.idkelompokmapel', 'left');
         $this->db->join('tb_guru', 'tb_mengajar.nip = tb_guru.nip', 'left');
         $this->db->where('tb_kelas.kelas', $kelas);
         $this->db->where('tb_mengajar.semester', $semeter);

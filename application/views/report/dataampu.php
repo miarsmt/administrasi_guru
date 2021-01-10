@@ -96,7 +96,7 @@ if (!empty($ampu)) {
         $pdf->MultiCell(200, 15, $key->namamapel, 'LRT', 'L');
         $curA = $pdf->GetY();
         $pdf->SetXY($pdf->GetX() + 410, $curY);
-        $pdf->MultiCell(150, 15, $key->kelompok, 'lRT', "L");
+        $pdf->MultiCell(150, 15, $key->namakelompokmapel, 'lRT', "L");
         $curJ = $pdf->GetY();
         $pdf->SetXY($pdf->GetX() + 560, $curY);
         $pdf->MultiCell(100, 15, $key->kelas . " " . $key->namakelas, 'LRT', "L");

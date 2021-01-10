@@ -67,7 +67,7 @@ $pdf->Cell(150, 15, "Nama Siswa", 1, "LR", "C", true);
 $pdf->Cell(150, 15, "Tempat, Tanggal Lahir", 1, "LR", "C", true);
 $pdf->Cell(150, 15, "Alamat", 1, "LR", "C", true);
 $pdf->Cell(100, 15, "Asal Sekolah", 1, "LR", "C", true);
-$pdf->Cell(80, 15, "Status", 1, "LR", "C", true);
+$pdf->Cell(80, 15, "Semester Aktif", 1, "LR", "C", true);
 if (!empty($siswa)) {
     $pdf->SetLeftMargin(45);
     $pdf->Ln();
@@ -76,11 +76,7 @@ if (!empty($siswa)) {
     $curN = 0;
     $akhir = 0;
     foreach ($siswa as $sw) {
-        if ($sw->is_active == 1) {
-            $active = 'Aktif';
-        } else {
-            $active = 'Tidak Aktif';
-        }
+
 
         $no++;
         $yAwal = $pdf->GetY();
@@ -102,7 +98,7 @@ if (!empty($siswa)) {
         $pdf->MultiCell(100, 15, $sw->asalsekolah, 'LRT', "L");
         $curS = $pdf->GetY();
         $pdf->SetXY($pdf->GetX() + 670, $curY);
-        $pdf->MultiCell(80, 15, $active, 'LRT', "C");
+        $pdf->MultiCell(80, 15, $sw->semester_aktif, 'LRT', "C");
         if (($curA >= $curJ) && ($curA >= $curS)) {
             $curN = $curA;
         } else if (($curJ >= $curA) && ($curJ >= $curS)) {
