@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2021 at 05:24 AM
+-- Generation Time: Jan 10, 2021 at 10:35 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -114,7 +114,7 @@ CREATE TABLE `tb_guru` (
   `notelpseluler` char(15) DEFAULT NULL,
   `emailguru` varchar(30) DEFAULT NULL,
   `kodejurusan` char(10) NOT NULL,
-  `iduser` int(11) DEFAULT NULL,
+  `iduser` varchar(20) DEFAULT NULL,
   `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `is_active` int(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -160,7 +160,7 @@ INSERT INTO `tb_guru` (`nip`, `kodeguru`, `namaguru`, `jeniskelamin`, `tempatlah
 ('11144', 'ERICK', 'Erick Andika, M.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
 ('11145', 'AZIS', 'Azis Sumadullah, A.Md.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
 ('11146', 'SANDI', 'Sandi P C Permadi, A.Md.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2021-01-01 02:39:07', 1),
-('11147', 'IH', 'Ihsan, S.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
+('11147', NULL, 'Ihsan, S.Kom', 'Laki-laki', 'Sukabumi', '1993-10-10', 'Jampang Kulon', '081345678902', 'ihsan@gmail.com', 'RPL', '0', '2021-01-10 08:01:52', 1),
 ('11148', 'WK', 'Weli Kusnadi, S.Kom, M.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
 ('11149', 'RI', 'Riki Iskandar', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
 ('11150', 'LUT', 'Lufti M Yassin, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
@@ -176,7 +176,7 @@ INSERT INTO `tb_guru` (`nip`, `kodeguru`, `namaguru`, `jeniskelamin`, `tempatlah
 ('11160', 'DY', 'Dinny Yulanda, P.Si', 'Perempuan', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
 ('11161', 'MF', 'M Fiuji Hardiansyah', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
 ('11162', 'JM', 'Joko Mulyantoro, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, '-', NULL, '2020-12-28 04:40:34', 1),
-('19950310202105003', NULL, 'Najwa Shihab', 'Perempuan', 'Sukabumi', '1995-03-10', 'Jl. Prana Kp. Babakan Jampang RT 001/RW 018', '085896600511', 'najwashihab@gmail.com', 'RPL', 1, '2021-01-03 07:57:50', 1);
+('19950310202105003', NULL, 'Najwa Shihab', 'Perempuan', 'Sukabumi', '1995-03-10', 'Jl. Prana Kp. Babakan Jampang RT 001/RW 018', '085896600511', 'najwashihab@gmail.com', 'RPL', '1', '2021-01-03 07:57:50', 1);
 
 --
 -- Triggers `tb_guru`
@@ -195,10 +195,10 @@ CREATE TRIGGER `auto_user_guru` AFTER INSERT ON `tb_guru` FOR EACH ROW BEGIN
      END;
     ELSE
      BEGIN
-      set nextNo = CONCAT(formatID, LPAD(lastNo + 1, 3, '0'));
+      set nextNo = CONCAT(formatID, LPAD(lastNo + 1, 5, '0'));
      END;
     END IF;
- INSERT INTO user_login (iduser, namauser, namalengkapuser, passuser, role_id, is_active, kodejurusan,semester_aktif) VALUES (nextNo, new.nip, new.namaguru, md5(new.nip), 3, 1, new.kodejurusan,'-' );
+ INSERT INTO user_login (iduser, namauser, namalengkapuser, passuser, role_id, is_active, kodejurusan,semester_aktif) VALUES (nextNo, new.nip, new.namaguru, md5(new.nip), 2, 1, new.kodejurusan,'-' );
 END
 $$
 DELIMITER ;
@@ -213,7 +213,7 @@ CREATE TABLE `tb_jurusan` (
   `kodejurusan` char(10) NOT NULL,
   `namajurusan` varchar(50) NOT NULL,
   `nip` varchar(30) NOT NULL,
-  `iduser` int(11) NOT NULL,
+  `iduser` varchar(20) NOT NULL,
   `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -222,12 +222,12 @@ CREATE TABLE `tb_jurusan` (
 --
 
 INSERT INTO `tb_jurusan` (`kodejurusan`, `namajurusan`, `nip`, `iduser`, `tglperbaharui`) VALUES
-('AKL', 'Akuntansi dan Keuangan Lembaga', '11143', 1, '2020-12-28 04:49:35'),
-('ANM', 'Animasi', '11157', 1, '2020-12-28 04:49:51'),
-('OTKP', 'Otomatisasi Tata Kelola Perkantoran', '11135', 1, '2020-12-28 04:50:04'),
-('PSPT', 'Produksi dan Siaran Program Televisi', '11150', 1, '2020-12-28 04:50:14'),
-('RPL', 'Rekayasa Perangkat Lunak', '11148', 1, '2020-12-28 04:50:24'),
-('TKJ', 'Teknik Komputer dan Jaringan', '11145', 1, '2020-12-28 04:50:36');
+('AKL', 'Akuntansi dan Keuangan Lembaga', '11143', '1', '2020-12-28 04:49:35'),
+('ANM', 'Animasi', '11157', '1', '2020-12-28 04:49:51'),
+('OTKP', 'Otomatisasi Tata Kelola Perkantoran', '11135', '1', '2020-12-28 04:50:04'),
+('PSPT', 'Produksi dan Siaran Program Televisi', '11150', '1', '2020-12-28 04:50:14'),
+('RPL', 'Rekayasa Perangkat Lunak', '11148', '1', '2020-12-28 04:50:24'),
+('TKJ', 'Teknik Komputer dan Jaringan', '11145', '1', '2020-12-28 04:50:36');
 
 -- --------------------------------------------------------
 
@@ -242,7 +242,7 @@ CREATE TABLE `tb_kelas` (
   `kelas` char(3) DEFAULT NULL,
   `angkatankelas` int(11) NOT NULL,
   `is_active` int(1) DEFAULT NULL,
-  `iduser` int(11) DEFAULT NULL,
+  `iduser` varchar(20) DEFAULT NULL,
   `tglperbaharui` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -251,15 +251,15 @@ CREATE TABLE `tb_kelas` (
 --
 
 INSERT INTO `tb_kelas` (`kodekelas`, `kodejurusan`, `namakelas`, `kelas`, `angkatankelas`, `is_active`, `iduser`, `tglperbaharui`) VALUES
-('XIAKL', 'AKL', 'AKL', 'XI', 2019, 1, 1, '2020-12-03 14:28:14'),
-('XIANM', 'ANM', 'ANIMASI', 'XI', 2019, 1, 1, '2021-01-01 11:16:34'),
-('XIOTKP1', 'OTKP', 'OTKP 1', 'XI', 2019, 1, 1, '2020-12-27 16:07:00'),
-('XIOTKP2', 'OTKP', 'OTKP 2', 'XI', 2019, 1, 1, '2020-12-27 16:07:25'),
-('XIPSPT1', 'PSPT', 'PSPT 1', 'XI', 2019, 1, 1, '2020-12-27 16:06:02'),
-('XIPSPT2', 'PSPT', 'PSPT 2', 'XI', 2019, 1, 1, '2020-12-27 16:06:31'),
-('XIRPL', 'RPL', 'RPL', 'XI', 2019, 1, 1, '2020-12-27 16:04:20'),
-('XITKJ', 'TKJ', 'TKJ', 'XI', 2019, 1, 1, '2020-12-27 16:04:58'),
-('XTKJ', 'TKJ', 'TKJ', 'X', 2020, 1, 1, '2021-01-01 17:34:14');
+('XIAKL', 'AKL', 'AKL', 'XI', 2019, 1, '1', '2020-12-03 14:28:14'),
+('XIANM', 'ANM', 'ANIMASI', 'XI', 2019, 1, '1', '2021-01-01 11:16:34'),
+('XIOTKP1', 'OTKP', 'OTKP 1', 'XI', 2019, 1, '1', '2020-12-27 16:07:00'),
+('XIOTKP2', 'OTKP', 'OTKP 2', 'XI', 2019, 1, '1', '2020-12-27 16:07:25'),
+('XIPSPT1', 'PSPT', 'PSPT 1', 'XI', 2019, 1, '1', '2020-12-27 16:06:02'),
+('XIPSPT2', 'PSPT', 'PSPT 2', 'XI', 2019, 1, '1', '2020-12-27 16:06:31'),
+('XIRPL', 'RPL', 'RPL', 'XI', 2019, 1, '1', '2020-12-27 16:04:20'),
+('XITKJ', 'TKJ', 'TKJ', 'XI', 2019, 1, '1', '2020-12-27 16:04:58'),
+('XTKJ', 'TKJ', 'TKJ', 'X', 2020, 1, '1', '2021-01-01 17:34:14');
 
 -- --------------------------------------------------------
 
@@ -318,7 +318,7 @@ CREATE TABLE `tb_mapel` (
   `idkelompokmapel` char(5) NOT NULL,
   `kodejurusan` varchar(30) NOT NULL,
   `kkm` double DEFAULT NULL,
-  `iduser` varchar(15) DEFAULT NULL
+  `iduser` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -714,7 +714,8 @@ INSERT INTO `tb_siswa` (`nis`, `namasiswa`, `nisn`, `jeniskelamin`, `tempatlahir
 ('171800029', 'Yuni Yuningsih', NULL, 'Perempuan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23'),
 ('171800030', 'Maulana Yusuf', NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23'),
 ('171800031', 'Ahmad Ziriel', NULL, 'Laki-laki', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'XIRPL', 'RPL', 4, 1, NULL, '2020-12-27 16:01:23'),
-('202100100', 'Puspita Negara Sitompul', '202100100', 'Perempuan', 'Sukabumi', '2005-04-11', 'Sukabumi', '-', 'puspita@gmail.com', '-', '2020-06-13', '-', '-', 'XTKJ', 'TKJ', 2, 1, '1', '2021-01-03 07:22:26');
+('202100100', 'Puspita Negara Sitompul', '202100100', 'Perempuan', 'Sukabumi', '2005-04-11', 'Sukabumi', '-', 'puspita@gmail.com', '-', '2020-06-13', '-', '-', 'XTKJ', 'TKJ', 2, 1, '1', '2021-01-03 07:22:26'),
+('202100101', 'Rama Aprilian', '202100101', 'Laki-laki', 'Sukabumi', '2002-12-08', 'Sukabumi Jawa Barat', '081398028375', 'ramaaprilian@gmail.com', '-', '2020-06-13', '-', '-', 'XTKJ', 'TKJ', 2, 1, 'USR-2021003', '2021-01-10 08:12:24');
 
 --
 -- Triggers `tb_siswa`
@@ -733,7 +734,7 @@ CREATE TRIGGER `auto_user_siswa` AFTER INSERT ON `tb_siswa` FOR EACH ROW BEGIN
      END;
     ELSE
      BEGIN
-      set nextNo = CONCAT(formatID, LPAD(lastNo + 1, 3, '0'));
+      set nextNo = CONCAT(formatID, LPAD(lastNo + 1, 5, '0'));
      END;
     END IF;
  INSERT INTO user_login (iduser, namauser, namalengkapuser, passuser, role_id, is_active, kodejurusan,semester_aktif) VALUES (nextNo, new.nis, new.namasiswa, md5(new.nis), 5, 1, new.kodejurusan,new.semester_aktif );
@@ -834,7 +835,7 @@ CREATE TABLE `user_login` (
   `tglperbaharui` datetime DEFAULT NULL,
   `tgllogakhir` datetime DEFAULT NULL,
   `kodejurusan` char(10) NOT NULL,
-  `semester_aktif` int(2) NOT NULL
+  `semester_aktif` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -842,8 +843,11 @@ CREATE TABLE `user_login` (
 --
 
 INSERT INTO `user_login` (`iduser`, `namauser`, `passuser`, `namalengkapuser`, `avataruser`, `role_id`, `is_active`, `tglbuat`, `tglperbaharui`, `tgllogakhir`, `kodejurusan`, `semester_aktif`) VALUES
-('USR-202100001', '19950310202105003', 'ffa034e00cad2295ad0e7c58157b596c', 'Najwa Shihab', NULL, 3, 1, '2021-01-03 07:10:59', NULL, NULL, 'RPL', 0),
-('USR-2021002', '202100100', '0c59763a42eef689bca5a2d3b990087b', 'Puspita Negara Sitompul', NULL, 5, 1, '2021-01-03 07:22:26', NULL, NULL, 'TKJ', 2);
+('USR-202100001', 'admin', '9b20cffe6c058dcd33ec10e307c6b9ef', 'Administrator Sekolah', 'marc-mintel-1iYTusNPlSk-unsplash.jpg', 1, 1, '2021-01-10 08:32:05', NULL, NULL, '-', 0),
+('USR-202100002', '202100100', '0c59763a42eef689bca5a2d3b990087b', 'Puspita Negara Sitompul', NULL, 5, 1, '2021-01-10 07:55:29', NULL, NULL, 'TKJ', 2),
+('USR-202100003', '11147', 'eed054ecd7a0a544cf73292836023ffe', 'Ihsan, S.Kom', NULL, 2, 1, '2021-01-10 08:35:53', NULL, NULL, 'RPL', 0),
+('USR-202100004', '202100101', '6f7c52c3e720fb4a30e1328f209b1f36', 'Rama Aprilian', NULL, 5, 1, '2021-01-10 08:12:24', NULL, NULL, 'TKJ', 2),
+('USR-202100005', 'kepsek', 'f6aa6aab9baca19494d21a2ceb051fb2', 'Kepala Sekolah SMK PASIM', NULL, 3, 1, '2021-01-10 09:10:47', NULL, NULL, '-', 0);
 
 -- --------------------------------------------------------
 
@@ -863,11 +867,11 @@ CREATE TABLE `user_menu` (
 
 INSERT INTO `user_menu` (`id`, `menu`, `urutan`) VALUES
 (1, 'Admin', 1),
-(2, 'User', 5),
+(2, 'User', 6),
 (3, 'Menu', 4),
 (4, 'Master', 2),
 (5, 'Guru', 3),
-(6, 'Laporan', 6);
+(6, 'Laporan', 5);
 
 -- --------------------------------------------------------
 
@@ -1165,7 +1169,7 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_role`
