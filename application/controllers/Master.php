@@ -46,13 +46,14 @@ class Master extends CI_Controller
         } else {
             $data = [
                 'nip'           => $this->input->post('nip', true),
-                'namaguru'     => $this->input->post('namaguru', true),
+                'kodeguru'      => $this->input->post('kode', true),
+                'namaguru'      => $this->input->post('namaguru', true),
                 'jeniskelamin'  => $this->input->post('jenkel', true),
                 'tempatlahir'   => $this->input->post('tempat', true),
                 'tgllahir'      => $this->input->post('tgl', true),
-                'alamatguru'   => $this->input->post('alamatguru', true),
+                'alamatguru'    => $this->input->post('alamatguru', true),
                 'notelpseluler' => $this->input->post('notelp', true),
-                'emailguru'    => $this->input->post('emailguru', true),
+                'emailguru'     => $this->input->post('emailguru', true),
                 'kodejurusan'   => $this->input->post('kodejurusan', true),
                 'iduser'        => $this->session->userdata('iduser'),
                 'is_active'     => $this->input->post('is_active', true)
@@ -73,6 +74,9 @@ class Master extends CI_Controller
         $this->form_validation->set_rules('namaguru', 'Nama guru', 'required|trim', [
             'required' => '%s tidak boleh kosong',
         ]);
+        $this->form_validation->set_rules('kode', 'Kode guru', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
         $this->form_validation->set_rules('alamatguru', 'Alamat', 'required|trim|min_length[10]', [
             'required' => '%s tidak boleh kosong',
             'min_length' => '%s minimal 10 karakter'
@@ -89,6 +93,9 @@ class Master extends CI_Controller
         $this->form_validation->set_rules('emailguru', 'Email', 'required|trim|valid_email', [
             'required' => '%s tidak boleh kosong',
             'valid_email' => '%s tidak sesuai'
+        ]);
+        $this->form_validation->set_rules('kodejurusan', 'Jurusan', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
         ]);
     }
 
@@ -120,6 +127,9 @@ class Master extends CI_Controller
     private function _rulesEditGuru()
     {
         $this->form_validation->set_rules('namaguru', 'Nama guru', 'required|trim', [
+            'required' => '%s tidak boleh kosong',
+        ]);
+        $this->form_validation->set_rules('kode', 'Kode guru', 'required|trim', [
             'required' => '%s tidak boleh kosong',
         ]);
         $this->form_validation->set_rules('alamatguru', 'Alamat', 'required|trim|min_length[10]', [

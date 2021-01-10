@@ -32,6 +32,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="kode" class="col-sm-3 col-form-label">Kode Guru</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="kode" id="kode" value="<?= set_value('kode'); ?>">
+                                    <?= form_error('kode', '<small class="text-danger">', '</small>'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="jenkel" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                                 <div class="col-sm-9">
                                     <select name="jenkel" id="jenkel" class="form-control">
@@ -87,6 +94,7 @@
                                             <option value="<?= $j['kodejurusan']; ?>"><?= $j['namajurusan']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
+                                    <?= form_error('kodejurusan', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                             </div>
                             <div class="form-group row">

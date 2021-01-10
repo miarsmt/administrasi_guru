@@ -33,6 +33,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="kode" class="col-sm-3 col-form-label">Kode Guru</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="kode" id="kode" value="<?= $dtguru['kodeguru']; ?>">
+                                    <?= form_error('kode', '<small class="text-danger">', '</small>'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="jenkel" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                                 <div class="col-sm-9">
                                     <select name="jenkel" id="jenkel" class="form-control">

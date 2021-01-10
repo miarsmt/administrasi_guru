@@ -37,13 +37,14 @@ class Master_model extends CI_Model
     public function editDataGuru()
     {
         $data = [
-            'namaguru'     => $this->input->post('namaguru', true),
+            'namaguru'      => $this->input->post('namaguru', true),
+            'kodeguru'      => $this->input->post('kode', true),
             'jeniskelamin'  => $this->input->post('jenkel', true),
             'tempatlahir'   => $this->input->post('tempat', true),
             'tgllahir'      => $this->input->post('tgl', true),
-            'alamatguru'   => $this->input->post('alamatguru', true),
+            'alamatguru'    => $this->input->post('alamatguru', true),
             'notelpseluler' => $this->input->post('notelp', true),
-            'emailguru'    => $this->input->post('emailguru', true),
+            'emailguru'     => $this->input->post('emailguru', true),
             'kodejurusan'   => $this->input->post('kodejurusan', true),
             'iduser'        => $this->session->userdata('iduser'),
             'is_active'     => $this->input->post('is_active', true)

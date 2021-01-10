@@ -28,7 +28,7 @@
                                     <th scope="col">Nama Guru</th>
                                     <th scope="col">Tempat, Tgl Lahir</th>
                                     <th scope="col">Jurusan</th>
-                                    <th scope="col">Active</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
