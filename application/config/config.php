@@ -37,6 +37,9 @@ $config['pnp_h'] = 2; // porsi nilai ulangan harian
 $config['pnp_t'] = 1; // porsi nilai UTS
 $config['pnp_a'] = 1; // porsi nilai UAS
 
+// kkm global
+$config['kkm'] = 70;
+
 /*
 |--------------------------------------------------------------------------
 | Index File
