@@ -14,7 +14,12 @@
         <div class="col-lg-12">
             <div class="alert alert-warning bg-warning" style="color: #000; font-size: small;">
                 <b>Petunjuk : </b><br>
-                Menu ini digunakan untuk menginput absensi siswa pada setiap masing-masing agenda kegiatan. Silakan klik tombol " <i class="fas fa-fw fa-edit"></i> " , dan akan muncul modal daftar siswa serta isian keterangan. Jangan lupa klik tombol <b><i>Simpan</i></b> di bagian bawah.</li>
+                <ul>
+                    <li>
+                        Menu ini digunakan untuk menginput absensi siswa pada setiap masing-masing agenda kegiatan. Silakan klik tombol " <i class="fas fa-fw fa-edit"></i> " , dan akan muncul modal daftar siswa serta isian keterangan. Jangan lupa klik tombol <b><i>Simpan</i></b> di bagian bawah.</li>
+                    </li>
+                    <li>Apabila data pada tabel kosong, artinya data agenda kegiatan belum ditambahkan. Silahkan kembali ke menu agenda kegiatan lalu klik tombol <b><i>" Add Agenda "</i></b></li>
+                </ul>
             </div>
         </div>
 
