@@ -622,7 +622,7 @@ class Guru extends CI_Controller
 
         $html = '<p align="left"><b>REKAP NILAI PENGETAHUAN</b>
                 <br>
-                Mata Pelajaran : ' . $detil_guru['namamapel'] . '<br/> Kelas : ' . $detil_guru['kelas'] . ' ' . $detil_guru['namakelas'] . '<br/> Guru : ' . $detil_guru['namaguru'] . '. <br/> Tahun Pelajaran ' . $detil_guru['periode_mengajar'] . ' <br/> Semester : ' . $detil_guru['semester'] . '<hr style="border: solid 1px #000; margin-top: -10px"></p>';
+                Mata Pelajaran : ' . $detil_guru['namamapel'] . ', Kelas : ' . $detil_guru['kelas'] . ' ' . $detil_guru['namakelas'] . ', Guru : ' . $detil_guru['namaguru'] . '. Tahun Pelajaran ' . $detil_guru['periode_mengajar'] . ', Semester : ' . $detil_guru['semester'] . '<hr style="border: solid 1px #000; margin-top: -10px"></p>';
 
         $html .= '<table class="table"><tr><td rowspan="2">Nama</td><td colspan="' . $jml_kd . '">NH</td><td rowspan="2">Rata-rata NH</td><td rowspan="2">PTS</td><td rowspan="2">PAS</td><td rowspan="2">Nilai Akhir</td></tr><tr>';
 
@@ -670,5 +670,153 @@ class Guru extends CI_Controller
 
         $this->d['html'] = $html;
         $this->load->view('nilai/cetak', $this->d);
+    }
+
+    public function cetaknk($bawa)
+    {
+        $pc_bawa = explode("-", $bawa);
+
+        $html = '';
+
+        $detil_guru = $this->db->query('SELECT
+                b.namamapel, c.kelas, c.namakelas, d.namaguru, a.semester, a.periode_mengajar
+                FROM tb_mengajar a
+                INNER JOIN tb_mapel b ON a.kodemapel = b.kodemapel
+                INNER JOIN tb_kelas c ON a.kodekelas = c.kodekelas
+                INNER JOIN tb_guru d ON a.nip = d.nip
+                WHERE b.kodemapel = "' . $pc_bawa[0] . '" AND c.kodekelas = "' . $pc_bawa[1] . '"')->row_array();
+
+        $q_nilai_harian = $this->db->query('SELECT
+                c.namasiswa, a.idkd, a.nis, a.nilai
+                FROM tb_nilai_ket a
+                LEFT JOIN tb_kompdasar b ON a.idkd = b.idkd
+                LEFT JOIN tb_siswa c ON a.nis = c.nis
+                WHERE c.kodekelas = "' . $pc_bawa[1] . '" AND b.kodemapel = "' . $pc_bawa[0] . '"
+                ORDER BY c.namasiswa ASC')->result_array();
+
+        $nilai_harian = $this->db->query('SELECT
+        b.namasiswa, a.nis, a.idkd, a.nilai
+        FROM tb_nilai_ket a
+        LEFT JOIN tb_siswa b ON a.nis = b.nis
+        LEFT JOIN tb_kompdasar c ON a.idkd = c.idkd
+        LEFT JOIN tb_mengajar d ON a.idmengajar = d.idmengajar
+        WHERE d.kodekelas = "' . $pc_bawa[1] . '" AND d.kodemapel = "' . $pc_bawa[0] . '"
+        ORDER BY b.namasiswa ASC')->result_array();
+
+        $q_kd_guru_ini = $this->db->query('SELECT a.*
+                FROM tb_kompdasar a
+                LEFT JOIN tb_mengajar b ON a.kodemapel = b.kodemapel
+                WHERE b.kodemapel = "' . $pc_bawa[0] . '"
+                AND b.kodekelas = "' . $pc_bawa[1] . '"
+                AND a.jenis = "K"')->result_array();
+
+        $d_kd = [];
+
+        if (!empty($q_kd_guru_ini)) {
+            foreach ($q_kd_guru_ini as $v) {
+                $idx = $v['idkd'];
+                $d_kd[$idx]['kode'] = $v['kodekd'];
+                $d_kd[$idx]['nama_kd'] = $v['namakd'];
+            }
+        }
+
+        $d_nilai = [];
+
+        if (!empty($nilai_harian)) {
+            foreach ($nilai_harian as $d) {
+                $idx1 = $d['nis'];
+                $idx2 = $d['idkd'];
+
+                $d_nilai[$idx1]['nama'] = $d['namasiswa'];
+                $d_nilai[$idx1]['h'][$idx2]['nilai_huruf'] = nilai_huruf($d['nilai']);
+                $d_nilai[$idx1]['h'][$idx2]['nilai_pre'] = nilai_pre($d['nilai']);
+                $d_nilai[$idx1]['h'][$idx2]['nilai_angka'] = $d['nilai'];
+            }
+        }
+
+        $jml_kd = sizeof($d_kd);
+
+        $html = '<p align="left"><b>REKAP NILAI KETERAMPILAN</b>
+                <br>
+                Mata Pelajaran : ' . $detil_guru['namamapel'] . ', Kelas : ' . $detil_guru['kelas'] . ' ' . $detil_guru['namakelas'] . ', Guru : ' . $detil_guru['namaguru'] . ', Tahun Pelajaran: ' . $detil_guru['periode_mengajar'] . ', Semester : ' . $detil_guru['semester'] . '<hr style="border: solid 1px #000; margin-top: -10px"></p>
+                <table class="table"><thead><tr>
+                <th rowspan="2">No</th>
+                <th rowspan="2">Nama</th>
+                <th colspan="' . $jml_kd . '">Kode KD</th>
+                <th rowspan="2">Rata-rata UH</th>
+                <th colspan="3">Nilai Akhir</th>
+                </tr>
+                <tr>';
+
+        if (!empty($d_kd)) {
+            foreach ($d_kd as $kd) {
+                $html .= '<th>' . $kd['kode'] . '</th>';
+            }
+        }
+
+        $html .= '<th>Nilai</th><th>Predikat</th><th>Deskripsi</th></tr></thead><tbody>';
+
+        if (!empty($d_nilai)) {
+            $no = 1;
+            foreach ($d_nilai as $ke => $dn) {
+
+                $html .= '<tr><td class="ctr">' . $no . '</td><td>' . $dn['nama'] . '</td>';
+
+                $jml_nilai_tugas = 0;
+
+                $array_kurang = [];
+                $array_cukup = [];
+                $array_baik = [];
+                $array_sangat_baik = [];
+                $array_undefined = [];
+                $kurang = "";
+                $cukup = "";
+                $baik = "";
+                $sangat_baik = "";
+                $undefined = "";
+
+                if (!empty($d_kd)) {
+                    foreach ($d_kd as $k => $v) {
+                        $id_siswa = $ke;
+                        $id_kd = $k;
+                        $nil_huruf = empty($dn["h"][$id_kd]['nilai_huruf']) ? "" : $dn["h"][$id_kd]['nilai_huruf'];
+
+                        if ($nil_huruf == "D") {
+                            $array_kurang[] = $v['nama_kd'];
+                        } else if ($nil_huruf == "C") {
+                            $array_cukup[] = $v['nama_kd'];
+                        } else if ($nil_huruf == "B") {
+                            $array_baik[] = $v['nama_kd'];
+                        } else if ($nil_huruf == "A") {
+                            $array_sangat_baik[] = $v['nama_kd'];
+                        } else {
+                            $array_undefined[] = "un";
+                        }
+
+                        $nilai_uh = empty($dn["h"][$id_kd]["nilai_angka"]) ? 0 : number_format($dn["h"][$id_kd]["nilai_angka"]);
+
+                        $html .= '<td class="ctr">' . $nilai_uh . '</td>';
+                        $jml_nilai_tugas += $nilai_uh;
+                    }
+                }
+
+                $n_h    = number_format($jml_nilai_tugas / $jml_kd);
+                $nilai_akhir = number_format($n_h);
+
+                $kurang = empty($array_kurang) ? "" : "KURANG, pada : " . implode(", ", $array_kurang) . "; ";
+                $cukup = empty($array_cukup) ? "" : "CUKUP, pada : " . implode(", ", $array_cukup) . "; ";
+                $baik = empty($array_baik) ? "" : "BAIK, pada : " . implode(", ", $array_baik) . "; ";
+                $sangat_baik = empty($array_sangat_baik) ? "" : "SANGAT BAIK, pada : " . implode(", ", $array_sangat_baik) . "; ";
+
+                $html .= '<td class="ctr">' . $n_h . '</td><td class="ctr">' . $nilai_akhir . '</td><td class="ctr">' . nilai_huruf($nilai_akhir) . '</td><td>' . $kurang . $cukup . $baik . $sangat_baik . '</td>';
+
+                $no++;
+            }
+        } else {
+            $html .= '<tr><td colspan="' . ($jml_kd + 6) . '">Belum ada data</td></tr>';
+        }
+
+        $this->d['html'] = $html;
+        $this->load->view('nilai/cetaknk', $this->d);
     }
 }
