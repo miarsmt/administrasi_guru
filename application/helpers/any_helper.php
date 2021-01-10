@@ -33,3 +33,70 @@ if (!function_exists('format_indo')) {
         return $result;
     }
 }
+
+if (!function_exists('nilai_huruf')) {
+    function nilai_huruf($nilai)
+    {
+        $CI     = &get_instance();
+        $kkm     = intval($CI->config->item('kkm'));
+
+        $rentang = round(((100 - $kkm) / 3), 0);
+
+        $d_min = 0;
+        $d_max = round(($kkm - 1), 0);
+        $c_min = $kkm;
+        $c_max = round(($kkm + $rentang), 0);
+        $b_min = round(($kkm + ($rentang * 1) + 1), 0);
+        $b_max = round(($kkm + ($rentang * 2)));
+        $a_min = round(($kkm + ($rentang * 2) + 1), 0);
+        $a_max = 100;
+
+
+        $ret = "";
+        if ($nilai >= $d_min && $nilai <= $d_max) {
+            $ret = "D";
+        } else if ($nilai >= $c_min && $nilai <= $c_max) {
+            $ret = "C";
+        } else if ($nilai >= $b_min && $nilai <= $b_max) {
+            $ret = "B";
+        } else if ($nilai >= $a_min && $nilai <= $a_max) {
+            $ret = "A";
+        } else {
+            $ret = "-";
+        }
+        return $ret;
+    }
+}
+
+if (!function_exists('nilai_pre')) {
+    function nilai_pre($nilai)
+    {
+        $CI     = &get_instance();
+        $kkm     = intval($CI->config->item('kkm'));
+
+        $rentang = round(((100 - $kkm) / 3), 0);
+
+        $d_min = 0;
+        $d_max = round(($kkm - 1), 0);
+        $c_min = $kkm;
+        $c_max = round(($kkm + $rentang), 0);
+        $b_min = round(($kkm + ($rentang * 1) + 1), 0);
+        $b_max = round(($kkm + ($rentang * 2)), 0);
+        $a_min = round(($kkm + ($rentang * 2) + 1), 0);
+        $a_max = 100;
+
+        $ret = "";
+        if ($nilai >= $d_min && $nilai <= $d_max) {
+            $ret = "Kurang";
+        } else if ($nilai >= $c_min && $nilai <= $c_max) {
+            $ret = "Cukup";
+        } else if ($nilai >= $b_min && $nilai <= $b_max) {
+            $ret = "Baik";
+        } else if ($nilai >= $a_min && $nilai <= $a_max) {
+            $ret = "Sangat Baik";
+        } else {
+            $ret = "Undefined";
+        }
+        return $ret;
+    }
+}
