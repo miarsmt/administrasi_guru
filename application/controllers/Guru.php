@@ -819,4 +819,19 @@ class Guru extends CI_Controller
         $this->d['html'] = $html;
         $this->load->view('nilai/cetaknk', $this->d);
     }
+
+    public function riwayat()
+    {
+        $data = [
+            'title' => 'Riwayat Mengajar',
+            'user'  => $this->admin->sesi(),
+            'riwayat' => $this->guru->getRiwayat()
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('guru/riwayat', $data);
+        $this->load->view('templates/footer');
+    }
 }

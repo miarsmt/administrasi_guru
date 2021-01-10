@@ -134,4 +134,15 @@ class Guru_model extends CI_Model
         $this->db->delete('tb_nilai_ket', ['idkd' => $id]);
         return true;
     }
+
+    public function getRiwayat()
+    {
+        $this->db->select('a.*, b.namamapel, c.kelas, c.namakelas');
+        $this->db->from('tb_mengajar a');
+        $this->db->join('tb_mapel b', 'a.kodemapel = b.kodemapel', 'left');
+        $this->db->join('tb_kelas c', 'a.kodekelas = c.kodekelas', 'left');
+        $this->db->where('a.nip', $this->session->userdata('namauser'));
+        $result = $this->db->get();
+        return $result->result_array();
+    }
 }
