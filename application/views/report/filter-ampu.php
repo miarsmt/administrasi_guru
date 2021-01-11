@@ -16,7 +16,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <div class="card shadow">
                 <div class="card-header">
                     <h6>Filter Rekapitulasi Data Ampu</h6>
