@@ -94,7 +94,7 @@ class Guru_model extends CI_Model
         $this->db->where('tb_mengajar.kodekelas', $idkelas);
         $this->db->where('tb_mengajar.kodemapel', $kdmapel);
         $this->db->where('tb_mengajar.nip', $this->session->userdata('namauser'));
-        $this->db->where('tb_agenda.status_absen', 0);
+        // $this->db->where('tb_agenda.status_absen', 0);
         $result = $this->db->get();
         return $result->result_array();
     }
@@ -144,5 +144,16 @@ class Guru_model extends CI_Model
         $this->db->where('a.nip', $this->session->userdata('namauser'));
         $result = $this->db->get();
         return $result->result_array();
+    }
+
+    public function getAbsen($kelas, $tanggal)
+    {
+        $this->db->select('a.nis, a.namasiswa, b.keterangan');
+        $this->db->from('tb_absensi b');
+        $this->db->join('tb_siswa a', 'a.nis = b.nis', 'left');
+        $this->db->where('a.kodekelas', $kelas);
+        $this->db->where('b.tglabsen', $tanggal);
+        $hasil = $this->db->get();
+        return $hasil->result();
     }
 }

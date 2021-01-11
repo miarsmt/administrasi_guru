@@ -181,7 +181,7 @@ class Guru extends CI_Controller
         $ambil = $this->master->getAjarById($idajar);
         $data = [
             'title'     => 'Agenda Kegiatan',
-            'subtitle'  => 'Input Absen',
+            'subtitle'  => 'Absensi Siswa',
             'user'      => $this->admin->sesi(),
             'agenda'    => $this->guru->getAgendaByKelas($ambil['kodekelas'], $ambil['kodemapel']),
             'kelas'     => $this->master->getKelasById($ambil['kodekelas']),
@@ -833,5 +833,38 @@ class Guru extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('guru/riwayat', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function cekabsen()
+    {
+        $kelas = $this->uri->segment(3);
+        $tanggal = $this->uri->segment(4);
+
+        $data = [
+            'title' => 'Edit Absensi',
+            'user'  => $this->admin->sesi(),
+            'ambil' => $this->guru->getAbsen($kelas, $tanggal)
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('guru/cekabsen', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function update_absen()
+    {
+        $p = $this->input->post();
+        $i = 0;
+
+        foreach ($p['ket'] as $s) {
+            $this->db->query("UPDATE tb_absensi SET keterangan = '$s' WHERE nis = '" . $p['nis'][$i] . "' ");
+
+            $i++;
+        }
+
+        $this->session->set_flashdata('message', '' . $i . ' Data absensi berhasil di-rubah');
+        redirect('guru');
     }
 }

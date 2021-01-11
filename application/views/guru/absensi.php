@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="col-lg-8">
+        <div class="col-lg-10">
 
             <div class="card shadow md-4">
                 <div class="card-header py-3">
@@ -55,7 +55,8 @@
                                         <td><?= $a['jam_ke']; ?></td>
                                         <td><?= $a['namamapel']; ?></td>
                                         <td>
-                                            <button type="button" data-toggle="modal" data-target="#modal-absen" data-kelas="<?= $a['kodekelas']; ?>" data-idagenda="<?= $a['idagenda']; ?>" class="btn btn-sm btn-circle btn-outline-info tombolTambahAbsen" title="Input Absen"><i class="fas fa-fw fa-edit"></i></button>
+                                            <button type="button" data-toggle="modal" data-target="#modal-absen" data-kelas="<?= $a['kodekelas']; ?>" data-idagenda="<?= $a['idagenda']; ?>" class="btn btn-sm  btn-outline-success tombolTambahAbsen" title="Input Absen"><i class="fas fa-fw fa-edit"></i> Input Absen</button>
+                                            <a href="<?= base_url('guru/cekabsen/' . $a['kodekelas'] . '/' . $a['tanggal']); ?>" class="btn btn-sm btn-outline-primary" title="Edit Absen"><i class="fas fa-fw fa-pencil-alt"></i> Edit Absen</a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
@@ -89,9 +90,8 @@
                     <table class="table table-bordered table-striped table-sm" id="mydata">
                         <thead>
                             <tr>
+                                <th scope="col">NIS</th>
                                 <th scope="col">Nama Siswa</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">Semester Aktif</th>
                                 <th scope="col">Keterangan</th>
                             </tr>
                         </thead>
