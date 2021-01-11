@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-    <h1 class="h2 pt-4 text-gray-900 text-center">Selamat Datang di Si Admingur</h1>
+    <h1 class="h2 pt-4 text-gray-900 text-center text-uppercase">Selamat Datang di Si Admingur</h1>
     <img src="<?= base_url('assets/img/logo.png') ?>" alt="logo.png" width="240px" style="display: block; margin: auto;">
     <h1 class="h4 mb-5 text-gray-900 text-center">Sistem Informasi Administrasi Guru SMK PASIM Plus Sukabumi</h1>
 
