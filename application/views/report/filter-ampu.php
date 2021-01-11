@@ -26,11 +26,15 @@
                         <div class="form-group">
                             <label for="tingkatan">Kelas</label>
                             <select name="tingkatan" id="tingkatan" class="form-control">
-                                <option value="">- Pilih Kelas -</option>
+                                <option value="">- Pilih Tingkat -</option>
                                 <option value="X">X</option>
                                 <option value="XI">XI</option>
                                 <option value="XII">XII</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="periode">Tahun Ajaran</label>
+                            <input type="text" name="periode" id="periode" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="semester">Semester</label>
@@ -38,10 +42,6 @@
                                 <option value="">- Pilih Semester -</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
                             </select>
                         </div>
                         <div class="form-group">

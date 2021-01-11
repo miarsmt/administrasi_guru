@@ -28,7 +28,7 @@ class Laporan extends CI_Controller
     public function datakelas()
     {
         $data = [
-            'title' => 'Data Kelas',
+            'title' => 'Rekap Data Kelas',
             'user'  => $this->admin->sesi(),
         ];
 
@@ -54,7 +54,7 @@ class Laporan extends CI_Controller
     public function datasiswa()
     {
         $data = [
-            'title' => 'Data Siswa',
+            'title' => 'Rekap Data Siswa',
             'user'  => $this->admin->sesi(),
             'jurusan' => $this->master->getAllJurusan()
         ];
@@ -86,7 +86,7 @@ class Laporan extends CI_Controller
     public function dataampu()
     {
         $data = [
-            'title' => 'Data Ampu',
+            'title' => 'Rekap Data Ampu',
             'user'  => $this->admin->sesi(),
         ];
 
@@ -101,12 +101,13 @@ class Laporan extends CI_Controller
     {
         $kelas = $this->input->post('tingkatan');
         $semeter = $this->input->post('semester');
+        $periode = $this->input->post('periode');
 
         $data = [
             'title' => 'REKAPITULASI DATA AMPU',
             'kelas' => $kelas,
             'semester' => $semeter,
-            'ampu'  => $this->master->getAmpu($kelas, $semeter)
+            'ampu'  => $this->master->getAmpu($kelas, $semeter, $periode)
         ];
 
         $this->load->view('report/dataampu', $data);
@@ -115,7 +116,7 @@ class Laporan extends CI_Controller
     public function dataagenda()
     {
         $data = [
-            'title' => 'Data Agenda',
+            'title' => 'Rekap Data Agenda',
             'user'  => $this->admin->sesi(),
             'guru'  => $this->master->getAllGuru()
         ];
