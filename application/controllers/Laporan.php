@@ -140,4 +140,36 @@ class Laporan extends CI_Controller
 
         $this->load->view('report/dataagenda', $data);
     }
+
+    public function dataabsen()
+    {
+        $data = [
+            'title' => 'Rekap Absensi',
+            'user'  => $this->admin->sesi(),
+            'kelas' => $this->master->getkelas()
+        ];
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('report/filter-absen', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function report_absen()
+    {
+        $kelas = $this->input->post('kelas');
+        $semester = $this->input->post('semester');
+
+        $q = $this->db->get_where('tb_kelas', ['kodekelas' => $kelas])->row_array();
+
+        $data = [
+            'title'     => 'REKAPITULASI ABSENSI SISWA',
+            'kelas'     => $q,
+            'semester'  => $semester,
+            'absen'     => $this->master->getAbsen($kelas, $semester)->result()
+        ];
+
+        $this->load->view('report/dataabsen', $data);
+    }
 }

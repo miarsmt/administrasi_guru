@@ -377,4 +377,55 @@ class Master_model extends CI_Model
         $this->db->delete('tb_mengajar', ['idmengajar' => $id]);
         return true;
     }
+
+    public function getAbsen($kelas, $semester)
+    {
+        $sql = "SELECT tb_siswa.nis, tb_siswa.namasiswa,
+
+                /* ----------- jumlah sakit ------------*/
+                IFNULL((SELECT COUNT(tb_absensi.keterangan)
+                FROM tb_absensi
+                WHERE tb_absensi.keterangan = 'S'
+                AND tb_absensi.semester = '$semester'
+                AND tb_absensi.nis = tb_siswa.nis
+                AND tb_absensi.nis IN (SELECT tb_siswa.nis
+                                FROM tb_siswa
+                                WHERE tb_siswa.kodekelas = '$kelas'
+                                ORDER BY tb_siswa.nis ASC)
+                GROUP BY tb_absensi.nis
+                ORDER BY tb_absensi.nis ASC), 0) AS sakit,
+
+                /* ----------- jumlah ijin ------------*/
+                IFNULL((SELECT COUNT(tb_absensi.keterangan)
+                FROM tb_absensi
+                WHERE tb_absensi.keterangan = 'I'
+                AND tb_absensi.semester = '$semester'
+                AND tb_absensi.nis = tb_siswa.nis
+                AND tb_absensi.nis IN (SELECT tb_siswa.nis
+                                FROM tb_siswa
+                                WHERE tb_siswa.kodekelas = '$kelas'
+                                ORDER BY tb_siswa.nis ASC)
+                GROUP BY tb_absensi.nis
+                ORDER BY tb_absensi.nis ASC), 0) AS ijin,
+
+                /* ----------- jumlah alpa ------------*/
+                IFNULL((SELECT COUNT(tb_absensi.keterangan)
+                FROM tb_absensi
+                WHERE tb_absensi.keterangan = 'A'
+                AND tb_absensi.semester = '$semester'
+                AND tb_absensi.nis = tb_siswa.nis
+                AND tb_absensi.nis IN (SELECT tb_siswa.nis
+                                FROM tb_siswa
+                                WHERE tb_siswa.kodekelas = '$kelas'
+                                ORDER BY tb_siswa.nis ASC)
+                GROUP BY tb_absensi.nis
+                ORDER BY tb_absensi.nis ASC), 0) AS alpha
+
+            FROM tb_siswa
+            WHERE tb_siswa.kodekelas = '$kelas'
+            GROUP BY tb_siswa.nis
+            ORDER BY tb_siswa.nis ASC;";
+
+        return $this->db->query($sql);
+    }
 }
