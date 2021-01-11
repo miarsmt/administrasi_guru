@@ -88,9 +88,8 @@
                     for (i = 0; i < data.length; i++) {
                         html += '<tr>' +
                             '<input type="hidden" name="nis[]" id="nis[]" class="form-control" value="' + data[i].nis + '">' +
+                            '<td>' + data[i].nis + '</td>' +
                             '<td>' + data[i].namasiswa + '</td>' +
-                            '<td>' + data[i].jeniskelamin + '</td>' +
-                            '<td>' + data[i].semester_aktif + '</td>' +
                             '<input type="hidden" name="semester[]" id="semester[]" class="form-control" value="' + data[i].semester_aktif + '">' +
                             '<td style="text-align:right;">' +
                             '<select name="keterangan[]" id="keterangan[]" class="form-control">' +
