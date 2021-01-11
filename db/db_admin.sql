@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2021 at 10:35 AM
+-- Generation Time: Jan 11, 2021 at 01:25 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -160,7 +160,7 @@ INSERT INTO `tb_guru` (`nip`, `kodeguru`, `namaguru`, `jeniskelamin`, `tempatlah
 ('11144', 'ERICK', 'Erick Andika, M.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
 ('11145', 'AZIS', 'Azis Sumadullah, A.Md.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2020-12-28 04:40:34', 1),
 ('11146', 'SANDI', 'Sandi P C Permadi, A.Md.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'TKJ', NULL, '2021-01-01 02:39:07', 1),
-('11147', NULL, 'Ihsan, S.Kom', 'Laki-laki', 'Sukabumi', '1993-10-10', 'Jampang Kulon', '081345678902', 'ihsan@gmail.com', 'RPL', '0', '2021-01-10 08:01:52', 1),
+('11147', 'IH', 'Ihsan, S.Kom', 'Laki-laki', 'Sukabumi', '1993-10-10', 'Jampang Kulon', '081345678902', 'ihsan@gmail.com', 'RPL', 'USR-202100001', '2021-01-10 10:50:07', 1),
 ('11148', 'WK', 'Weli Kusnadi, S.Kom, M.Kom', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
 ('11149', 'RI', 'Riki Iskandar', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'RPL', NULL, '2020-12-28 04:40:34', 1),
 ('11150', 'LUT', 'Lufti M Yassin, S.Pd', 'Laki-laki', NULL, NULL, NULL, NULL, NULL, 'PSPT', NULL, '2020-12-28 04:40:34', 1),
@@ -568,91 +568,6 @@ INSERT INTO `tb_nilai_ket` (`id`, `idmengajar`, `idkd`, `nis`, `nilai`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_nilai_penugasan`
---
-
-CREATE TABLE `tb_nilai_penugasan` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(15) NOT NULL,
-  `idkd` int(11) NOT NULL,
-  `nilai` double NOT NULL,
-  `ket` varchar(15) NOT NULL,
-  `idnilai` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_nilai_penugasan`
---
-
-INSERT INTO `tb_nilai_penugasan` (`id`, `nama`, `idkd`, `nilai`, `ket`, `idnilai`) VALUES
-(7, 't1', 9, 82, 'Tuntas', 3),
-(8, 't2', 10, 83, 'Tuntas', 3),
-(9, 't1', 9, 85, 'Tuntas', 4),
-(10, 't2', 10, 86, 'Tuntas', 4);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_nilai_portofolio`
---
-
-CREATE TABLE `tb_nilai_portofolio` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(15) NOT NULL,
-  `idkd` int(11) NOT NULL,
-  `nilai` double NOT NULL,
-  `ket` varchar(15) NOT NULL,
-  `idnilai` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_nilai_produk`
---
-
-CREATE TABLE `tb_nilai_produk` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(15) NOT NULL,
-  `idkd` int(11) NOT NULL,
-  `nilai` double NOT NULL,
-  `ket` varchar(15) NOT NULL,
-  `idnilai` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_nilai_proses`
---
-
-CREATE TABLE `tb_nilai_proses` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(10) NOT NULL,
-  `idkd` int(11) NOT NULL,
-  `nilai` double NOT NULL,
-  `ket` varchar(15) NOT NULL,
-  `idnilai` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_nilai_proyek`
---
-
-CREATE TABLE `tb_nilai_proyek` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(15) NOT NULL,
-  `idkd` int(11) NOT NULL,
-  `nilai` double NOT NULL,
-  `ket` varchar(15) NOT NULL,
-  `idnilai` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tb_siswa`
 --
 
@@ -737,7 +652,7 @@ CREATE TRIGGER `auto_user_siswa` AFTER INSERT ON `tb_siswa` FOR EACH ROW BEGIN
       set nextNo = CONCAT(formatID, LPAD(lastNo + 1, 5, '0'));
      END;
     END IF;
- INSERT INTO user_login (iduser, namauser, namalengkapuser, passuser, role_id, is_active, kodejurusan,semester_aktif) VALUES (nextNo, new.nis, new.namasiswa, md5(new.nis), 5, 1, new.kodejurusan,new.semester_aktif );
+ INSERT INTO user_login (iduser, namauser, namalengkapuser, passuser, role_id, is_active, kodejurusan,semester_aktif) VALUES (nextNo, new.nis, new.namasiswa, md5(new.nis), 4, 1, new.kodejurusan,new.semester_aktif );
 END
 $$
 DELIMITER ;
@@ -815,7 +730,8 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (5, 1, 4),
 (9, 2, 5),
 (10, 3, 2),
-(11, 3, 6);
+(11, 3, 6),
+(12, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -843,10 +759,10 @@ CREATE TABLE `user_login` (
 --
 
 INSERT INTO `user_login` (`iduser`, `namauser`, `passuser`, `namalengkapuser`, `avataruser`, `role_id`, `is_active`, `tglbuat`, `tglperbaharui`, `tgllogakhir`, `kodejurusan`, `semester_aktif`) VALUES
-('USR-202100001', 'admin', '9b20cffe6c058dcd33ec10e307c6b9ef', 'Administrator Sekolah', 'marc-mintel-1iYTusNPlSk-unsplash.jpg', 1, 1, '2021-01-10 08:32:05', NULL, NULL, '-', 0),
-('USR-202100002', '202100100', '0c59763a42eef689bca5a2d3b990087b', 'Puspita Negara Sitompul', NULL, 5, 1, '2021-01-10 07:55:29', NULL, NULL, 'TKJ', 2),
+('USR-202100001', 'admin', '4a6a665e5da8d9f6c849104bae8e2437', 'Administrator', 'marc-mintel-1iYTusNPlSk-unsplash.jpg', 1, 1, '2021-01-10 12:45:08', NULL, NULL, '-', 0),
+('USR-202100002', '202100100', '0c59763a42eef689bca5a2d3b990087b', 'Puspita Negara Sitompul', NULL, 4, 1, '2021-01-10 12:36:28', NULL, NULL, 'TKJ', 2),
 ('USR-202100003', '11147', 'eed054ecd7a0a544cf73292836023ffe', 'Ihsan, S.Kom', NULL, 2, 1, '2021-01-10 08:35:53', NULL, NULL, 'RPL', 0),
-('USR-202100004', '202100101', '6f7c52c3e720fb4a30e1328f209b1f36', 'Rama Aprilian', NULL, 5, 1, '2021-01-10 08:12:24', NULL, NULL, 'TKJ', 2),
+('USR-202100004', '202100101', '6f7c52c3e720fb4a30e1328f209b1f36', 'Rama Aprilian', NULL, 4, 1, '2021-01-10 12:36:32', NULL, NULL, 'TKJ', 2),
 ('USR-202100005', 'kepsek', 'f6aa6aab9baca19494d21a2ceb051fb2', 'Kepala Sekolah SMK PASIM', NULL, 3, 1, '2021-01-10 09:10:47', NULL, NULL, '-', 0);
 
 -- --------------------------------------------------------
@@ -871,7 +787,8 @@ INSERT INTO `user_menu` (`id`, `menu`, `urutan`) VALUES
 (3, 'Menu', 4),
 (4, 'Master', 2),
 (5, 'Guru', 3),
-(6, 'Laporan', 5);
+(6, 'Laporan', 5),
+(8, 'Siswa', 0);
 
 -- --------------------------------------------------------
 
@@ -891,7 +808,8 @@ CREATE TABLE `user_role` (
 INSERT INTO `user_role` (`id`, `role`) VALUES
 (1, 'Superadmin'),
 (2, 'Guru'),
-(3, 'Kepala Sekolah');
+(3, 'Kepala Sekolah'),
+(4, 'Siswa');
 
 -- --------------------------------------------------------
 
@@ -928,12 +846,13 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (13, 4, 'Modul Mengajar', 'master/mengajar', 'fas fa-fw fa-archive', 1),
 (14, 5, 'Mapel Diampu', 'guru/ampu', 'fas fa-fw fa-pencil-alt', 1),
 (15, 5, 'Agenda Kegiatan', 'guru', 'fas fa-fw fa-clipboard', 1),
-(19, 6, 'Data Guru', 'laporan/dataguru', 'fas fa-fw fa-database', 1),
-(20, 6, 'Data Kelas', 'laporan/datakelas', 'fas fa-fw fa-database', 1),
-(21, 6, 'Data Siswa', 'laporan/datasiswa', 'fas fa-fw fa-database', 1),
-(22, 6, 'Data Ampu', 'laporan/dataampu', 'fas fa-fw fa-database', 1),
-(23, 6, 'Data Agenda', 'laporan/dataagenda', 'fas fa-fw fa-database', 1),
-(24, 5, 'Riwayat Mengajar', 'guru/riwayat', 'fas fa-fw fa-chalkboard-teacher', 1);
+(19, 6, 'Rekap Data Guru', 'laporan/dataguru', 'fas fa-fw fa-database', 1),
+(20, 6, 'Rekap Data Kelas', 'laporan/datakelas', 'fas fa-fw fa-database', 1),
+(21, 6, 'Rekap Data Siswa', 'laporan/datasiswa', 'fas fa-fw fa-database', 1),
+(22, 6, 'Rekap Data Ampu', 'laporan/dataampu', 'fas fa-fw fa-database', 1),
+(23, 6, 'Rekap Data Agenda', 'laporan/dataagenda', 'fas fa-fw fa-database', 1),
+(24, 5, 'Riwayat Mengajar', 'guru/riwayat', 'fas fa-fw fa-chalkboard-teacher', 1),
+(25, 8, 'Lihat Nilai', 'siswa', 'fas fa-fw fa-folder-open', 1);
 
 --
 -- Indexes for dumped tables
@@ -1009,30 +928,6 @@ ALTER TABLE `tb_nilai`
 -- Indexes for table `tb_nilai_ket`
 --
 ALTER TABLE `tb_nilai_ket`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tb_nilai_penugasan`
---
-ALTER TABLE `tb_nilai_penugasan`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tb_nilai_portofolio`
---
-ALTER TABLE `tb_nilai_portofolio`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tb_nilai_proses`
---
-ALTER TABLE `tb_nilai_proses`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tb_nilai_proyek`
---
-ALTER TABLE `tb_nilai_proyek`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1124,30 +1019,6 @@ ALTER TABLE `tb_nilai_ket`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT for table `tb_nilai_penugasan`
---
-ALTER TABLE `tb_nilai_penugasan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `tb_nilai_portofolio`
---
-ALTER TABLE `tb_nilai_portofolio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tb_nilai_proses`
---
-ALTER TABLE `tb_nilai_proses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tb_nilai_proyek`
---
-ALTER TABLE `tb_nilai_proyek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tb_tugas`
 --
 ALTER TABLE `tb_tugas`
@@ -1163,25 +1034,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
