@@ -156,4 +156,29 @@ class Guru_model extends CI_Model
         $hasil = $this->db->get();
         return $hasil->result();
     }
+
+    public function ambilagenda($kode)
+    {
+        $this->db->select('tb_mengajar.kodemapel, tb_mengajar.idmengajar');
+        $this->db->from('tb_mengajar');
+        $this->db->join('tb_agenda', 'tb_mengajar.idmengajar = tb_agenda.idmengajar', 'left');
+        $this->db->where('tb_agenda.idagenda', $kode);
+        $hsl = $this->db->get();
+        return $hsl->row_array();
+    }
+
+    public function update_agenda($idajar)
+    {
+        $data = [
+            'idmengajar' => $idajar,
+            'tanggal'    => $this->input->post('tgl', true),
+            'jam_ke'     => $this->input->post('jamke', true),
+            'idkd'       => $this->input->post('kompdsr', true),
+            'keterangan' => $this->input->post('ket', true)
+        ];
+
+        $this->db->where('idagenda', $this->input->post('agenda_id'));
+        $this->db->update('tb_agenda', $data);
+        return true;
+    }
 }

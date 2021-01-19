@@ -158,12 +158,47 @@ class Guru extends CI_Controller
                 'jam_ke'    => $this->input->post('jamke', true),
                 'idkd'      => $this->input->post('kompdsr', true),
                 'keterangan' => $this->input->post('ket', true),
-                'status_tgs' => 0,
-                'status_absen' => 0
+                'status_tgs' => 0
             ];
 
             $this->guru->save_agenda($data);
             $this->session->set_flashdata('message', 'data agenda berhasil ditambah-kan');
+            redirect('guru');
+        }
+    }
+
+    public function editagenda()
+    {
+        $kode = $this->uri->segment(3);
+        $ambil = $this->guru->ambilagenda($kode);
+        $data = [
+            'title'     => 'Agenda Kegiatan',
+            'subtitle'  => 'Edit Agenda',
+            'user'      => $this->admin->sesi(),
+            'kompdasar' => $this->guru->getListKd($ambil['kodemapel']),
+            'agenda'    => $this->guru->getAgendaById($kode)
+        ];
+
+        $this->form_validation->set_rules('tgl', 'Tanggal', 'required', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('jamke', 'Jam ke', 'required', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+        $this->form_validation->set_rules('ket', 'Keterangan', 'required|trim', [
+            'required' => '%s tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('guru/editagenda', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $idajar = $ambil['idmengajar'];
+            $this->guru->update_agenda($idajar);
+            $this->session->set_flashdata('message', 'data agenda berhasil di-rubah');
             redirect('guru');
         }
     }

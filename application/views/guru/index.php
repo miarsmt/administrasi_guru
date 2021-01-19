@@ -86,10 +86,11 @@
                                         <td><?= $ag['keterangan']; ?></td>
                                         <td>
                                             <?php if ($ag['keterangan'] == 'Tugas' && $ag['status_tgs'] == 0) { ?>
-                                                <a href="javascript:;" data-toggle="modal" data-target="#modal-tugas" data-id="<?= $ag['idagenda']; ?>" class="badge badge-success tombolTambahTugas" title="Input Tugas">Tugas</a>
+                                                <a href="javascript:;" data-toggle="modal" data-target="#modal-tugas" data-id="<?= $ag['idagenda']; ?>" class="btn btn-sm btn-circle btn-outline-success tombolTambahTugas" title="Input Tugas"><i class="fas fa-fw fa-tasks"></i></a>
                                             <?php } else { ?>
-                                                <a href="<?= base_url('guru/delete_agenda/' . $ag['idagenda']); ?>" class="badge badge-danger tombol-hapus" title="Hapus Data">Delete</a>
+                                                <a href="<?= base_url('guru/delete_agenda/' . $ag['idagenda']); ?>" class="btn btn-sm btn-outline-danger btn-circle tombol-hapus" title="Hapus Data"><i class="fas fa-fw fa-trash"></i></a>
                                             <?php } ?>
+                                            <a href="<?= base_url('guru/editagenda/' . $ag['idagenda']); ?>" class="btn btn-sm btn-circle btn-outline-warning"><i class="fas fa-fw fa-pencil-alt"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
